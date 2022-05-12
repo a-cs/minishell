@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/10 23:48:42 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/05/11 21:05:44 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = clang
+CC = cc
 FLAGS = -g -Wall -Wextra -Werror
 
 LIBFT_DIR = ./libft
@@ -30,7 +30,7 @@ SRC = $(SRC_DIR)/minishell.c
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
 	@echo "Minishell compiled!"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE)
