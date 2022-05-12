@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/11 21:05:44 by acarneir         ###   ########.fr        #
+#    Updated: 2022/05/11 22:59:53 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 CC = cc
 FLAGS = -g -Wall -Wextra -Werror
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck -q ./minishell
 
 LIBFT_DIR = ./libft
 LIBFT = libft/libft.a
@@ -22,10 +23,13 @@ INCLUDE_DIR = ./includes
 INCLUDE = $(INCLUDE_DIR)/minishell.h
 
 OBJ_DIR = ./objs
+OBJ_BUILTINS = ./objs/builtins
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 SRC_DIR = ./src
-SRC = $(SRC_DIR)/minishell.c
+BUILTINS = ./src/builtins
+SRC = $(SRC_DIR)/minishell.c \
+	$(BUILTINS)/exit_prompt.c
 
 all: $(NAME)
 
@@ -35,6 +39,7 @@ $(NAME): $(LIBFT) $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE)
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_BUILTINS)
 	@$(CC) -c $(FLAGS) -I$(INCLUDE_DIR) -o $@ $<
 
 $(LIBFT):
@@ -53,3 +58,6 @@ fclean: clean
 	@echo "Project cleaned up!"
 
 re: fclean all
+
+valgrind: all
+	$(VALGRIND)

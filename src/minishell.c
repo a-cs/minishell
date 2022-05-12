@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/11 21:34:39 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/11 22:42:13 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,23 @@ char	*prompt_str(void)
 	return (str);
 }
 
-int	main(void)
+int	main(int argc, char *argv[], char **envp)
 {
 	char	*prompt;
 	char	*input;
 
+	(void)argv;
+	(void)envp;
+	if (argc != 1)
+		return (1);
 	printf("Hello minishell\n");
 	while (1)
 	{
 		prompt = prompt_str();
 		input = readline(prompt);
 		printf("Input => %s\n", input);
+		if (ft_memcmp(input, "exit", 4) == 0)
+			exit_prompt(input);
 	}
 	return (0);
 }
