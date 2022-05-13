@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/12 21:29:07 by acarneir         ###   ########.fr        #
+#    Updated: 2022/05/12 22:26:40 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,3 +62,5 @@ re: fclean all
 
 valgrind: all
 	@$(VALGRIND)
+
+v: valgrind
