@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/12 21:28:22 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:08:17 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@
 // DEFINE
 # define HASHTABLE_SIZE	50
 
+// STRUCTS
+typedef struct s_data
+{
+	char	**envp;
+	char	*prompt;
+	char	*input;
+}	t_data;
+
 // FUNCTIONS
-void	exit_prompt(char *input);
+void	exit_prompt(t_data *obj);
 void	pwd_prompt(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/12 21:28:43 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:09:46 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,22 @@ char	*prompt_str(void)
 	return (str);
 }
 
-
-
 int	main(int argc, char *argv[], char **envp)
 {
-	char	*prompt;
-	char	*input;
+	t_data	obj;
 
-	(void)argv;
-	(void)envp;
-
-	if (argc != 1)
+	if (argc != 1 && argv)
 		return (1);
+	obj.envp = envp;
 	printf("Hello minishell\n");
 	while (1)
 	{
-		prompt = prompt_str();
-		input = readline(prompt);
-		printf("Input => %s\n", input);
-		if (ft_memcmp(input, "exit", 4) == 0)
-			exit_prompt(input);
-		if (ft_memcmp(input, "pwd", 4) == 0)
+		obj.prompt = prompt_str();
+		obj.input = readline(obj.prompt);
+		printf("Input => %s\n", obj.input);
+		if (ft_memcmp(obj.input, "exit", 4) == 0)
+			exit_prompt(&obj);
+		if (ft_memcmp(obj.input, "pwd", 4) == 0)
 			pwd_prompt();
 	}
 	return (0);
