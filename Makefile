@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/11 22:59:53 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/05/12 21:29:07 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 SRC_DIR = ./src
 BUILTINS = ./src/builtins
 SRC = $(SRC_DIR)/minishell.c \
-	$(BUILTINS)/exit_prompt.c
+	$(BUILTINS)/exit_prompt.c \
+	$(BUILTINS)/pwd_prompt.c
 
 all: $(NAME)
 
@@ -60,4 +61,4 @@ fclean: clean
 re: fclean all
 
 valgrind: all
-	$(VALGRIND)
+	@$(VALGRIND)
