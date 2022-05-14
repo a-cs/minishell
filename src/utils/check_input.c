@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/13 00:04:34 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/14 00:49:21 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*get_path(char *command, char **envp)
 	return (0);
 }
 
-static int	check_envp(t_data *obj)
+static int	check_envp(t_data *obj, char **args)
 {
 	int	fd[2];
 	int	pid;
@@ -46,13 +46,8 @@ static int	check_envp(t_data *obj)
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
-	{
-		response = execve(get_path(obj->input, obj->envp),
-				&obj->input, obj->envp);
-	}
+		response = execve(get_path(args[0], obj->envp), args, obj->envp);
 	waitpid(pid, NULL, 0);
-	if (pid > 0)
-		kill(pid, SIGKILL);
 	close(fd[0]);
 	close(fd[1]);
 	if (response == -1)
@@ -60,20 +55,29 @@ static int	check_envp(t_data *obj)
 	return (1);
 }
 
-static int	check_builtin(t_data *obj)
+static int	check_builtin(t_data *obj, char **args)
 {
-	if (ft_memcmp(obj->input, "exit", ft_strlen(obj->input)) == 0)
+	if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0)
 		exit_prompt(obj);
-	if (ft_memcmp(obj->input, "pwd", ft_strlen(obj->input)) == 0)
+	if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0)
 		return (pwd_prompt());
 	return (0);
 }
 
 void	check_input(t_data *obj)
 {
-	if (!check_builtin(obj))
+	char	**args;
+
+	args = tokenizer(obj->input);
+	if (!check_builtin(obj, args))
 	{
-		if (!check_envp(obj))
+		if (get_path(args[0], obj->envp))
+		{
+			if (!check_envp(obj, args))
+				printf("Error -> Command not found: %s\n", obj->input);
+				//ver no futuro
+		}
+		else
 			printf("Command not found: %s\n", obj->input);
 	}
 }

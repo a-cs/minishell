@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/12 23:31:00 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/05/14 00:20:11 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_DIR = ./src
 SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/exit_prompt.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
-	$(SRC_DIR)/utils/check_input.c
+	$(SRC_DIR)/utils/check_input.c \
+	$(SRC_DIR)/utils/tokenizer.c
 
 all: $(NAME)
 
