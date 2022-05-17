@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/15 18:28:04 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/05/16 22:59:58 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/utils/check_input.c \
 	$(SRC_DIR)/utils/tokenizer.c \
-	$(SRC_DIR)/utils/check_string.c
+	$(SRC_DIR)/utils/check_string.c \
+	$(SRC_DIR)/builtins/echo_prompt.c
 
 all: $(NAME)
 

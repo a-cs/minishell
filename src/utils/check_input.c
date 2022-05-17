@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/16 22:48:43 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:54:23 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static int	check_builtin(t_data *obj, char **args)
 		exit_prompt(obj);
 	if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0)
 		return (pwd_prompt());
+	if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0)
+		return (echo_prompt(args));
 	return (0);
 }
 
