@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/14 00:49:21 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:48:43 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	check_input(t_data *obj)
 {
 	char	**args;
 
-	args = tokenizer(obj->input);
-	if (!check_builtin(obj, args))
+	args = tokenizer(obj);
+	if (args && !check_builtin(obj, args))
 	{
 		if (get_path(args[0], obj->envp))
 		{

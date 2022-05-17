@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/14 00:10:45 by acarneir          #+#    #+#             */
-/*   Updated: 2022/05/16 22:47:51 by rfelipe-         ###   ########.fr       */
+/*   Created: 2021/05/22 17:38:45 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/05/16 22:28:36 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-char	**tokenizer(t_data *obj)
+int	ft_isascii(int c)
 {
-	char	**args;
-
-	if (!check_string(obj))
-		return (NULL);
-	// TODO: definir regra split quando tiver aspas
-	args = ft_split(obj->input, ' ');
-	return (args);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   check_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/14 00:10:45 by acarneir          #+#    #+#             */
-/*   Updated: 2022/05/16 22:47:51 by rfelipe-         ###   ########.fr       */
+/*   Created: 2022/05/15 18:05:35 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/05/16 22:42:54 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	**tokenizer(t_data *obj)
+static int	check_quotes(t_data *obj)
 {
-	char	**args;
+	if ((ft_chrqty(obj->input, DOUBLE_QUOTES) % 2 != 0)
+		|| (ft_chrqty(obj->input, SINGLE_QUOTES) % 2 != 0))
+	{
+		printf("Error: unclosed quotes\n");
+		return (0);
+	}
+	return (1);
+}
 
-	if (!check_string(obj))
-		return (NULL);
-	// TODO: definir regra split quando tiver aspas
-	args = ft_split(obj->input, ' ');
-	return (args);
+int	check_string(t_data *obj)
+{
+	return (check_quotes(obj));
 }

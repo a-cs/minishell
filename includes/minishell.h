@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/14 00:21:35 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:46:52 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # include <signal.h>
 
 // DEFINE
-# define HASHTABLE_SIZE 2
+# define DOUBLE_QUOTES 34
+# define SINGLE_QUOTES 39
 
 // STRUCTS
 typedef struct s_data
@@ -39,6 +40,7 @@ typedef struct s_data
 void	exit_prompt(t_data *obj);
 int		pwd_prompt(void);
 void	check_input(t_data *obj);
-char	**tokenizer(char *input);
+char	**tokenizer(t_data *obj);
+int		check_string(t_data *obj);
 
 #endif

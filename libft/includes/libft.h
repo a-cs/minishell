@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 20:36:32 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/12 23:47:46 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:27:50 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
+int		ft_chrqty(const char *s, int c);
+int		ft_isascii(int c);
+int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	ft_putchar_fd(char c, int fd);

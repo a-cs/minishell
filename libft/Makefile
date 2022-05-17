@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/12 23:36:51 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/05/16 22:27:55 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,9 @@ INCLUDES = -I$(INCLUDE_DIR)
 SRCS = ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
+		ft_chrqty.c \
+		ft_isascii.c \
+		ft_isalpha.c \
 		ft_isdigit.c \
 		ft_memcmp.c \
 		ft_putchar_fd.c \
