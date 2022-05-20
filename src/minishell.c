@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/13 00:05:25 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/20 00:21:26 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		obj->prompt = prompt_str();
+		signal(SIGINT, new_prompt);
+		signal(SIGQUIT, SIG_IGN);
 		obj->input = readline(obj->prompt);
 		check_input(obj);
 	}
