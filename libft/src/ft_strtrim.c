@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 04:14:50 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/23 23:05:36 by rfelipe-         ###   ########.fr       */
+/*   Created: 2021/05/22 04:30:31 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/05/23 23:04:44 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 static int	ft_find_start(char *s1, char *set)
 {
@@ -32,25 +32,38 @@ static int	ft_find_start(char *s1, char *set)
 	return (start);
 }
 
-int	ft_atoi(char *str)
+static int	ft_find_end(char *s1, char *set)
 {
-	int	signal;
-	int	number;
+	int	i;
+	int	size;
 
-	str += ft_find_start(str, " 	\t\n\r\v\f");
-	signal = 1;
-	if (*str == '+' || *str == '-')
+	size = ft_strlen(s1) - 1;
+	i = 0;
+	while (set[i])
 	{
-		if (*str == '-')
-			signal = -1;
-		str++;
+		while (s1[size] == set[i] && size >= 0)
+		{
+			size--;
+			i = 0;
+			continue ;
+		}
+		i++;
 	}
-	number = 0;
-	while ((ft_isdigit(*str)))
-	{
-		number *= 10;
-		number += signal * (*str - '0');
-		str++;
-	}
-	return (number);
+	return (size + 1);
+}
+
+char	*ft_strtrim(char *s1, char *set)
+{
+	char	*str;
+	int		size;
+
+	if (!s1 || !set)
+		return (NULL);
+	s1 += ft_find_start(s1, set);
+	size = ft_find_end(s1, set);
+	str = (char *)ft_calloc(size + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	ft_memcpy(str, s1, size);
+	return (str);
 }

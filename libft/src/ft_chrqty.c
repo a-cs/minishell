@@ -6,13 +6,13 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:18:33 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/16 22:27:41 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:05:36 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_chrqty(const char *s, int c)
+int	ft_chrqty(char *s, int c)
 {
 	int				i;
 	int				qtd;

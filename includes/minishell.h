@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/20 00:26:34 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:29:30 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <signal.h>
 
 // DEFINE
+# define SPACE 32
 # define DOUBLE_QUOTES 34
 # define SINGLE_QUOTES 39
 
@@ -34,6 +35,7 @@ typedef struct s_data
 	char	**envp;
 	char	*prompt;
 	char	*input;
+	int		error;
 }	t_data;
 
 // FUNCTIONS

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/20 00:21:26 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:30:03 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ int	main(int argc, char *argv[], char **envp)
 	printf("Hello minishell\n");
 	while (1)
 	{
+		obj->error = 0;
 		obj->prompt = prompt_str();
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
-		obj->input = readline(obj->prompt);
+		obj->input = ft_strtrim(readline(obj->prompt), " \t");
 		check_input(obj);
 	}
 	return (0);

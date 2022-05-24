@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/20 00:27:30 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/24 02:13:39 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char *get_path(char *command, char **envp)
+static char	*get_path(char *command, char **envp)
 {
-	char **env_path;
-	char *temp_path;
-	char *path;
-	int i;
+	char	**env_path;
+	char	*temp_path;
+	char	*path;
+	int		i;
 
 	i = 0;
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
@@ -36,11 +36,11 @@ static char *get_path(char *command, char **envp)
 	return (0);
 }
 
-static int check_envp(t_data *obj, char **args)
+static int	check_envp(t_data *obj, char **args)
 {
-	int fd[2];
-	int pid;
-	int response;
+	int	fd[2];
+	int	pid;
+	int	response;
 
 	response = 0;
 	pipe(fd);
@@ -56,31 +56,42 @@ static int check_envp(t_data *obj, char **args)
 	return (1);
 }
 
-static int check_builtin(t_data *obj, char **args)
+static int	check_builtin(t_data *obj, char **args)
 {
-	if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0)
-		exit_prompt(obj);
-	if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0)
-		return (pwd_prompt());
-	if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0)
-		return (echo_prompt(args));
+	if (obj->error == 0)
+	{
+		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0)
+			exit_prompt(obj);
+		if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0)
+			return (pwd_prompt());
+		if (ft_memcmp(args[0], "echo", ft_strlen(args[0])) == 0)
+			return (echo_prompt(args));
+	}
 	return (0);
 }
 
-void check_input(t_data *obj)
+void	check_input(t_data *obj)
 {
-	char **args;
+	int		i;
+	char	**args;
 
 	args = tokenizer(obj);
-	if (args && !check_builtin(obj, args))
+	i = 0;
+	// while (args[i])
+	// {
+	// 	printf("args[%d]: $%s$\n", i, args[i]);
+	// 	i++;
+	// }
+	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
 		if (get_path(args[0], obj->envp))
 		{
 			if (!check_envp(obj, args))
 				printf("Error -> Command not found: %s\n", obj->input);
-			// ver no futuro
 		}
 		else
 			printf("Command not found: %s\n", obj->input);
 	}
+	if (args)
+		free(args);
 }

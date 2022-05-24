@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 00:17:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2021/11/09 01:23:55 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:05:36 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	*ft_free_result(char **result)
 	return (NULL);
 }
 
-static size_t	ft_wrd_size(char const *s, char c)
+static size_t	ft_wrd_size(char *s, char c)
 {
 	size_t	pos;
 
@@ -36,7 +36,7 @@ static size_t	ft_wrd_size(char const *s, char c)
 	return (pos);
 }
 
-static size_t	ft_nbr_wrd(char const *s, char c)
+static size_t	ft_nbr_wrd(char *s, char c)
 {
 	size_t	nbr_wrd;
 	size_t	pos;
@@ -63,7 +63,7 @@ static size_t	ft_nbr_wrd(char const *s, char c)
 	return (nbr_wrd);
 }
 
-static char	*ft_put_wrd(char const *s, size_t size)
+static char	*ft_put_wrd(char *s, size_t size)
 {
 	size_t	i;
 	char	*temp;
@@ -80,7 +80,7 @@ static char	*ft_put_wrd(char const *s, size_t size)
 	return (temp);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	size_t	nbr_wrd;
 	size_t	index;
