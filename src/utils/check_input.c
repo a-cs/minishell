@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/24 02:13:39 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/24 03:57:20 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,9 @@ static int	check_builtin(t_data *obj, char **args)
 
 void	check_input(t_data *obj)
 {
-	int		i;
 	char	**args;
 
 	args = tokenizer(obj);
-	i = 0;
-	// while (args[i])
-	// {
-	// 	printf("args[%d]: $%s$\n", i, args[i]);
-	// 	i++;
-	// }
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
 		if (get_path(args[0], obj->envp))

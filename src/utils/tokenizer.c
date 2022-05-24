@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 00:10:45 by acarneir          #+#    #+#             */
-/*   Updated: 2022/05/24 02:11:44 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/24 04:07:32 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	get_phrase(t_data *obj, int pos, char *args, int c)
 {
 	int		j;
 	char	*temp;
-	char	*temp_2;
 
 	j = ft_chrpos(obj->input + pos + 1, c);
 	if (j == -1 && c == SPACE)
@@ -28,19 +27,10 @@ static int	get_phrase(t_data *obj, int pos, char *args, int c)
 		return (ft_strlen(obj->input));
 	}
 	temp = ft_strtrim(ft_strjoin(
-				ft_substr(obj->input + pos, 0, j + 1), ""), " \t");
-	temp_2 = malloc(ft_strlen(temp) * sizeof(char));
-	if (c == DOUBLE_QUOTES)
-		ft_memcpy(temp_2, ft_strtrim(temp, "\""), ft_strlen(temp) - 1);
-	else if (c == SINGLE_QUOTES)
-		ft_memcpy(temp_2, ft_strtrim(temp, "\'"), ft_strlen(temp) - 1);
-	if (c == DOUBLE_QUOTES || c == SINGLE_QUOTES)
-		ft_memcpy(args, temp_2, ft_strlen(temp_2) + 1);
-	else
-		ft_memcpy(args, temp, ft_strlen(temp) + 1);
+				ft_substr(obj->input, pos, j + 2), ""), " \t");
+	ft_memcpy(args, temp, ft_strlen(temp) + 1);
 	free(temp);
-	free(temp_2);
-	return (j);
+	return (j + 1);
 }
 
 static void	split_token(char **args, t_data *obj)
@@ -79,7 +69,7 @@ static int	count_tokens(t_data *obj)
 	pos = 0;
 	while (pos < ft_strlen(obj->input))
 	{
-		temp = ft_calloc(ft_strlen(obj->input) + 1, sizeof(char));
+		temp = malloc((ft_strlen(obj->input) + 1) * sizeof(char));
 		if ((obj->input + pos)[0] == SINGLE_QUOTES)
 			pos += get_phrase(obj, pos, temp, SINGLE_QUOTES);
 		else if ((obj->input + pos)[0] == DOUBLE_QUOTES)
@@ -97,9 +87,8 @@ char	**tokenizer(t_data *obj)
 {
 	char	**args;
 
-	if (!check_string(obj))
-		return (NULL);
 	args = malloc((count_tokens(obj) + 1) * sizeof(char *));
-	split_token(args, obj);
+	if (obj->error == 0)
+		split_token(args, obj);
 	return (args);
 }

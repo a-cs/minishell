@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/24 00:29:30 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/24 03:07:05 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	exit_prompt(t_data *obj);
 int		pwd_prompt(void);
 void	check_input(t_data *obj);
 char	**tokenizer(t_data *obj);
-int		check_string(t_data *obj);
 int		echo_prompt(char **args);
 void	new_prompt(int signal);
 void	new_line(int signal);
