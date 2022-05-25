@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/24 03:57:20 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/25 01:55:02 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,17 @@ static int	check_envp(t_data *obj, char **args)
 
 static int	check_builtin(t_data *obj, char **args)
 {
+	char	*temp;
+
+	temp = ft_strtrim(args[0], " \t");
 	if (obj->error == 0)
 	{
-		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0)
+		if (ft_memcmp(temp, "exit", ft_strlen(temp)) == 0)
 			exit_prompt(obj);
-		if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0)
+		if (ft_memcmp(temp, "pwd", ft_strlen(temp)) == 0)
 			return (pwd_prompt());
-		if (ft_memcmp(args[0], "echo", ft_strlen(args[0])) == 0)
-			return (echo_prompt(args));
+		if (ft_memcmp(temp, "echo", ft_strlen(temp)) == 0)
+			return (echo_prompt(args, obj));
 	}
 	return (0);
 }

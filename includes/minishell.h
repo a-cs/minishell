@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/24 03:07:05 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/25 01:43:56 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 	char	*prompt;
 	char	*input;
 	int		error;
+	int		args_num;
 }	t_data;
 
 // FUNCTIONS
@@ -43,7 +44,7 @@ void	exit_prompt(t_data *obj);
 int		pwd_prompt(void);
 void	check_input(t_data *obj);
 char	**tokenizer(t_data *obj);
-int		echo_prompt(char **args);
+int		echo_prompt(char **args, t_data *obj);
 void	new_prompt(int signal);
 void	new_line(int signal);
 
