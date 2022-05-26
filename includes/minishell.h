@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/25 01:43:56 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/26 01:43:54 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <signal.h>
 
 // DEFINE
-# define SPACE 32
+# define SPACE_VALUE 32
 # define DOUBLE_QUOTES 34
 # define SINGLE_QUOTES 39
 
@@ -47,5 +47,7 @@ char	**tokenizer(t_data *obj);
 int		echo_prompt(char **args, t_data *obj);
 void	new_prompt(int signal);
 void	new_line(int signal);
+void	count_tokens(t_data *obj);
+void	split_token(t_data *obj, char **args);
 
 #endif

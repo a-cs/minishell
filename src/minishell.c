@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/24 00:30:03 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/26 02:18:02 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		obj->error = 0;
+		obj->args_num = 0;
 		obj->prompt = prompt_str();
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);

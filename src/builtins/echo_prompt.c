@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:02 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/25 01:59:49 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/25 21:03:54 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	trim_quotes(char **args, char *temp, int i, int *has_flag)
 
 	temp_2 = ft_calloc(ft_strlen(args[i]) + 1, sizeof(char));
 	if (i == 2 && (has_flag[0] != 0 && ((has_flag[1] == 0
-					|| has_flag[2] == 0) && args[i][0] == SPACE)))
+					|| has_flag[2] == 0) && args[i][0] == SPACE_VALUE)))
 		ft_memcpy(temp_2, args[i] + 1, ft_strlen(args[i]));
 	else
 		ft_memcpy(temp_2, args[i], ft_strlen(args[i]) + 1);
@@ -26,10 +26,10 @@ static void	trim_quotes(char **args, char *temp, int i, int *has_flag)
 		ft_memcpy(temp, ft_strtrim(temp_2, "\""), ft_strlen(temp_2) - 1);
 	else if (temp_2[0] == SINGLE_QUOTES)
 		ft_memcpy(temp, ft_strtrim(temp_2, "\'"), ft_strlen(temp_2) - 1);
-	else if (temp_2[0] == SPACE && temp_2[1] == DOUBLE_QUOTES)
+	else if (temp_2[0] == SPACE_VALUE && temp_2[1] == DOUBLE_QUOTES)
 		ft_memcpy(temp, ft_strjoin(" ", ft_strtrim(temp_2 + 1, "\"")),
 			ft_strlen(temp_2) - 1);
-	else if (temp_2[0] == SPACE && temp_2[1] == SINGLE_QUOTES)
+	else if (temp_2[0] == SPACE_VALUE && temp_2[1] == SINGLE_QUOTES)
 		ft_memcpy(temp, ft_strjoin(" ", ft_strtrim(temp_2 + 1, "\'")),
 			ft_strlen(temp_2) - 1);
 	else
@@ -62,7 +62,7 @@ int	echo_prompt(char **args, t_data *obj)
 	has_flag = ft_calloc(3, sizeof(int));
 	get_flag(obj, args, has_flag);
 	if (has_flag[0] == 0 || ((has_flag[1] == 0 || has_flag[2] == 0)
-			&& args[2][0] == SPACE))
+			&& args[2][0] == SPACE_VALUE))
 		i = 2;
 	else
 		i = 1;
@@ -75,7 +75,7 @@ int	echo_prompt(char **args, t_data *obj)
 		free(temp);
 	}
 	if (obj->args_num > 1 && !(has_flag[0] == 0 || ((has_flag[1] == 0
-					|| has_flag[2] == 0) && args[2][0] == SPACE)))
+					|| has_flag[2] == 0) && args[2][0] == SPACE_VALUE)))
 		printf("\n");
 	free(has_flag);
 	return (1);

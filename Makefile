@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/24 03:06:58 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/05/26 02:16:39 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/utils/check_input.c \
 	$(SRC_DIR)/utils/tokenizer.c \
 	$(SRC_DIR)/utils/signals.c \
-	$(SRC_DIR)/builtins/echo_prompt.c
+	$(SRC_DIR)/builtins/echo_prompt.c \
+	$(SRC_DIR)/utils/count_tokens.c \
+	$(SRC_DIR)/utils/split_tokens.c
 
 all: $(NAME)
 
