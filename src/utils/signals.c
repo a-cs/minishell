@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/05/25 20:59:10 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/26 02:16:59 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	new_prompt(int signal)
 {
 	(void)signal;
 	printf("\n");
-    rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
