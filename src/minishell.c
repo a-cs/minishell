@@ -32,6 +32,7 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		obj->error = 0;
+        obj->args_num = 0;
 		obj->prompt = prompt_str();
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);

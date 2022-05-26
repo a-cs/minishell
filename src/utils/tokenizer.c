@@ -6,111 +6,149 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 00:10:45 by acarneir          #+#    #+#             */
-/*   Updated: 2022/05/25 02:46:18 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/25 22:15:18 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	get_phrase(t_data *obj, int pos, char *args, int c)
+static void	split_token(t_data *obj, char **args)
 {
-	int		j;
-	int		aux;
-	char	*temp;
+    int i;
+    int init;
+    int	pos;
 
-	if ((obj->input + pos)[0] == c || pos == 0)
-		aux = 1;
-	else
-		aux = 0;
-	j = ft_chrpos(obj->input + pos + aux, c);
-	if (j == -1 && c == SPACE)
-		j = ft_strlen(obj->input + pos + aux);
-	if (j == -1)
-	{
-		printf("Error: unclosed quotes\n");
-		obj->error = 1;
-		return (ft_strlen(obj->input));
-	}
-	temp = ft_strjoin(ft_substr(obj->input, pos, j + 2 - aux), "");
-	ft_memcpy(args, temp, ft_strlen(temp) + 1 - aux);
-	printf("args: __%s__\n", args);
-	free(temp);
-	return (j + 1);
-}
-
-static int	get_closest(t_data *obj, int pos, char *temp)
-{
-	int	aux;
-
-	aux = get_phrase(obj, pos, temp, SPACE);
-	if (ft_chrpos(obj->input + pos + 1, SINGLE_QUOTES) != -1)
-		if (pos > 0 && get_phrase(obj, pos, temp, SINGLE_QUOTES) < aux)
-			aux = get_phrase(obj, pos, temp, SINGLE_QUOTES);
-	if (ft_chrpos(obj->input + pos + 1, DOUBLE_QUOTES) != -1)
-		if (pos > 0 && get_phrase(obj, pos, temp, DOUBLE_QUOTES) < aux)
-			aux = get_phrase(obj, pos, temp, DOUBLE_QUOTES);
-	if (pos > 0)
-		return (aux - 1);
-	return (aux);
-}
-
-static void	split_token(char **args, t_data *obj)
-{
-	int		i;
-	int		pos;
-	char	*temp;
-
-	i = 0;
-	pos = 0;
-	while (pos < ft_strlen(obj->input))
-	{
-		temp = malloc((ft_strlen(obj->input) + 1) * sizeof(char));
-		if ((obj->input + pos)[0] == SINGLE_QUOTES)
-			pos += get_phrase(obj, pos, temp, SINGLE_QUOTES);
-		else if ((obj->input + pos)[0] == DOUBLE_QUOTES)
-			pos += get_phrase(obj, pos, temp, DOUBLE_QUOTES);
-		else
-			pos += get_closest(obj, pos, temp);
-		args[i] = malloc((ft_strlen(temp) + 1) * sizeof(char));
-		ft_memcpy(args[i], temp, ft_strlen(temp) + 1);
-		i++;
-		pos++;
-		free(temp);
-	}
-	args[i] = NULL;
+    i = 0;
+    pos = 0;
+    while (pos < ft_strlen(obj->input) && i < obj->args_num) {
+        if (pos == 0)
+        {
+            while (obj->input[pos] && obj->input[pos] != SPACE_VALUE)
+                pos++;
+            args[i] = malloc((pos + 1) * sizeof(char));
+            ft_memcpy(args[i], ft_strjoin(ft_substr(obj->input, 0, pos), ""), pos + 1);
+        }
+        else if (obj->input[pos] == SINGLE_QUOTES)
+        {
+            init = pos;
+            pos++;
+            while (obj->input[pos] && obj->input[pos] != SINGLE_QUOTES)
+                pos++;
+            args[i] = malloc((pos - init + 2) * sizeof(char));
+            ft_memcpy(args[i], ft_strjoin(ft_substr(obj->input, init, pos - init + 1), ""), pos - init + 2);
+        }
+        else if (obj->input[pos] == DOUBLE_QUOTES)
+        {
+            init = pos;
+            pos++;
+            while (obj->input[pos] && obj->input[pos] != DOUBLE_QUOTES)
+                pos++;
+            args[i] = malloc((pos - init + 2) * sizeof(char));
+            ft_memcpy(args[i], ft_strjoin(ft_substr(obj->input, init, pos - init + 1), ""), pos - init + 2);
+        }
+        else
+        {
+            init = pos;
+            while (obj->input[pos] && (obj->input[pos] != SPACE_VALUE
+                                       && obj->input[pos] != SINGLE_QUOTES
+                                       && obj->input[pos] != DOUBLE_QUOTES))
+                pos++;
+            if (obj->input[pos] == SPACE_VALUE)
+            {
+                args[i] = malloc((pos - init + 1) * sizeof(char));
+                ft_memcpy(args[i], ft_strjoin(ft_substr(obj->input, init, pos - init + 1), ""), pos - init + 1);
+            }
+            else
+            {
+                args[i] = malloc((pos - init) * sizeof(char));
+                ft_memcpy(args[i], ft_strjoin(ft_substr(obj->input, init, pos - init), ""), pos - init);
+                pos--;
+            }
+        }
+        pos++;
+        i++;
+    }
+    args[i] = NULL;
 }
 
 static void	count_tokens(t_data *obj)
 {
-	int		i;
-	int		pos;
-	char	*temp;
+	int	pos;
 
-	i = 0;
 	pos = 0;
 	while (pos < ft_strlen(obj->input))
 	{
-		temp = malloc((ft_strlen(obj->input) + 1) * sizeof(char));
-		if ((obj->input + pos)[0] == SINGLE_QUOTES)
-			pos += get_phrase(obj, pos, temp, SINGLE_QUOTES);
-		else if ((obj->input + pos)[0] == DOUBLE_QUOTES)
-			pos += get_phrase(obj, pos, temp, DOUBLE_QUOTES);
-		else
-			pos += get_closest(obj, pos, temp);
-		i++;
-		pos++;
-		free(temp);
+		if (pos == 0)
+			while (obj->input[pos] && obj->input[pos] != SPACE_VALUE)
+				pos++;
+		else if (obj->input[pos] == SINGLE_QUOTES)
+        {
+            pos++;
+            while (obj->input[pos] && obj->input[pos] != SINGLE_QUOTES)
+                pos++;
+        }
+        else if (obj->input[pos] == DOUBLE_QUOTES)
+        {
+            pos++;
+            while (obj->input[pos] && obj->input[pos] != DOUBLE_QUOTES)
+                pos++;
+        }
+        else
+			while (obj->input[pos] && (obj->input[pos] != SPACE_VALUE
+					&& obj->input[pos] != SINGLE_QUOTES
+					&& obj->input[pos] != DOUBLE_QUOTES))
+				pos++;
+        pos++;
+		obj->args_num++;
 	}
-	obj->args_num = i;
 }
 
-char	**tokenizer(t_data *obj)
+static void check_unclosed_quotes(t_data *obj)
 {
-	char	**args;
+    int	pos;
 
-	count_tokens(obj);
-	args = malloc((obj->args_num + 1) * sizeof(char *));
-	if (obj->error == 0)
-		split_token(args, obj);
-	return (args);
+    pos = 0;
+    while (pos < ft_strlen(obj->input))
+    {
+        if (obj->input[pos] == SINGLE_QUOTES)
+        {
+            pos++;
+            while (obj->input[pos] && obj->input[pos] != SINGLE_QUOTES)
+                pos++;
+            if (obj->input[pos] != SINGLE_QUOTES)
+            {
+                obj->error = 1;
+                printf("Error: unclosed quotes\n");
+                break ;
+            }
+        }
+        else if (obj->input[pos] == DOUBLE_QUOTES)
+        {
+            pos++;
+            while (obj->input[pos] && obj->input[pos] != DOUBLE_QUOTES)
+                pos++;
+            if (obj->input[pos] != DOUBLE_QUOTES)
+            {
+                obj->error = 1;
+                printf("Error: unclosed quotes\n");
+                break ;
+            }
+        }
+        pos++;
+    }
+}
+
+char	**tokenizer(t_data *obj) {
+    char **args;
+
+    check_unclosed_quotes(obj);
+    if (obj->error == 0)
+    {
+        count_tokens(obj);
+        args = malloc((obj->args_num + 1) * sizeof(char *));
+        split_token(obj, args);
+        return (args);
+    }
+    else
+        return (NULL);
 }

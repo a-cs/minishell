@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/25 01:43:56 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/25 21:03:54 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <signal.h>
 
 // DEFINE
-# define SPACE 32
+# define SPACE_VALUE 32
 # define DOUBLE_QUOTES 34
 # define SINGLE_QUOTES 39
 
