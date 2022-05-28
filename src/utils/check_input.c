@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/25 01:55:02 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/28 16:11:04 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	check_input(t_data *obj)
 {
 	char	**args;
 
-	args = tokenizer(obj);
+	args = clean_args(obj, tokenizer(obj));
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
 		if (get_path(args[0], obj->envp))

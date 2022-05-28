@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/26 01:43:54 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/28 16:43:53 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SPACE_VALUE 32
 # define DOUBLE_QUOTES 34
 # define SINGLE_QUOTES 39
+# define DOLLAR_SIGN 36
 
 // STRUCTS
 typedef struct s_data
@@ -49,5 +50,6 @@ void	new_prompt(int signal);
 void	new_line(int signal);
 void	count_tokens(t_data *obj);
 void	split_token(t_data *obj, char **args);
+char	**clean_args(t_data *obj, char **temp);
 
 #endif
