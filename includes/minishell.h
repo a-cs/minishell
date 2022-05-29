@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/28 16:43:53 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/28 22:16:55 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	new_prompt(int signal);
 void	new_line(int signal);
 void	count_tokens(t_data *obj);
 void	split_token(t_data *obj, char **args);
-char	**clean_args(t_data *obj, char **temp);
+char	**trim_args(t_data *obj, char **temp);
+char	**replace_env_var(t_data *obj, char **temp);
 
 #endif

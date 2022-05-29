@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/28 16:11:48 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/05/28 22:17:08 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/echo_prompt.c \
 	$(SRC_DIR)/utils/count_tokens.c \
 	$(SRC_DIR)/utils/split_tokens.c \
-	$(SRC_DIR)/utils/clean_args.c
+	$(SRC_DIR)/utils/trim_args.c \
+	$(SRC_DIR)/utils/replace_env_var.c
 
 all: $(NAME)
 
