@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/28 16:11:04 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/28 21:01:13 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	check_input(t_data *obj)
 		if (get_path(args[0], obj->envp))
 		{
 			if (!check_envp(obj, args))
-				printf("Error -> Command not found: %s\n", obj->input);
+				printf("Error -> Command not found: %s\n", args[0]);
 		}
 		else
-			printf("Command not found: %s\n", obj->input);
+			printf("Command not found: %s\n", args[0]);
 	}
 	if (args)
 		free(args);
