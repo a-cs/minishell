@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/28 22:15:13 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/29 23:14:06 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,14 @@ static int	check_builtin(t_data *obj, char **args)
 	temp = ft_strtrim(args[0], " \t");
 	if (obj->error == 0)
 	{
-		if (ft_memcmp(temp, "exit", ft_strlen(temp)) == 0)
+		if (ft_memcmp(temp, "exit", ft_strlen(temp)) == 0
+			&& ft_memcmp(temp, "exit", 4) == 0)
 			exit_prompt(obj);
-		if (ft_memcmp(temp, "pwd", ft_strlen(temp)) == 0)
+		if (ft_memcmp(temp, "pwd", ft_strlen(temp)) == 0
+			&& ft_memcmp(temp, "pwd", 3) == 0)
 			return (pwd_prompt());
-		if (ft_memcmp(temp, "echo", ft_strlen(temp)) == 0)
+		if (ft_memcmp(temp, "echo", ft_strlen(temp)) == 0
+			&& ft_memcmp(temp, "echo", 4) == 0)
 			return (echo_prompt(args, obj));
 	}
 	return (0);
