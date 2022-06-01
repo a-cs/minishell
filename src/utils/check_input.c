@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/29 23:14:06 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/01 01:04:30 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,34 @@ static int	check_envp(t_data *obj, char **args)
 
 static int	check_builtin(t_data *obj, char **args)
 {
-	char	*temp;
-
-	temp = ft_strtrim(args[0], " \t");
 	if (obj->error == 0)
 	{
-		if (ft_memcmp(temp, "exit", ft_strlen(temp)) == 0
-			&& ft_memcmp(temp, "exit", 4) == 0)
+		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0
+			&& ft_memcmp(args[0], "exit", 4) == 0)
 			exit_prompt(obj);
-		if (ft_memcmp(temp, "pwd", ft_strlen(temp)) == 0
-			&& ft_memcmp(temp, "pwd", 3) == 0)
+		if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0
+			&& ft_memcmp(args[0], "pwd", 3) == 0)
 			return (pwd_prompt());
-		if (ft_memcmp(temp, "echo", ft_strlen(temp)) == 0
-			&& ft_memcmp(temp, "echo", 4) == 0)
+		if (ft_memcmp(args[0], "echo", ft_strlen(args[0])) == 0
+			&& ft_memcmp(args[0], "echo", 4) == 0)
 			return (echo_prompt(args, obj));
 	}
 	return (0);
+}
+
+static void	check_eof(t_data *obj)
+{
+	if (obj->input)
+		return ;
+	printf("exit\n");
+	exit_prompt(obj);
 }
 
 void	check_input(t_data *obj)
 {
 	char	**args;
 
+	check_eof(obj);
 	args = trim_args(obj, replace_env_var(obj, tokenizer(obj)));
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
