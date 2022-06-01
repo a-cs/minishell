@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:56:18 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/05/31 23:44:47 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,22 @@ static int	check_builtin(t_data *obj, char **args)
 	if (obj->error == 0)
 	{
 		if (ft_memcmp(temp, "exit", ft_strlen(temp)) == 0)
+		{
+			free(temp);
 			exit_prompt(obj);
+		}
 		if (ft_memcmp(temp, "pwd", ft_strlen(temp)) == 0)
+		{
+			free(temp);
 			return (pwd_prompt());
+		}
 		if (ft_memcmp(temp, "echo", ft_strlen(temp)) == 0)
+		{
+			free(temp);
 			return (echo_prompt(args, obj));
+		}
 	}
+	free(temp);
 	return (0);
 }
 

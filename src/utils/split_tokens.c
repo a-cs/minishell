@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 02:16:00 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/26 02:16:15 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:08:23 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	split_token(t_data *obj, char **args)
 	pos = 0;
 	while (pos < ft_strlen(obj->input) && i < obj->args_num)
 	{
-		temp = ft_calloc(ft_strlen(obj->input), sizeof(char));
+		temp = ft_calloc(ft_strlen(obj->input) + 1, sizeof(char));
 		if (pos == 0)
 			pos = split_first_token(obj, temp, pos);
 		else if (obj->input[pos] == SINGLE_QUOTES)

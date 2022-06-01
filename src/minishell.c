@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/26 02:18:02 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:05:33 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char	*prompt_str(void)
 int	main(int argc, char *argv[], char **envp)
 {
 	t_data	*obj;
+	char	*temp;
 
 	if (argc != 1 && argv)
 		return (1);
@@ -36,7 +37,8 @@ int	main(int argc, char *argv[], char **envp)
 		obj->prompt = prompt_str();
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
-		obj->input = ft_strtrim(readline(obj->prompt), " \t");
+		temp = readline(obj->prompt);
+		obj->input = temp;
 		check_input(obj);
 	}
 	return (0);
