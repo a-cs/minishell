@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/25 01:55:02 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/05/31 22:56:18 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,19 @@ static int	check_builtin(t_data *obj, char **args)
 	return (0);
 }
 
+static void	check_eof(t_data *obj)
+{
+	if (obj->input)
+		return ;
+	printf("exit\n");
+	exit_prompt(obj);
+}
+
 void	check_input(t_data *obj)
 {
 	char	**args;
 
+	check_eof(obj);
 	args = tokenizer(obj);
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
