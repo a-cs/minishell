@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   ft_free_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/14 00:10:45 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/07 01:19:27 by acarneir         ###   ########.fr       */
+/*   Created: 2022/06/06 23:45:50 by acarneir          #+#    #+#             */
+/*   Updated: 2022/06/06 23:46:30 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/libft.h"
 
-char	**tokenizer(t_data *obj)
+void	ft_free_ptr(void **ptr)
 {
-	char	**args;
-
-	args = ft_split(obj->input, ' ');
-	while (args[obj->args_num])
-		obj->args_num++;
-	return (args);
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
 }
-
-// while (input[i])
-// {
-// 	if (input[i] == DOUBLE_QUOTES)
-// 	{
-// 		while (input[i+j])
-// 		{
-// 			if (input[i+j] == DOUBLE_QUOTES)
-// 			return (i, j);
-// 			j++;
-// 		}
-// 	}
-// 	i++;
-// }

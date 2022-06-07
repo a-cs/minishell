@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 20:36:32 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/23 23:05:18 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/06 23:46:58 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int		ft_strlen(char *str);
 char	*ft_strnstr(char *haystack, char *needle, size_t len);
 char	*ft_strtrim(char *s1, char *set);
 char	*ft_substr(char *s, unsigned int start, size_t len);
+void	ft_free_matrix(char **matrix);
+void	ft_free_ptr(void **ptr);
 
 #endif
