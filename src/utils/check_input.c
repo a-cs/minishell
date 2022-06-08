@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/01 01:04:30 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:59:57 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@ static char	*get_path(char *command, char **envp)
 		path = ft_strjoin(temp_path, command);
 		free(temp_path);
 		if (access(path, F_OK) == 0)
+		{
+			ft_free_matrix(env_path);
 			return (path);
+		}
 		i++;
+		free(path);
 	}
+	ft_free_matrix(env_path);
 	return (0);
 }
 
@@ -62,7 +67,10 @@ static int	check_builtin(t_data *obj, char **args)
 	{
 		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "exit", 4) == 0)
+		{
+			ft_free_matrix(args);
 			exit_prompt(obj);
+		}
 		if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "pwd", 3) == 0)
 			return (pwd_prompt());
@@ -73,30 +81,25 @@ static int	check_builtin(t_data *obj, char **args)
 	return (0);
 }
 
-static void	check_eof(t_data *obj)
-{
-	if (obj->input)
-		return ;
-	printf("exit\n");
-	exit_prompt(obj);
-}
-
 void	check_input(t_data *obj)
 {
 	char	**args;
+	char	*path;
 
-	check_eof(obj);
-	args = trim_args(obj, replace_env_var(obj, tokenizer(obj)));
+	if (!obj->input || ft_strlen(obj->input) == 0)
+		return ;
+	args = tokenizer(obj);
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
-		if (get_path(args[0], obj->envp))
+		path = get_path(args[0], obj->envp);
+		if (path)
 		{
+			free(path);
 			if (!check_envp(obj, args))
 				printf("Error -> Command not found: %s\n", args[0]);
 		}
 		else
 			printf("Command not found: %s\n", args[0]);
 	}
-	if (args)
-		free(args);
+	ft_free_matrix(args);
 }

@@ -3,50 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 00:10:45 by acarneir          #+#    #+#             */
-/*   Updated: 2022/05/26 01:39:28 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:01:31 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	throw_unclosed_quotes_error(t_data *obj, int pos, int c)
+int	increment_count(t_data *obj, int i, int c)
 {
-	if (obj->input[pos] != c)
-	{
-		obj->error = 1;
-		printf("Error: unclosed quotes\n");
-		return (1);
-	}
-	return (0);
+	i++;
+	while (obj->input[i] && obj->input[i] != c)
+		i++;
+	return (i);
 }
 
-static void	check_unclosed_quotes(t_data *obj)
+static void	count_args(t_data *obj)
 {
-	int	pos;
+	int	i;
 
-	pos = 0;
-	while (pos < ft_strlen(obj->input))
+	i = 0;
+	while (i < ft_strlen(obj->input) && obj->input[i])
 	{
-		if (obj->input[pos] == SINGLE_QUOTES)
+		if (obj->input[i] == DOUBLE_QUOTES)
+			i = increment_count(obj, i, DOUBLE_QUOTES) + 1;
+		else if (obj->input[i] == SINGLE_QUOTES)
+			i = increment_count(obj, i, SINGLE_QUOTES) + 1;
+		else if (obj->input[i] == SPACE_VALUE)
 		{
-			pos++;
-			while (obj->input[pos] && obj->input[pos] != SINGLE_QUOTES)
-				pos++;
-			if (throw_unclosed_quotes_error(obj, pos, SINGLE_QUOTES))
-				break ;
+			i++;
+			obj->args_num++;
+			while (obj->input[i] && obj->input[i] == SPACE_VALUE)
+				i++;
 		}
-		else if (obj->input[pos] == DOUBLE_QUOTES)
-		{
-			pos++;
-			while (obj->input[pos] && obj->input[pos] != DOUBLE_QUOTES)
-				pos++;
-			if (throw_unclosed_quotes_error(obj, pos, DOUBLE_QUOTES))
-				break ;
-		}
-		pos++;
+		else if (obj->input[i] != DOUBLE_QUOTES
+			&& obj->input[i] != SINGLE_QUOTES && obj->input[i] != SPACE_VALUE)
+			i = increment_count(obj, i, SPACE_VALUE);
+		if (i > ft_strlen(obj->input) || obj->input[i] == '\0')
+			obj->args_num++;
 	}
 }
 
@@ -54,14 +50,8 @@ char	**tokenizer(t_data *obj)
 {
 	char	**args;
 
-	check_unclosed_quotes(obj);
-	if (obj->error == 0)
-	{
-		count_tokens(obj);
-		args = malloc((obj->args_num + 1) * sizeof(char *));
-		split_token(obj, args);
-		return (args);
-	}
-	else
-		return (NULL);
+	count_args(obj);
+	args = ft_calloc(obj->args_num + 1, sizeof(char *));
+	split_args(obj, args);
+	return (args);
 }

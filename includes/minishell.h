@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/28 22:16:55 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:55:28 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ char	**tokenizer(t_data *obj);
 int		echo_prompt(char **args, t_data *obj);
 void	new_prompt(int signal);
 void	new_line(int signal);
-void	count_tokens(t_data *obj);
-void	split_token(t_data *obj, char **args);
-char	**trim_args(t_data *obj, char **temp);
-char	**replace_env_var(t_data *obj, char **temp);
+int		increment_count(t_data *obj, int i, int c);
+void	split_args(t_data *obj, char **args);
 
 #endif
