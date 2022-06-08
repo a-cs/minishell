@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/07 01:19:36 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:22:31 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,15 @@ static int	check_builtin(t_data *obj, char **args)
 	return (0);
 }
 
-static void	check_eof(t_data *obj)
-{
-	if (obj->input)
-		return ;
-	printf("exit\n");
-	exit_prompt(obj);
-}
+
 
 void	check_input(t_data *obj)
 {
 	char	**args;
 	char	*path;
 
-	check_eof(obj);
+	if (!obj->input || ft_strlen(obj->input) == 0)
+		return ;
 	args = tokenizer(obj);
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{

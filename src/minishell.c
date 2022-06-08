@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/01 00:05:33 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:24:45 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static char	*prompt_str(void)
 
 	str = "\001\033[1;96m\002Minishell \001\033[1;92m\002>\001\033[0m\002 ";
 	return (str);
+}
+
+static void	check_eof(char *input, t_data *obj)
+{
+	if (input)
+		return ;
+	printf("exit\n");
+	exit_prompt(obj);
 }
 
 int	main(int argc, char *argv[], char **envp)
@@ -38,8 +46,11 @@ int	main(int argc, char *argv[], char **envp)
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		temp = readline(obj->prompt);
-		obj->input = temp;
+		check_eof(temp, obj);
+		obj->input = ft_strtrim(temp, " \t");
 		check_input(obj);
+		if (obj->input)
+			free(obj->input);
 	}
 	return (0);
 }
