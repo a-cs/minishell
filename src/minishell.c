@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/07 23:24:45 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:43:10 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char *argv[], char **envp)
 		obj->error = 0;
 		obj->args_num = 0;
 		obj->prompt = prompt_str();
+		obj->input = NULL;
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		temp = readline(obj->prompt);

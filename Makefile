@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/06 23:25:36 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/08 00:55:54 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/utils/check_input.c \
 	$(SRC_DIR)/utils/tokenizer.c \
+	$(SRC_DIR)/utils/split_args.c \
 	$(SRC_DIR)/utils/signals.c \
 	$(SRC_DIR)/builtins/echo_prompt.c
 
