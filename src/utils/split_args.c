@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:53:06 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/08 01:12:22 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/09 02:10:10 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static char	*save_arg(char *str, int len, int pos)
 
 static int	skip_spaces(t_data *obj, int i, int j)
 {
-	if (obj->input[i + j] == SPACE_VALUE)
+	if ((i + j) < ft_strlen(obj->input) && obj->input[i + j] == SPACE_VALUE)
 	{
 		j++;
-		while (obj->input[i + j] && obj->input[i + j] == SPACE_VALUE)
+		while ((i + j) < ft_strlen(obj->input) && obj->input[i + j] && obj->input[i + j] == SPACE_VALUE)
 			j++;
 	}
 	return (j);
@@ -60,7 +60,7 @@ void	split_args(t_data *obj, char **args)
 		pos++;
 		j = skip_spaces(obj, i, j);
 		i += j;
-		if (i > ft_strlen(obj->input) || obj->input[i] == '\0')
-			args[pos] = NULL ;
+		// if (i > ft_strlen(obj->input) || obj->input[i] == '\0')
 	}
+	args[obj->args_num] = NULL ;
 }

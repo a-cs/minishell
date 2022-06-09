@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 00:10:45 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/08 01:01:31 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/09 01:55:44 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	increment_count(t_data *obj, int i, int c)
 {
 	i++;
-	while (obj->input[i] && obj->input[i] != c)
+	while (i < ft_strlen(obj->input) && obj->input[i] && obj->input[i] != c)
 		i++;
 	return (i);
 }
