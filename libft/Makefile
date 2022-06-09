@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/06 23:47:34 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/08 23:29:14 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,15 @@ SRCS = ft_atoi.c \
 		get_next_line_utils.c \
 		get_next_line.c \
 		ft_free_ptr.c \
+		ft_lstnew.o \
+		ft_lstadd_front.o \
+		ft_lstsize.o \
+		ft_lstlast.o \
+		ft_lstadd_back.o \
+		ft_lstdelone.o \
+		ft_lstclear.o \
+		ft_lstiter.o \
+		ft_lstmap.o \
 		ft_free_matrix.c
 
 OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:%.c=%.o))

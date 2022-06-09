@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/08 00:55:28 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/08 23:30:51 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	new_prompt(int signal);
 void	new_line(int signal);
 int		increment_count(t_data *obj, int i, int c);
 void	split_args(t_data *obj, char **args);
+char	**clean_quotes(t_data *obj, char **temp);
 
 #endif

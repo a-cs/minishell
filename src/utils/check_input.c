@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/08 00:59:57 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/08 23:09:34 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	check_input(t_data *obj)
 
 	if (!obj->input || ft_strlen(obj->input) == 0)
 		return ;
-	args = tokenizer(obj);
+	args = clean_quotes(obj, tokenizer(obj));
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
 		path = get_path(args[0], obj->envp);
