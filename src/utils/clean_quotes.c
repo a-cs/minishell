@@ -12,17 +12,43 @@
 
 #include "../../includes/minishell.h"
 
-char	*iterate_and_clean(t_data *obj, char *temp, t_list *char_list)
+char *join_list(t_list *char_list) {
+    char *save;
+    char *temp;
+
+    if (char_list)
+    {
+        save = ft_calloc(ft_strlen(char_list->content) + 1, sizeof(char));
+        while (char_list)
+        {
+            if (!save[0])
+                ft_memcpy(save, char_list->content, ft_strlen(char_list->content));
+            else
+            {
+                temp = ft_strjoin(save, char_list->content);
+                free(save);
+                save = ft_calloc(ft_strlen(temp) + 1, sizeof(char));
+                ft_memcpy(save, temp, ft_strlen(temp));
+                free(temp);
+            }
+            char_list = char_list->next;
+        }
+        return (save);
+    }
+    return (NULL);
+}
+
+int	iterate_and_clean(t_data *obj, char *temp, t_list **char_list)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	if (obj->error != 0)
-		return (NULL);
-	while (temp[i] != '\0' && obj->error == 0)
+		return ft_strlen(temp);
+	while (obj->error == 0 && temp[i] != '\0')
 	{
-		printf("temp = |%s|\n", temp);
+//		printf("temp = |%s|\n", temp);
 		if (temp[0] == DOUBLE_QUOTES)
 		{
 			j = ft_chrpos(temp + 1, DOUBLE_QUOTES);
@@ -33,14 +59,13 @@ char	*iterate_and_clean(t_data *obj, char *temp, t_list *char_list)
 			}
 			else
 			{
-				// printf("j = %d\n", j);
-				ft_lstadd_back(&char_list, ft_lstnew(ft_substr(temp, 1, j)));
+				ft_lstadd_back(char_list, ft_lstnew(ft_substr(temp, 1, j)));
 				i += j + 2;
 			}
 		}
 		else if (temp[0] == SINGLE_QUOTES)
 		{
-			j = ft_chrpos(temp + 1, SINGLE_QUOTES);obj->error != 0
+			j = ft_chrpos(temp + 1, SINGLE_QUOTES);
 			if (j == -1)
 			{
 				obj->error++;
@@ -48,7 +73,7 @@ char	*iterate_and_clean(t_data *obj, char *temp, t_list *char_list)
 			}
 			else
 			{
-				ft_lstadd_back(&char_list, ft_lstnew(ft_substr(temp, 1, j)));
+				ft_lstadd_back(char_list, ft_lstnew(ft_substr(temp, 1, j)));
 				i += j + 2;
 			}
 		}
@@ -58,13 +83,13 @@ char	*iterate_and_clean(t_data *obj, char *temp, t_list *char_list)
 			while (temp[j] != DOUBLE_QUOTES && temp[j] != SINGLE_QUOTES
 				&& temp[j] != '\0')
 				j++;
-			ft_lstadd_back(&char_list, ft_lstnew(ft_substr(temp, 0, j)));
+			ft_lstadd_back(char_list, ft_lstnew(ft_substr(temp, 0, j)));
 			i += j;
 		}
-		printf("list = |%s|\n", (char *)char_list->content);
-		iterate_and_clean(obj, temp + i, char_list);
+//		printf("list = |%s|\n", (char *)char_list->content);
+		i += iterate_and_clean(obj, temp + i, char_list);
 	}
-	return (ft_strjoin(temp,""));
+	return (i);
 }
 
 char	**clean_quotes(t_data *obj, char **temp)
@@ -78,7 +103,8 @@ char	**clean_quotes(t_data *obj, char **temp)
 	while (i < obj->args_num)
 	{
 		char_list = NULL;
-		args[i] = iterate_and_clean(obj, temp[i], char_list);
+        iterate_and_clean(obj, temp[i], &char_list);
+        args[i] = join_list(char_list);
 		ft_lstclear(&char_list, free);
 		i++;
 	}
