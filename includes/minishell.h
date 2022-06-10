@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/08 23:30:51 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/10 01:36:14 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	new_line(int signal);
 int		increment_count(t_data *obj, int i, int c);
 void	split_args(t_data *obj, char **args);
 char	**clean_quotes(t_data *obj, char **temp);
-int     has_quotes_before_space(char *str);
-int 	skip_spaces(t_data *obj, int i, int j);
+int		has_quotes_before_space(char *str);
+int		increment_quotes(t_data *obj, int i);
+int		skip_spaces(t_data *obj, int i, int j);
 
 #endif
