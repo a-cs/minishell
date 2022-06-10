@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/10 02:08:31 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:18:04 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,22 @@ static int	check_builtin(t_data *obj, char **args)
 	return (0);
 }
 
+static char	*try_path(t_data *obj, char	**args)
+{
+	char	*path;
+
+	if (ft_chrpos(args[0], '/') != -1)
+	{
+		if (access(args[0], F_OK) == 0)
+			path = ft_strjoin(args[0], "");
+		else
+			path = NULL;
+	}
+	else
+		path = get_path(args[0], obj->envp);
+	return (path);
+}
+
 void	check_input(t_data *obj)
 {
 	char	**args;
@@ -96,13 +112,7 @@ void	check_input(t_data *obj)
 	args = clean_quotes(obj, tokenizer(obj));
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
-		if (ft_chrpos(args[0], '/') != -1)
-		{
-			if (access(args[0], F_OK) == 0)
-				path = ft_strjoin(args[0], "");
-		}
-		else
-			path = get_path(args[0], obj->envp);
+		path = try_path(obj, args);
 		if (path)
 		{
 			free(path);
