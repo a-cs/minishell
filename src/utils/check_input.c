@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/08 23:09:34 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:08:31 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ static int	check_envp(t_data *obj, char **args)
 	pid = fork();
 	signal(SIGINT, new_line);
 	if (pid == 0)
-		response = execve(get_path(args[0], obj->envp), args, obj->envp);
+	{
+		if (ft_chrpos(args[0], '/') != -1)
+			response = execve(args[0], args, obj->envp);
+		else
+			response = execve(get_path(args[0], obj->envp), args, obj->envp);
+	}
 	waitpid(pid, NULL, 0);
 	close(fd[0]);
 	close(fd[1]);
@@ -91,7 +96,13 @@ void	check_input(t_data *obj)
 	args = clean_quotes(obj, tokenizer(obj));
 	if (obj->error == 0 && args && !check_builtin(obj, args))
 	{
-		path = get_path(args[0], obj->envp);
+		if (ft_chrpos(args[0], '/') != -1)
+		{
+			if (access(args[0], F_OK) == 0)
+				path = ft_strjoin(args[0], "");
+		}
+		else
+			path = get_path(args[0], obj->envp);
 		if (path)
 		{
 			free(path);
