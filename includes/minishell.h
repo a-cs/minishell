@@ -51,5 +51,7 @@ void	new_line(int signal);
 int		increment_count(t_data *obj, int i, int c);
 void	split_args(t_data *obj, char **args);
 char	**clean_quotes(t_data *obj, char **temp);
+int     has_quotes_before_space(char *str);
+int 	skip_spaces(t_data *obj, int i, int j);
 
 #endif

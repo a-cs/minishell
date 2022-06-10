@@ -22,28 +22,39 @@ int	increment_count(t_data *obj, int i, int c)
 
 static void	count_args(t_data *obj)
 {
-	int	i;
+    int	i;
+    int	j;
+    int aux_single;
+    int aux_double;
 
-	i = 0;
-	while (i < ft_strlen(obj->input) && obj->input[i])
-	{
-		if (obj->input[i] == DOUBLE_QUOTES)
-			i = increment_count(obj, i, DOUBLE_QUOTES) + 1;
-		else if (obj->input[i] == SINGLE_QUOTES)
-			i = increment_count(obj, i, SINGLE_QUOTES) + 1;
-		else if (obj->input[i] == SPACE_VALUE)
-		{
-			i++;
-			obj->args_num++;
-			while (obj->input[i] && obj->input[i] == SPACE_VALUE)
-				i++;
-		}
-		else if (obj->input[i] != DOUBLE_QUOTES
-			&& obj->input[i] != SINGLE_QUOTES && obj->input[i] != SPACE_VALUE)
-			i = increment_count(obj, i, SPACE_VALUE);
-		if (i > ft_strlen(obj->input) || obj->input[i] == '\0')
-			obj->args_num++;
-	}
+    i = 0;
+    while (i < ft_strlen(obj->input) && obj->input[i])
+    {
+        j = 0;
+        while (has_quotes_before_space(obj->input + i + j))
+        {
+            if (obj->input[i + j] == DOUBLE_QUOTES)
+                j += increment_count(obj, i + j, DOUBLE_QUOTES) + 1 - i - j;
+            else if (obj->input[i + j] == SINGLE_QUOTES)
+                j += increment_count(obj, i + j, SINGLE_QUOTES) + 1 - i - j;
+            else
+            {
+                aux_double = increment_count(obj, i + j, DOUBLE_QUOTES);
+                aux_single = increment_count(obj, i + j, SINGLE_QUOTES);
+                if (aux_single < aux_double)
+                    j += aux_single - i - j;
+                else
+                    j += aux_double - i - j;
+            }
+        }
+        if ((i + j) < ft_strlen(obj->input) && obj->input[i + j] != DOUBLE_QUOTES
+            && obj->input[i + j] != SINGLE_QUOTES
+            && obj->input[i + j] != SPACE_VALUE)
+            j = increment_count(obj, i + j, SPACE_VALUE) - i;
+        obj->args_num++;
+        j = skip_spaces(obj, i, j);
+        i += j;
+    }
 }
 
 char	**tokenizer(t_data *obj)
