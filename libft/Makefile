@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/05/23 23:03:58 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/08 23:29:14 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,17 @@ SRCS = ft_atoi.c \
 		ft_substr.c \
 		get_next_line_utils.c \
 		get_next_line.c \
+		ft_free_ptr.c \
+		ft_lstnew.o \
+		ft_lstadd_front.o \
+		ft_lstsize.o \
+		ft_lstlast.o \
+		ft_lstadd_back.o \
+		ft_lstdelone.o \
+		ft_lstclear.o \
+		ft_lstiter.o \
+		ft_lstmap.o \
+		ft_free_matrix.c
 
 OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:%.c=%.o))
 SRCS := $(addprefix $(SRC_DIR)/,$(SRC))

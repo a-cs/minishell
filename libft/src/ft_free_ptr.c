@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_free_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/09 01:51:25 by acarneir         ###   ########.fr       */
+/*   Created: 2022/06/06 23:45:50 by acarneir          #+#    #+#             */
+/*   Updated: 2022/06/06 23:46:30 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/libft.h"
 
-void	new_prompt(int signal)
+void	ft_free_ptr(void **ptr)
 {
-	(void)signal;
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-void	new_line(int signal)
-{
-	(void)signal;
-	printf("\n");
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
 }

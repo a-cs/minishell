@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/09 01:51:25 by acarneir         ###   ########.fr       */
+/*   Created: 2021/05/27 00:15:22 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/06/08 23:27:22 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/libft.h"
 
-void	new_prompt(int signal)
+t_list	*ft_lstnew(void *content)
 {
-	(void)signal;
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	t_list	*new_elemet;
 
-void	new_line(int signal)
-{
-	(void)signal;
-	printf("\n");
+	new_elemet = (t_list *)malloc(sizeof(t_list));
+	if (!new_elemet)
+		return (NULL);
+	new_elemet->content = content;
+	new_elemet->next = NULL;
+	return (new_elemet);
 }

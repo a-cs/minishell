@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/26 01:43:54 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/10 01:36:14 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SPACE_VALUE 32
 # define DOUBLE_QUOTES 34
 # define SINGLE_QUOTES 39
+# define DOLLAR_SIGN 36
 
 // STRUCTS
 typedef struct s_data
@@ -47,7 +48,11 @@ char	**tokenizer(t_data *obj);
 int		echo_prompt(char **args, t_data *obj);
 void	new_prompt(int signal);
 void	new_line(int signal);
-void	count_tokens(t_data *obj);
-void	split_token(t_data *obj, char **args);
+int		increment_count(t_data *obj, int i, int c);
+void	split_args(t_data *obj, char **args);
+char	**clean_quotes(t_data *obj, char **temp);
+int		has_quotes_before_space(char *str);
+int		increment_quotes(t_data *obj, int i);
+int		skip_spaces(t_data *obj, int i, int j);
 
 #endif
