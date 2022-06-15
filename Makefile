@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/15 00:34:29 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/15 01:48:42 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,15 +27,15 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 SRC_DIR = ./src
 SRC = $(SRC_DIR)/minishell.c \
+	$(SRC_DIR)/builtins/echo_prompt.c \
 	$(SRC_DIR)/builtins/exit_prompt.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/utils/check_input.c \
-	$(SRC_DIR)/utils/tokenizer.c \
-	$(SRC_DIR)/utils/split_args.c \
-	$(SRC_DIR)/utils/replace_env_var.c \
 	$(SRC_DIR)/utils/clean_quotes.c \
+	$(SRC_DIR)/utils/replace_env_var.c \
 	$(SRC_DIR)/utils/signals.c \
-	$(SRC_DIR)/builtins/echo_prompt.c
+	$(SRC_DIR)/utils/split_args.c \
+	$(SRC_DIR)/utils/tokenizer.c
 
 all: $(NAME)
 

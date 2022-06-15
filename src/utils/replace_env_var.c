@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 23:27:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/15 01:06:15 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/15 01:35:26 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**replace_env_var(t_data *obj, char **temp)
 		if (((temp[i][0] == SINGLE_QUOTES || (temp[i][0] == SPACE_VALUE
 				&& temp[i][1] == SINGLE_QUOTES)) && temp[i][ft_strlen(temp[i])
 				- 1] == SINGLE_QUOTES) || ft_chrpos(temp[i], DOLLAR_SIGN) == -1)
-			ft_lstadd_back(&char_list, ft_lstnew(temp[i]));
+			ft_lstadd_back(&char_list, ft_lstnew(ft_strdup(temp[i])));
 		else
 			iterate_and_replace(obj, temp[i], &char_list);
 		args[i] = join_list(char_list);

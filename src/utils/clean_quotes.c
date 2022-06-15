@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:10:11 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/15 01:06:11 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/15 01:49:42 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*join_list(t_list *char_list)
 	return (NULL);
 }
 
-int	populate_list(t_data *obj, char *temp, t_list **char_list, int i)
+static int	populate_list(t_data *obj, char *temp, t_list **char_list, int i)
 {
 	int	j;
 
@@ -68,7 +68,7 @@ int	populate_list(t_data *obj, char *temp, t_list **char_list, int i)
 	return (i);
 }
 
-int	iterate_and_clean(t_data *obj, char *temp, t_list **char_list)
+static int	iterate_and_clean(t_data *obj, char *temp, t_list **char_list)
 {
 	int	i;
 	int	j;
