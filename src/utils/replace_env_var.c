@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 23:27:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/15 01:35:26 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/15 01:57:02 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	iterate_and_replace(t_data *obj, char *str, t_list **char_list)
 		i = ft_chrpos(str, DOLLAR_SIGN);
 		if (i == -1)
 		{
-			ft_lstadd_back(char_list, ft_lstnew(str));
+			ft_lstadd_back(char_list, ft_lstnew(ft_strdup(str)));
 			return (ft_strlen(str));
 		}
 		else if (i == 0)
