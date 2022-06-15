@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/10 01:36:14 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/15 00:33:59 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ char	**clean_quotes(t_data *obj, char **temp);
 int		has_quotes_before_space(char *str);
 int		increment_quotes(t_data *obj, int i);
 int		skip_spaces(t_data *obj, int i, int j);
+char	**replace_env_var(t_data *obj, char **temp);
+char	*join_list(t_list *char_list);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/08 23:30:38 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/15 00:34:29 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/utils/check_input.c \
 	$(SRC_DIR)/utils/tokenizer.c \
 	$(SRC_DIR)/utils/split_args.c \
+	$(SRC_DIR)/utils/replace_env_var.c \
 	$(SRC_DIR)/utils/clean_quotes.c \
 	$(SRC_DIR)/utils/signals.c \
 	$(SRC_DIR)/builtins/echo_prompt.c
