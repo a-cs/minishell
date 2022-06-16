@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/08 23:29:14 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/15 01:32:51 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,33 +24,35 @@ SRCS = ft_atoi.c \
 		ft_calloc.c \
 		ft_chrpos.c \
 		ft_chrqty.c \
-		ft_isascii.c \
+		ft_free_matrix.c \
+		ft_free_ptr.c \
 		ft_isalpha.c \
+		ft_isascii.c \
 		ft_isdigit.c \
+		ft_lstadd_back.o \
+		ft_lstadd_front.o \
+		ft_lstclear.o \
+		ft_lstdelone.o \
+		ft_lstiter.o \
+		ft_lstlast.o \
+		ft_lstmap.o \
+		ft_lstnew.o \
+		ft_lstsize.o \
 		ft_memcmp.c \
 		ft_memcpy.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_split.c \
 		ft_strchr.c \
+		ft_strdup.c \
 		ft_strjoin.c \
+		ft_strlcpy.c \
 		ft_strlen.c \
 		ft_strnstr.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		get_next_line_utils.c \
-		get_next_line.c \
-		ft_free_ptr.c \
-		ft_lstnew.o \
-		ft_lstadd_front.o \
-		ft_lstsize.o \
-		ft_lstlast.o \
-		ft_lstadd_back.o \
-		ft_lstdelone.o \
-		ft_lstclear.o \
-		ft_lstiter.o \
-		ft_lstmap.o \
-		ft_free_matrix.c
+		get_next_line.c
 
 OBJS := $(addprefix $(OBJ_DIR)/,$(SRCS:%.c=%.o))
 SRCS := $(addprefix $(SRC_DIR)/,$(SRC))
