@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 23:27:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/16 00:35:20 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/16 00:41:24 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	save_var(t_data *obj, char *str, t_list **char_list)
 	char	*var;
 
 	i = 0;
-	while (str[i] || (ft_isalpha(str[i]) || ft_isdigit(str[i])))
+	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
 		i++;
 	var = ft_substr(str, 0, i);
 	len = ft_strlen(var);
@@ -35,7 +35,7 @@ static void	save_var(t_data *obj, char *str, t_list **char_list)
 		i++;
 	}
 	if (obj->envp[i] == NULL)
-		ft_lstadd_back(char_list, ft_lstnew(""));
+		ft_lstadd_back(char_list, ft_lstnew(ft_strjoin("", "")));
 	free(var);
 }
 
@@ -56,7 +56,7 @@ static int	iterate_and_replace(t_data *obj, char *str, t_list **char_list)
 		{
 			save_var(obj, str + 1, char_list);
 			i++;
-			while (str[i] || (ft_isalpha(str[i]) || ft_isdigit(str[i])))
+			while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
 				i++;
 		}
 		else
