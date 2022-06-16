@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/14 23:26:53 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/16 00:52:09 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ static int	check_builtin(t_data *obj, char **args)
 		if (ft_memcmp(args[0], "echo", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "echo", 4) == 0)
 			return (echo_prompt(args, obj));
+		if (ft_memcmp(args[0], "env", ft_strlen(args[0])) == 0
+			&& ft_memcmp(args[0], "env", 4) == 0)
+			return (env_prompt(obj));
 	}
 	return (0);
 }
