@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 23:27:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/15 01:57:02 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/16 00:31:07 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	save_var(t_data *obj, char *str, t_list **char_list)
 	char	*var;
 
 	i = 0;
-	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
+	while (str[i] || (ft_isalpha(str[i]) || ft_isdigit(str[i])))
 		i++;
 	var = ft_substr(str, 0, i);
 	len = ft_strlen(var);
@@ -29,9 +29,11 @@ static void	save_var(t_data *obj, char *str, t_list **char_list)
 		if (ft_memcmp(var, obj->envp[i], len) == 0)
 		{
 			if (obj->envp[i][len] == '=')
+			{
 				ft_lstadd_back(char_list, ft_lstnew(ft_substr(obj->envp[i],
-							len + 1, ft_strlen(obj->envp[i] - len - 1))));
-			break ;
+							len + 1, ft_strlen(obj->envp[i]) - len - 1)));
+				break ;
+			}
 		}
 		i++;
 	}
@@ -57,7 +59,7 @@ static int	iterate_and_replace(t_data *obj, char *str, t_list **char_list)
 		{
 			save_var(obj, str + 1, char_list);
 			i++;
-			while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
+			while (str[i] || (ft_isalpha(str[i]) || ft_isdigit(str[i])))
 				i++;
 		}
 		else
