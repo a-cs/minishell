@@ -16,6 +16,8 @@ void	exit_prompt(t_data *obj)
 {
 	if (obj->input)
 		free(obj->input);
+    if (obj->envp)
+        ft_free_matrix(obj->envp);
 	if (obj)
 		free(obj);
 	exit(0);

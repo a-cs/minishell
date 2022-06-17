@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/07 23:43:10 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:57:17 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ static void	check_eof(char *input, t_data *obj)
 	exit_prompt(obj);
 }
 
+static void	dup_envp(t_data *obj, char **envp)
+{
+	int		i;
+	int		len;
+
+	len = 0;
+	while (envp[len])
+		len++;
+	obj->envp = ft_calloc(len + 1, sizeof(char *));
+	i = 0;
+	while (i < len)
+	{
+		obj->envp[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	obj->envp[i] = NULL;
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	t_data	*obj;
@@ -36,7 +54,7 @@ int	main(int argc, char *argv[], char **envp)
 	if (argc != 1 && argv)
 		return (1);
 	obj = malloc(sizeof(t_data));
-	obj->envp = envp;
+	dup_envp(obj, envp);
 	printf("Hello minishell\n");
 	while (1)
 	{

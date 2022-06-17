@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 23:27:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/16 00:41:24 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:26:09 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ static void	save_var(t_data *obj, char *str, t_list **char_list)
 	{
 		if (ft_memcmp(var, obj->envp[i], len) == 0 && obj->envp[i][len] == '=')
 		{
-			ft_lstadd_back(char_list, ft_lstnew(ft_substr(obj->envp[i],
-						len + 1, ft_strlen(obj->envp[i]) - len - 1)));
-			break ;
+			if (obj->envp[i][len + 1])
+				ft_lstadd_back(char_list, ft_lstnew(ft_substr(obj->envp[i],
+							len + 1, ft_strlen(obj->envp[i]) - len - 1)));
+			else
+				ft_lstadd_back(char_list, ft_lstnew(ft_strjoin("", "")));
 		}
 		i++;
 	}
