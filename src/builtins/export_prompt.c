@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 19:15:19 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/17 17:39:58 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/17 18:41:22 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ static int	is_valid_attribution(char **args, int pos)
 		return (0);
 	while (i < j)
 	{
-		if (!(ft_isalpha(args[pos][i]) || ft_isdigit(args[pos][i])))
+		if (!(ft_isalpha(args[pos][i]) || ft_isdigit(args[pos][i]))
+			|| ft_is_all_digit(args[pos], j))
 		{
 			printf("export '%s': not a valid identifier\n", args[pos]);
 			return (0);

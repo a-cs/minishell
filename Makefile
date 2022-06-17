@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/17 15:46:52 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/17 18:33:04 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/exit_prompt.c \
 	$(SRC_DIR)/builtins/export_prompt.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
+	$(SRC_DIR)/builtins/unset_prompt.c \
 	$(SRC_DIR)/utils/check_input.c \
 	$(SRC_DIR)/utils/clean_quotes.c \
 	$(SRC_DIR)/utils/replace_env_var.c \

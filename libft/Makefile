@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/15 01:32:51 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/17 18:28:55 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = ft_atoi.c \
 		ft_chrqty.c \
 		ft_free_matrix.c \
 		ft_free_ptr.c \
+		ft_is_all_digit.c \
 		ft_isalpha.c \
 		ft_isascii.c \
 		ft_isdigit.c \
