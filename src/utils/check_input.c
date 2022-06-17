@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/16 00:52:09 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:23:00 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,22 @@ static int	check_envp(t_data *obj, char **args)
 {
 	int	fd[2];
 	int	pid;
-	int	response;
 
-	response = 0;
 	pipe(fd);
 	pid = fork();
 	signal(SIGINT, new_line);
 	if (pid == 0)
 	{
 		if (ft_chrpos(args[0], '/') != -1)
-			response = execve(args[0], args, obj->envp);
+			obj->exit_code = execve(args[0], args, obj->envp);
 		else
-			response = execve(get_path(args[0], obj->envp), args, obj->envp);
+			obj->exit_code = execve(get_path(args[0], obj->envp), args,
+					obj->envp);
 	}
 	waitpid(pid, NULL, 0);
 	close(fd[0]);
 	close(fd[1]);
-	if (response == -1)
+	if (obj->exit_code == -1)
 		return (0);
 	return (1);
 }
@@ -78,7 +77,7 @@ static int	check_builtin(t_data *obj, char **args)
 		}
 		if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "pwd", 3) == 0)
-			return (pwd_prompt());
+			return (pwd_prompt(obj));
 		if (ft_memcmp(args[0], "echo", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "echo", 4) == 0)
 			return (echo_prompt(args, obj));
@@ -123,7 +122,10 @@ void	check_input(t_data *obj)
 				printf("Error -> Command not found: %s\n", args[0]);
 		}
 		else
+		{
 			printf("Command not found: %s\n", args[0]);
+			obj->exit_code = 127;
+		}
 	}
 	ft_free_matrix(args);
 }

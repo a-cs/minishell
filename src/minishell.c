@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/07 23:43:10 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:25:41 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static char	*prompt_str(void)
 
 	str = "\001\033[1;96m\002Minishell \001\033[1;92m\002>\001\033[0m\002 ";
 	return (str);
+}
+
+static void	set_obj_data(t_data *obj)
+{
+	obj->error = 0;
+	obj->args_num = 0;
+	obj->prompt = prompt_str();
+	obj->input = NULL;
 }
 
 static void	check_eof(char *input, t_data *obj)
@@ -37,13 +45,11 @@ int	main(int argc, char *argv[], char **envp)
 		return (1);
 	obj = malloc(sizeof(t_data));
 	obj->envp = envp;
+	obj->exit_code = 0;
 	printf("Hello minishell\n");
 	while (1)
 	{
-		obj->error = 0;
-		obj->args_num = 0;
-		obj->prompt = prompt_str();
-		obj->input = NULL;
+		set_obj_data(obj);
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		temp = readline(obj->prompt);

@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:10:11 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/15 01:49:42 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:34:07 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int	populate_list(t_data *obj, char *temp, t_list **char_list, int i)
 		if (j == -1)
 		{
 			obj->error++;
+			obj->exit_code = 22;
 			printf("Unclosed quotes\n");
 		}
 		else
@@ -76,14 +77,14 @@ static int	iterate_and_clean(t_data *obj, char *temp, t_list **char_list)
 	i = 0;
 	if (obj->error != 0)
 		return (ft_strlen(temp));
-	while (obj->error == 0 && temp[i] != '\0')
+	while (obj->error == 0 && obj->exit_code != 22 && temp[i] != '\0')
 	{
 		if (temp[0] == DOUBLE_QUOTES)
 		{
 			j = ft_chrpos(temp + 1, DOUBLE_QUOTES);
 			if (j == -1)
 			{
-				obj->error++;
+				obj->exit_code = 22;
 				printf("Unclosed quotes\n");
 			}
 			else

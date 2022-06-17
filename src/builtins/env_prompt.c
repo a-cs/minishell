@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 00:48:26 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/16 00:51:45 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:18:33 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	env_prompt(t_data *obj)
 		printf("%s\n", obj->envp[i]);
 		i++;
 	}
+	obj->exit_code = 0;
 	return (1);
 }

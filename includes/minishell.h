@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/16 00:56:54 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:19:09 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 {
 	int		args_num;
 	int		error;
+	int		exit_code;
 	char	*input;
 	char	*prompt;
 	char	**envp;
@@ -44,7 +45,7 @@ typedef struct s_data
 // BUILTINS
 int		echo_prompt(char **args, t_data *obj);
 int		env_prompt(t_data *obj);
-int		pwd_prompt(void);
+int		pwd_prompt(t_data *obj);
 void	exit_prompt(t_data *obj);
 
 // UTILS

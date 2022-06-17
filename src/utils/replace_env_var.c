@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 23:27:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/16 00:41:24 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:43:48 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	save_var(t_data *obj, char *str, t_list **char_list)
 	int		len;
 	char	*var;
 
+	if (str[0] == '?')
+		ft_lstadd_back(char_list, ft_lstnew(ft_itoa(obj->exit_code)));
 	i = 0;
 	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
 		i++;
@@ -57,6 +59,8 @@ static int	iterate_and_replace(t_data *obj, char *str, t_list **char_list)
 			save_var(obj, str + 1, char_list);
 			i++;
 			while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i])))
+				i++;
+			if (str[1] == '?')
 				i++;
 		}
 		else

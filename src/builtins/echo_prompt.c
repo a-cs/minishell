@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:02 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/05/28 20:49:22 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:18:24 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	echo_prompt(char **args, t_data *obj)
 	}
 	if (obj->args_num > 1 && has_flag != 0)
 		printf("\n");
+	obj->exit_code = 0;
 	return (1);
 }
