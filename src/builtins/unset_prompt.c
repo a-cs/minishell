@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   unset_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:05:24 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/18 01:04:07 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/18 02:31:29 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	clear_var(t_data *obj, char *var)
+static char	**copy_and_clear_env(t_data *obj, char *var, int i)
 {
-	int		i;
+	char	**aux;
 	int		j;
 	int		len;
-	char	**aux;
 
-	i = 0;
-	while (obj->envp[i])
-		i++;
-	aux = ft_calloc(i, sizeof(char *));
+	aux = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
 	j = 0;
 	len = ft_strlen(var);
@@ -36,6 +32,18 @@ static void	clear_var(t_data *obj, char *var)
 		j++;
 	}
 	aux[j] = NULL;
+	return (aux);
+}
+
+static void	clear_var(t_data *obj, char *var)
+{
+	int		i;
+	char	**aux;
+
+	i = 0;
+	while (obj->envp[i])
+		i++;
+	aux = copy_and_clear_env(obj, var, i);
 	ft_free_matrix(obj->envp);
 	obj->envp = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
@@ -70,14 +78,17 @@ static int	is_valid_unset(char *var)
 
 int	unset_prompt(t_data *obj, char **args)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	i = 1;
 	while (args[i])
 	{
-		if (is_valid_unset(args[i]))
-			clear_var(obj, args[i]);
+		temp = ft_strtrim(args[i], " \t");
+		if (is_valid_unset(temp))
+			clear_var(obj, temp);
 		i++;
+		free(temp);
 	}
 	return (1);
 }
