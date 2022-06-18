@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:05:24 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/17 18:42:01 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/18 01:04:07 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,37 @@
 
 static void	clear_var(t_data *obj, char *var)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		j;
+	int		len;
+	char	**aux;
 
 	i = 0;
+	while (obj->envp[i])
+		i++;
+	aux = ft_calloc(i, sizeof(char *));
+	i = 0;
+	j = 0;
 	len = ft_strlen(var);
 	while (obj->envp[i])
 	{
 		if (ft_memcmp(var, obj->envp[i], len) == 0 && obj->envp[i][len] == '=')
-			ft_bzero(obj->envp[i], ft_strlen(obj->envp[i]));
+			j--;
+		else
+			aux[j] = ft_strdup(obj->envp[i]);
+		i++;
+		j++;
+	}
+	aux[j] = NULL;
+	ft_free_matrix(obj->envp);
+	obj->envp = ft_calloc(i + 1, sizeof(char *));
+	i = 0;
+	while (aux[i])
+	{
+		obj->envp[i] = ft_strdup(aux[i]);
 		i++;
 	}
+	ft_free_matrix(aux);
 }
 
 static int	is_valid_unset(char *var)

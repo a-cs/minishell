@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 19:15:19 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/17 18:41:22 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/18 01:21:52 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,53 +75,54 @@ static int	already_has_env_var(t_data *obj, char *var)
 	return (0);
 }
 
-static int	is_valid_attribution(char **args, int pos)
+static int	is_valid_attribution(char *arg, char *next)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = ft_chrpos(args[pos], '=');
+	j = ft_chrpos(arg, '=');
 	if (j == -1)
 		return (0);
 	while (i < j)
 	{
-		if (!(ft_isalpha(args[pos][i]) || ft_isdigit(args[pos][i]))
-			|| ft_is_all_digit(args[pos], j))
+		if (!(ft_isalpha(arg[i]) || ft_isdigit(arg[i]))
+			|| ft_is_all_digit(arg, j))
 		{
-			printf("export '%s': not a valid identifier\n", args[pos]);
+			printf("export '%s': not a valid identifier\n", arg);
 			return (0);
 		}
 		i++;
 	}
-	if (!args[pos][j + 1] && args[pos + 1])
+	if (!arg[j + 1] && next)
 	{
-		printf("export '%s': not a valid identifier\n", args[pos + 1]);
+		printf("export '%s': not a valid identifier\n", next);
 		return (-1);
 	}
-	if (!args[pos][j + 1] && !args[pos + 1])
-		return (0);
 	return (1);
 }
 
 int	export_prompt(t_data *obj, char **args)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*temp;
 
 	i = 1;
 	while (args[i])
 	{
-		j = is_valid_attribution(args, i);
+		temp = ft_strtrim(args[i], " \t");
+		j = is_valid_attribution(temp, args[i + 1]);
 		if (j == 1 || j == -1)
 		{
-			if (already_has_env_var(obj, args[i]))
-				update_var(obj, args[i]);
+			if (already_has_env_var(obj, temp))
+				update_var(obj, temp);
 			else
-				define_var(obj, args[i]);
+				define_var(obj, temp);
 			if (j == -1)
 				i++;
 		}
+		free(temp);
 		i++;
 	}
 	return (1);

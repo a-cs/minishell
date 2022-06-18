@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_lst_to_matrix.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/18 01:28:30 by rfelipe-         ###   ########.fr       */
+/*   Created: 2022/06/18 00:44:27 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/06/18 00:51:04 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/libft.h"
 
-void	new_prompt(int signal)
+char	**ft_lst_to_matrix(t_list *lst)
 {
-	(void)signal;
-	printf("\n");
-	// rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	int		i;
+	char	**matrix;
 
-void	new_line(int signal)
-{
-	(void)signal;
-	printf("\n");
+	i = ft_lstsize(lst);
+	matrix = ft_calloc(i + 1, sizeof(char *));
+	i = 0;
+	while (lst)
+	{
+		matrix[i] = ft_strdup((char *)lst->content);
+		lst = lst->next;
+		i++;
+	}
+	return (matrix);
 }
