@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/16 00:52:09 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/18 02:13:22 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	check_envp(t_data *obj, char **args)
 
 static int	check_builtin(t_data *obj, char **args)
 {
-	if (obj->error == 0)
+	if (obj->error == 0 && args[0])
 	{
 		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "exit", 4) == 0)
@@ -85,6 +85,12 @@ static int	check_builtin(t_data *obj, char **args)
 		if (ft_memcmp(args[0], "env", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "env", 4) == 0)
 			return (env_prompt(obj));
+		if (ft_memcmp(args[0], "export", ft_strlen(args[0])) == 0
+			&& ft_memcmp(args[0], "export", 4) == 0)
+			return (export_prompt(obj, args));
+		if (ft_memcmp(args[0], "unset", ft_strlen(args[0])) == 0
+			&& ft_memcmp(args[0], "unset", 4) == 0)
+			return (unset_prompt(obj, args));
 	}
 	return (0);
 }
@@ -113,7 +119,7 @@ void	check_input(t_data *obj)
 	if (!obj->input || ft_strlen(obj->input) == 0)
 		return ;
 	args = clean_quotes(obj, replace_env_var(obj, tokenizer(obj)));
-	if (obj->error == 0 && args && !check_builtin(obj, args))
+	if (obj->error == 0 && args[0] && !check_builtin(obj, args))
 	{
 		path = try_path(obj, args);
 		if (path)

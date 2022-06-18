@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_is_all_digit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/18 02:24:17 by acarneir         ###   ########.fr       */
+/*   Created: 2022/06/17 18:26:24 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/06/17 18:40:41 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/libft.h"
 
-void	new_prompt(int signal)
+int	ft_is_all_digit(char *c, int len)
 {
-	(void)signal;
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	int	i;
 
-void	new_line(int signal)
-{
-	(void)signal;
-	printf("\n");
+	i = 0;
+	while (i < len)
+	{
+		if (!(c[i] >= '0' && c[i] <= '9'))
+			return (0);
+		i++;
+	}
+	return (1);
 }
