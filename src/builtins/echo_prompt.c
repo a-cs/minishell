@@ -16,7 +16,7 @@ static int	get_flag(t_data *obj, char **args)
 {
 	int	has_flag;
 
-	if (obj->args_num > 1)
+	if (obj->args_num > 1 && args[1])
 	{
 		has_flag = ft_memcmp(args[1], "-n", ft_strlen(args[1]))
 			+ ft_memcmp(args[1], "-n", 2);

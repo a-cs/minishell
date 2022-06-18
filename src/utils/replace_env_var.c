@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 23:27:29 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/17 19:43:48 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:37:39 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ static void	save_var(t_data *obj, char *str, t_list **char_list)
 	{
 		if (ft_memcmp(var, obj->envp[i], len) == 0 && obj->envp[i][len] == '=')
 		{
-			ft_lstadd_back(char_list, ft_lstnew(ft_substr(obj->envp[i],
-						len + 1, ft_strlen(obj->envp[i]) - len - 1)));
+			if (obj->envp[i][len + 1])
+				ft_lstadd_back(char_list, ft_lstnew(ft_substr(obj->envp[i],
+							len + 1, ft_strlen(obj->envp[i]) - len - 1)));
+			else
+				ft_lstadd_back(char_list, ft_lstnew(ft_strjoin("", "")));
 			break ;
 		}
 		i++;

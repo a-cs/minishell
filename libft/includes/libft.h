@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 20:36:32 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/17 19:40:04 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:29:10 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 int		ft_atoi(char *str);
 int		ft_chrpos(char *s, int c);
 int		ft_chrqty(char *s, int c);
+int		ft_is_all_digit(char *c, int len);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
@@ -40,6 +41,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strnstr(char *haystack, char *needle, size_t len);
 char	*ft_strtrim(char *s1, char *set);
 char	*ft_substr(char *s, unsigned int start, size_t len);
+char	**ft_lst_to_matrix(t_list *lst);
 char	**ft_split(char *s, char c);
 void	ft_bzero(void *s, size_t n);
 void	ft_free_matrix(char **matrix);

@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/17 19:19:09 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:28:44 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ typedef struct s_data
 // BUILTINS
 int		echo_prompt(char **args, t_data *obj);
 int		env_prompt(t_data *obj);
+int		export_prompt(t_data *obj, char **args);
 int		pwd_prompt(t_data *obj);
+int		unset_prompt(t_data *obj, char **args);
 void	exit_prompt(t_data *obj);
 
 // UTILS
