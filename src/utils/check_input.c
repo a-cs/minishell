@@ -6,13 +6,13 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/18 18:30:48 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:50:02 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*get_path(char *command, char **envp)
+static char	*get_path(char *command)
 {
 	char	**env_path;
 	char	*temp_path;
@@ -20,9 +20,9 @@ static char	*get_path(char *command, char **envp)
 	int		i;
 
 	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
+	while (ft_strnstr(g_obj.envp[i], "PATH", 4) == 0)
 		i++;
-	env_path = ft_split(envp[i] + 5, ':');
+	env_path = ft_split(g_obj.envp[i] + 5, ':');
 	i = 0;
 	while (env_path[i])
 	{
@@ -41,7 +41,7 @@ static char	*get_path(char *command, char **envp)
 	return (0);
 }
 
-static int	check_envp(t_data *obj, char **args)
+static int	check_envp(char **args)
 {
 	int	fd[2];
 	int	pid;
@@ -52,49 +52,48 @@ static int	check_envp(t_data *obj, char **args)
 	if (pid == 0)
 	{
 		if (ft_chrpos(args[0], '/') != -1)
-			obj->exit_code = execve(args[0], args, obj->envp);
+			g_obj.exit_code = execve(args[0], args, g_obj.envp);
 		else
-			obj->exit_code = execve(get_path(args[0], obj->envp), args,
-					obj->envp);
+			g_obj.exit_code = execve(get_path(args[0]), args, g_obj.envp);
 	}
 	waitpid(pid, NULL, 0);
 	close(fd[0]);
 	close(fd[1]);
-	if (obj->exit_code == -1)
+	if (g_obj.exit_code == -1)
 		return (0);
 	return (1);
 }
 
-static int	check_builtin(t_data *obj, char **args)
+static int	check_builtin(char **args)
 {
-	if (obj->error == 0 && args[0])
+	if (g_obj.error == 0 && args[0])
 	{
 		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "exit", 4) == 0)
 		{
 			ft_free_matrix(args);
-			exit_prompt(obj);
+			exit_prompt();
 		}
 		if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "pwd", 3) == 0)
-			return (pwd_prompt(obj));
+			return (pwd_prompt());
 		if (ft_memcmp(args[0], "echo", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "echo", 4) == 0)
-			return (echo_prompt(args, obj));
+			return (echo_prompt(args));
 		if (ft_memcmp(args[0], "env", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "env", 4) == 0)
-			return (env_prompt(obj));
+			return (env_prompt());
 		if (ft_memcmp(args[0], "export", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "export", 4) == 0)
-			return (export_prompt(obj, args));
+			return (export_prompt(args));
 		if (ft_memcmp(args[0], "unset", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "unset", 4) == 0)
-			return (unset_prompt(obj, args));
+			return (unset_prompt(args));
 	}
 	return (0);
 }
 
-static char	*try_path(t_data *obj, char	**args)
+static char	*try_path(char	**args)
 {
 	char	*path;
 
@@ -106,31 +105,31 @@ static char	*try_path(t_data *obj, char	**args)
 			path = NULL;
 	}
 	else
-		path = get_path(args[0], obj->envp);
+		path = get_path(args[0]);
 	return (path);
 }
 
-void	check_input(t_data *obj)
+void	check_input(void)
 {
 	char	**args;
 	char	*path;
 
-	if (!obj->input || ft_strlen(obj->input) == 0)
+	if (!g_obj.input || ft_strlen(g_obj.input) == 0)
 		return ;
-	args = clean_quotes(obj, replace_env_var(obj, tokenizer(obj)));
-	if (obj->error == 0 && args[0] && !check_builtin(obj, args))
+	args = clean_quotes(replace_env_var(tokenizer()));
+	if (g_obj.error == 0 && args[0] && !check_builtin(args))
 	{
-		path = try_path(obj, args);
+		path = try_path(args);
 		if (path)
 		{
 			free(path);
-			if (!check_envp(obj, args))
+			if (!check_envp(args))
 				printf("Error -> Command not found: %s\n", args[0]);
 		}
 		else
 		{
 			printf("Command not found: %s\n", args[0]);
-			obj->exit_code = 127;
+			g_obj.exit_code = 127;
 		}
 	}
 	ft_free_matrix(args);

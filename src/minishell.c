@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/18 18:32:16 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:20:18 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,62 +20,62 @@ static char	*prompt_str(void)
 	return (str);
 }
 
-static void	set_obj_data(t_data *obj)
+static void	set_obj_data(void)
 {
-	obj->error = 0;
-	obj->args_num = 0;
-	obj->exit_code = 0;
-	obj->prompt = prompt_str();
-	obj->input = NULL;
+	g_obj.error = 0;
+	g_obj.args_num = 0;
+	g_obj.prompt = prompt_str();
+	g_obj.input = NULL;
 }
 
-static void	check_eof(char *input, t_data *obj)
+static void	check_eof(char *input)
 {
 	if (input)
 		return ;
 	printf("exit\n");
-	exit_prompt(obj);
+	exit_prompt();
 }
 
-static void	dup_envp(t_data *obj, char **envp)
+static char	**dup_envp(char **envp)
 {
 	int		i;
 	int		len;
+	char	**temp;
 
 	len = 0;
 	while (envp[len])
 		len++;
-	obj->envp = ft_calloc(len + 1, sizeof(char *));
+	temp = ft_calloc(len + 1, sizeof(char *));
 	i = 0;
 	while (i < len)
 	{
-		obj->envp[i] = ft_strdup(envp[i]);
+		temp[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	obj->envp[i] = NULL;
+	temp[i] = NULL;
+	return (temp);
 }
 
 int	main(int argc, char *argv[], char **envp)
 {
-	t_data	*obj;
 	char	*temp;
 
 	if (argc != 1 && argv)
 		return (1);
-	obj = malloc(sizeof(t_data));
-	dup_envp(obj, envp);
+	g_obj.envp = dup_envp(envp);
+	g_obj.exit_code = 0;
 	printf("Hello minishell\n");
 	while (1)
 	{
-		set_obj_data(obj);
+		set_obj_data();
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
-		temp = readline(obj->prompt);
-		check_eof(temp, obj);
-		obj->input = ft_strtrim(temp, " \t");
-		check_input(obj);
-		if (obj->input)
-			free(obj->input);
+		temp = readline(g_obj.prompt);
+		check_eof(temp);
+		g_obj.input = ft_strtrim(temp, " \t");
+		check_input();
+		if (g_obj.input)
+			free(g_obj.input);
 	}
 	return (0);
 }
