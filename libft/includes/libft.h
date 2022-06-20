@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 20:36:32 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/18 01:27:37 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:29:10 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_isdigit(int c);
 int		ft_lstsize(t_list *lst);
 int		ft_memcmp(void *s1, void *s2, size_t n);
 int		ft_strlen(char *str);
+char	*ft_itoa(int n);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(char *s);
 char	*ft_strjoin(char *s1, char *s2);

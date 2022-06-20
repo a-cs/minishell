@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:10:11 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/15 01:49:42 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:52:39 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*join_list(t_list *char_list)
 	return (NULL);
 }
 
-static int	populate_list(t_data *obj, char *temp, t_list **char_list, int i)
+static int	populate_list(char *temp, t_list **char_list, int i)
 {
 	int	j;
 
@@ -49,7 +49,8 @@ static int	populate_list(t_data *obj, char *temp, t_list **char_list, int i)
 		j = ft_chrpos(temp + 1, SINGLE_QUOTES);
 		if (j == -1)
 		{
-			obj->error++;
+			g_obj.error++;
+			g_obj.exit_code = 22;
 			printf("Unclosed quotes\n");
 		}
 		else
@@ -68,22 +69,22 @@ static int	populate_list(t_data *obj, char *temp, t_list **char_list, int i)
 	return (i);
 }
 
-static int	iterate_and_clean(t_data *obj, char *temp, t_list **char_list)
+static int	iterate_and_clean(char *temp, t_list **char_list)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (obj->error != 0)
+	if (g_obj.error != 0)
 		return (ft_strlen(temp));
-	while (obj->error == 0 && temp[i] != '\0')
+	while (g_obj.error == 0 && g_obj.exit_code != 22 && temp[i] != '\0')
 	{
 		if (temp[0] == DOUBLE_QUOTES)
 		{
 			j = ft_chrpos(temp + 1, DOUBLE_QUOTES);
 			if (j == -1)
 			{
-				obj->error++;
+				g_obj.exit_code = 22;
 				printf("Unclosed quotes\n");
 			}
 			else
@@ -91,24 +92,24 @@ static int	iterate_and_clean(t_data *obj, char *temp, t_list **char_list)
 			i += j + 2;
 		}
 		else
-			i = populate_list(obj, temp, char_list, i);
-		i += iterate_and_clean(obj, temp + i, char_list);
+			i = populate_list(temp, char_list, i);
+		i += iterate_and_clean(temp + i, char_list);
 	}
 	return (i);
 }
 
-char	**clean_quotes(t_data *obj, char **temp)
+char	**clean_quotes(char **temp)
 {
 	int		i;
 	char	**args;
 	t_list	*char_list;
 
-	args = ft_calloc(obj->args_num + 1, sizeof(char *));
+	args = ft_calloc(g_obj.args_num + 1, sizeof(char *));
 	i = 0;
-	while (i < obj->args_num)
+	while (i < g_obj.args_num)
 	{
 		char_list = NULL;
-		iterate_and_clean(obj, temp[i], &char_list);
+		iterate_and_clean(temp[i], &char_list);
 		args[i] = join_list(char_list);
 		ft_lstclear(&char_list, free);
 		i++;

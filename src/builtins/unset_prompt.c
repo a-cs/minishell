@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:05:24 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/18 02:31:29 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:12:56 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	**copy_and_clear_env(t_data *obj, char *var, int i)
+static char	**copy_and_clear_env(char *var, int i)
 {
 	char	**aux;
 	int		j;
@@ -22,12 +22,13 @@ static char	**copy_and_clear_env(t_data *obj, char *var, int i)
 	i = 0;
 	j = 0;
 	len = ft_strlen(var);
-	while (obj->envp[i])
+	while (g_obj.envp[i])
 	{
-		if (ft_memcmp(var, obj->envp[i], len) == 0 && obj->envp[i][len] == '=')
+		if (ft_memcmp(var, g_obj.envp[i], len) == 0
+			&& g_obj.envp[i][len] == '=')
 			j--;
 		else
-			aux[j] = ft_strdup(obj->envp[i]);
+			aux[j] = ft_strdup(g_obj.envp[i]);
 		i++;
 		j++;
 	}
@@ -35,24 +36,25 @@ static char	**copy_and_clear_env(t_data *obj, char *var, int i)
 	return (aux);
 }
 
-static void	clear_var(t_data *obj, char *var)
+static void	clear_var(char *var)
 {
 	int		i;
 	char	**aux;
 
 	i = 0;
-	while (obj->envp[i])
+	while (g_obj.envp[i])
 		i++;
-	aux = copy_and_clear_env(obj, var, i);
-	ft_free_matrix(obj->envp);
-	obj->envp = ft_calloc(i + 1, sizeof(char *));
+	aux = copy_and_clear_env(var, i);
+	ft_free_matrix(g_obj.envp);
+	g_obj.envp = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
 	while (aux[i])
 	{
-		obj->envp[i] = ft_strdup(aux[i]);
+		g_obj.envp[i] = ft_strdup(aux[i]);
 		i++;
 	}
 	ft_free_matrix(aux);
+	g_obj.exit_code = 0;
 }
 
 static int	is_valid_unset(char *var)
@@ -72,11 +74,14 @@ static int	is_valid_unset(char *var)
 		i++;
 	}
 	if (error == 0)
+	{
 		printf("unset: '%s': not a valid identifier\n", var);
+		g_obj.exit_code = 1;
+	}
 	return (error);
 }
 
-int	unset_prompt(t_data *obj, char **args)
+int	unset_prompt(char **args)
 {
 	int		i;
 	char	*temp;
@@ -86,7 +91,7 @@ int	unset_prompt(t_data *obj, char **args)
 	{
 		temp = ft_strtrim(args[i], " \t");
 		if (is_valid_unset(temp))
-			clear_var(obj, temp);
+			clear_var(temp);
 		i++;
 		free(temp);
 	}

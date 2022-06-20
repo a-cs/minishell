@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/17 18:32:45 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:44:29 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,36 @@ typedef struct s_data
 {
 	int		args_num;
 	int		error;
+	int		exit_code;
 	char	*input;
 	char	*prompt;
 	char	**envp;
 }	t_data;
 
+// GLOBAL VARIABLE
+t_data	g_obj;
+
 /* FUNCTIONS */
 // BUILTINS
-int		echo_prompt(char **args, t_data *obj);
-int		env_prompt(t_data *obj);
-int		export_prompt(t_data *obj, char **args);
+int		echo_prompt(char **args);
+int		env_prompt(void);
+int		export_prompt(char **args);
 int		pwd_prompt(void);
-int		unset_prompt(t_data *obj, char **args);
-void	exit_prompt(t_data *obj);
+int		unset_prompt(char **args);
+void	exit_prompt(void);
 
 // UTILS
 int		has_quotes_before_space(char *str);
-int		increment_count(t_data *obj, int i, int c);
-int		increment_quotes(t_data *obj, int i);
-int		skip_spaces(t_data *obj, int i, int j);
+int		increment_count(int i, int c);
+int		increment_quotes(int i);
+int		skip_spaces(int i, int j);
 char	*join_list(t_list *char_list);
-char	**clean_quotes(t_data *obj, char **temp);
-char	**replace_env_var(t_data *obj, char **temp);
-char	**tokenizer(t_data *obj);
-void	check_input(t_data *obj);
+char	**clean_quotes(char **temp);
+char	**replace_env_var(char **temp);
+char	**tokenizer(void);
+void	check_input(void);
 void	new_line(int signal);
 void	new_prompt(int signal);
-void	split_args(t_data *obj, char **args);
+void	split_args(char **args);
 
 #endif

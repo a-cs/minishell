@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:53:06 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/10 01:36:49 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:02:47 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static char	*save_arg(char *str, int len)
 	return (arg);
 }
 
-int	skip_spaces(t_data *obj, int i, int j)
+int	skip_spaces(int i, int j)
 {
-	if ((i + j) < ft_strlen(obj->input) && obj->input[i + j] == SPACE_VALUE)
+	if ((i + j) < ft_strlen(g_obj.input) && g_obj.input[i + j] == SPACE_VALUE)
 	{
 		j++;
-		while ((i + j) < ft_strlen(obj->input) && obj->input[i + j]
-			&& obj->input[i + j] == SPACE_VALUE)
+		while ((i + j) < ft_strlen(g_obj.input) && g_obj.input[i + j]
+			&& g_obj.input[i + j] == SPACE_VALUE)
 			j++;
 	}
 	return (j);
@@ -58,7 +58,7 @@ int	has_quotes_before_space(char *str)
 	return (1);
 }
 
-void	split_args(t_data *obj, char **args)
+void	split_args(char **args)
 {
 	int	i;
 	int	j;
@@ -66,20 +66,20 @@ void	split_args(t_data *obj, char **args)
 
 	i = 0;
 	pos = 0;
-	while (i < ft_strlen(obj->input) && obj->input[i])
+	while (i < ft_strlen(g_obj.input) && g_obj.input[i])
 	{
-		j = increment_quotes(obj, i);
-		if ((i + j) < ft_strlen(obj->input) && obj->input[i + j]
-			!= DOUBLE_QUOTES && obj->input[i + j] != SINGLE_QUOTES
-			&& obj->input[i + j] != SPACE_VALUE)
-			j = increment_count(obj, i + j, SPACE_VALUE) - i;
+		j = increment_quotes(i);
+		if ((i + j) < ft_strlen(g_obj.input) && g_obj.input[i + j]
+			!= DOUBLE_QUOTES && g_obj.input[i + j] != SINGLE_QUOTES
+			&& g_obj.input[i + j] != SPACE_VALUE)
+			j = increment_count(i + j, SPACE_VALUE) - i;
 		if (pos <= 1)
-			args[pos] = save_arg(obj->input + i, j);
+			args[pos] = save_arg(g_obj.input + i, j);
 		else
-			args[pos] = save_arg(obj->input + i - 1, j + 1);
+			args[pos] = save_arg(g_obj.input + i - 1, j + 1);
 		pos++;
-		j = skip_spaces(obj, i, j);
+		j = skip_spaces(i, j);
 		i += j;
 	}
-	args[obj->args_num] = NULL;
+	args[g_obj.args_num] = NULL;
 }

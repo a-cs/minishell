@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/18 01:28:07 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/18 18:29:39 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = ft_atoi.c \
 		ft_isalpha.c \
 		ft_isascii.c \
 		ft_isdigit.c \
+		ft_itoa.c \
 		ft_lst_to_matrix.c \
 		ft_lstadd_back.o \
 		ft_lstadd_front.o \
