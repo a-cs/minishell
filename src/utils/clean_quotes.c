@@ -3,37 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:10:11 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/20 15:52:39 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/20 23:50:32 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static void	update_save(char **save, t_list *char_list)
+{
+	char	*temp;
+
+	temp = ft_strjoin(*save, char_list->content);
+	free(*save);
+	*save = ft_calloc(ft_strlen(temp) + 1, sizeof(char));
+	ft_memcpy(*save, temp, ft_strlen(temp));
+	free(temp);
+}
+
 char	*join_list(t_list *char_list)
 {
 	char	*save;
-	char	*temp;
+	int		i;
 
 	if (char_list)
 	{
 		save = ft_calloc(ft_strlen(char_list->content) + 1, sizeof(char));
+		i = 0;
 		while (char_list)
 		{
-			if (!save[0])
+			if (i == 0)
 				ft_memcpy(save, char_list->content,
 					ft_strlen(char_list->content));
 			else
-			{
-				temp = ft_strjoin(save, char_list->content);
-				free(save);
-				save = ft_calloc(ft_strlen(temp) + 1, sizeof(char));
-				ft_memcpy(save, temp, ft_strlen(temp));
-				free(temp);
-			}
+				update_save(&save, char_list);
 			char_list = char_list->next;
+			i++;
 		}
 		return (save);
 	}
