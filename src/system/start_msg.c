@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   start_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 23:44:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 17:11:46 by rfelipe-         ###   ########.fr       */
+/*   Created: 2022/06/20 22:18:18 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/06/20 22:47:30 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	main(int argc, char *argv[], char **envp)
+void	start_msg(void)
 {
-	if (argc != 1 && argv)
-		return (1);
-	start_msg();
-	keep_prompt(envp);
-	return (0);
+	printf("Hello minishell\n");
 }

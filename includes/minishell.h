@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/20 15:44:29 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:12:48 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int		pwd_prompt(void);
 int		unset_prompt(char **args);
 void	exit_prompt(void);
 
+// SYSTEM
+void	keep_prompt(char **envp);
+
 // UTILS
 int		has_quotes_before_space(char *str);
 int		increment_count(int i, int c);
@@ -66,5 +69,6 @@ void	check_input(void);
 void	new_line(int signal);
 void	new_prompt(int signal);
 void	split_args(char **args);
+void	start_msg(void);
 
 #endif

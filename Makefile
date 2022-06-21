@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/17 18:33:04 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/21 17:14:35 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/export_prompt.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/builtins/unset_prompt.c \
+	$(SRC_DIR)/system/keep_prompt.c \
+	$(SRC_DIR)/system/start_msg.c \
 	$(SRC_DIR)/utils/check_input.c \
 	$(SRC_DIR)/utils/clean_quotes.c \
 	$(SRC_DIR)/utils/replace_env_var.c \
@@ -49,6 +51,7 @@ $(NAME): $(LIBFT) $(OBJ)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE)
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/builtins
+	@mkdir -p $(OBJ_DIR)/system
 	@mkdir -p $(OBJ_DIR)/utils
 	@$(CC) -c $(FLAGS) -I$(INCLUDE_DIR) -o $@ $<
 
