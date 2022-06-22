@@ -6,17 +6,18 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 22:44:19 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 02:54:48 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	execute_args(void)
+static void	execute_children(int fd[])
 {
 	int		code;
 	char	**args;
 
+	redirect(g_obj.input, fd);
 	args = clean_quotes(replace_env_var(tokenizer()));
 	if (g_obj.error == 0 && args[0])
 	{
@@ -27,6 +28,27 @@ static void	execute_args(void)
 			execute_cmd(args);
 	}
 	ft_free_matrix(args);
+	g_obj.close_code = 1;
+}
+
+static void	execute_args(void)
+{
+	int	fd[2];
+	int	pid;
+
+	if (!is_exit_cmd())
+	{
+		pipe(fd);
+		pid = fork();
+		signal(SIGINT, new_line);
+		if (pid == 0)
+			execute_children(fd);
+		waitpid(pid, NULL, 0);
+		close(fd[0]);
+		close(fd[1]);
+	}
+	else
+		exit_prompt();
 }
 
 static void	check_eof(char *input)
@@ -43,7 +65,8 @@ void	keep_prompt(char **envp)
 
 	g_obj.envp = dup_envp(envp);
 	g_obj.exit_code = 0;
-	while (1)
+	g_obj.close_code = 0;
+	while (g_obj.close_code == 0)
 	{
 		reset_obj_data();
 		signal(SIGINT, new_prompt);

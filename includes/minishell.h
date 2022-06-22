@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 23:40:41 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 02:54:52 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 	int		args_num;
 	int		error;
 	int		exit_code;
+	int		close_code;
 	char	*input;
 	char	*prompt;
 	char	**envp;
@@ -47,6 +48,7 @@ t_data	g_obj;
 /* FUNCTIONS */
 // BUILTINS
 int		is_builtin(char **args);
+int		is_exit_cmd(void);
 void	echo_prompt(char **args);
 void	env_prompt(void);
 void	execute_builtin(char **args, int code);
@@ -74,6 +76,7 @@ void	split_args(char **args);
 
 // UTILS
 void	execute_cmd(char **args);
+void	redirect(char *input, int fd[]);
 void	new_line(int signal);
 void	new_prompt(int signal);
 

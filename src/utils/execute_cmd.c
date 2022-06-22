@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 22:46:04 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 01:49:26 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,10 @@ static char	*get_path(char *command)
 
 static int	check_envp(char **args)
 {
-	int	fd[2];
-	int	pid;
-
-	pipe(fd);
-	pid = fork();
-	signal(SIGINT, new_line);
-	if (pid == 0)
-	{
-		if (ft_chrpos(args[0], '/') != -1)
-			g_obj.exit_code = execve(args[0], args, g_obj.envp);
-		else
-			g_obj.exit_code = execve(get_path(args[0]), args, g_obj.envp);
-	}
-	waitpid(pid, NULL, 0);
-	close(fd[0]);
-	close(fd[1]);
+	if (ft_chrpos(args[0], '/') != -1)
+		g_obj.exit_code = execve(args[0], args, g_obj.envp);
+	else
+		g_obj.exit_code = execve(get_path(args[0]), args, g_obj.envp);
 	if (g_obj.exit_code == -1)
 		return (0);
 	return (1);

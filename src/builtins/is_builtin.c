@@ -6,11 +6,28 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:08:45 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 22:22:26 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 01:59:25 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	is_exit_cmd(void)
+{
+	int		result;
+	char	**cmds;
+
+	result = 0;
+	cmds = ft_split(g_obj.input, ' ');
+	if (cmds)
+	{
+		if (ft_memcmp(cmds[0], "exit", ft_strlen(cmds[0])) == 0
+			&& ft_memcmp(cmds[0], "exit", 4) == 0)
+			result = 1;
+	}
+	ft_free_matrix(cmds);
+	return (result);
+}
 
 int	is_builtin(char **args)
 {
