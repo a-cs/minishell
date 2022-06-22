@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/21 17:14:35 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/21 23:45:39 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,18 +29,21 @@ SRC_DIR = ./src
 SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/echo_prompt.c \
 	$(SRC_DIR)/builtins/env_prompt.c \
+	$(SRC_DIR)/builtins/execute_builtin.c \
 	$(SRC_DIR)/builtins/exit_prompt.c \
 	$(SRC_DIR)/builtins/export_prompt.c \
+	$(SRC_DIR)/builtins/is_builtin.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/builtins/unset_prompt.c \
 	$(SRC_DIR)/system/keep_prompt.c \
+	$(SRC_DIR)/system/set_obj_data.c \
 	$(SRC_DIR)/system/start_msg.c \
-	$(SRC_DIR)/utils/check_input.c \
-	$(SRC_DIR)/utils/clean_quotes.c \
-	$(SRC_DIR)/utils/replace_env_var.c \
-	$(SRC_DIR)/utils/signals.c \
-	$(SRC_DIR)/utils/split_args.c \
-	$(SRC_DIR)/utils/tokenizer.c
+	$(SRC_DIR)/tokenizer/clean_quotes.c \
+	$(SRC_DIR)/tokenizer/replace_env_var.c \
+	$(SRC_DIR)/tokenizer/split_args.c \
+	$(SRC_DIR)/tokenizer/tokenizer.c \
+	$(SRC_DIR)/utils/execute_cmd.c \
+	$(SRC_DIR)/utils/signals.c
 
 all: $(NAME)
 
@@ -52,6 +55,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE)
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/builtins
 	@mkdir -p $(OBJ_DIR)/system
+	@mkdir -p $(OBJ_DIR)/tokenizer
 	@mkdir -p $(OBJ_DIR)/utils
 	@$(CC) -c $(FLAGS) -I$(INCLUDE_DIR) -o $@ $<
 

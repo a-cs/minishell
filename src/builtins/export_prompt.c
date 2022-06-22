@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 19:15:19 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/20 16:10:42 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:25:38 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static int	is_valid_attribution(char *arg, char *next)
 	return (1);
 }
 
-int	export_prompt(char **args)
+void	export_prompt(char **args)
 {
 	int		i;
 	int		j;
@@ -131,5 +131,4 @@ int	export_prompt(char **args)
 		free(temp);
 		i++;
 	}
-	return (1);
 }

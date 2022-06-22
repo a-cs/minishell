@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 17:12:48 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/21 23:40:41 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,22 @@ t_data	g_obj;
 
 /* FUNCTIONS */
 // BUILTINS
-int		echo_prompt(char **args);
-int		env_prompt(void);
-int		export_prompt(char **args);
-int		pwd_prompt(void);
-int		unset_prompt(char **args);
+int		is_builtin(char **args);
+void	echo_prompt(char **args);
+void	env_prompt(void);
+void	execute_builtin(char **args, int code);
 void	exit_prompt(void);
+void	export_prompt(char **args);
+void	pwd_prompt(void);
+void	unset_prompt(char **args);
 
 // SYSTEM
+char	**dup_envp(char **envp);
 void	keep_prompt(char **envp);
+void	reset_obj_data(void);
+void	start_msg(void);
 
-// UTILS
+// TOKENIZER
 int		has_quotes_before_space(char *str);
 int		increment_count(int i, int c);
 int		increment_quotes(int i);
@@ -65,10 +70,11 @@ char	*join_list(t_list *char_list);
 char	**clean_quotes(char **temp);
 char	**replace_env_var(char **temp);
 char	**tokenizer(void);
-void	check_input(void);
+void	split_args(char **args);
+
+// UTILS
+void	execute_cmd(char **args);
 void	new_line(int signal);
 void	new_prompt(int signal);
-void	split_args(char **args);
-void	start_msg(void);
 
 #endif

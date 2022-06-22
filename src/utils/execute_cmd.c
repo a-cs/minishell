@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 23:27:40 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/20 15:50:02 by rfelipe-         ###   ########.fr       */
+/*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
+/*   Updated: 2022/06/21 22:46:04 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,35 +64,6 @@ static int	check_envp(char **args)
 	return (1);
 }
 
-static int	check_builtin(char **args)
-{
-	if (g_obj.error == 0 && args[0])
-	{
-		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0
-			&& ft_memcmp(args[0], "exit", 4) == 0)
-		{
-			ft_free_matrix(args);
-			exit_prompt();
-		}
-		if (ft_memcmp(args[0], "pwd", ft_strlen(args[0])) == 0
-			&& ft_memcmp(args[0], "pwd", 3) == 0)
-			return (pwd_prompt());
-		if (ft_memcmp(args[0], "echo", ft_strlen(args[0])) == 0
-			&& ft_memcmp(args[0], "echo", 4) == 0)
-			return (echo_prompt(args));
-		if (ft_memcmp(args[0], "env", ft_strlen(args[0])) == 0
-			&& ft_memcmp(args[0], "env", 4) == 0)
-			return (env_prompt());
-		if (ft_memcmp(args[0], "export", ft_strlen(args[0])) == 0
-			&& ft_memcmp(args[0], "export", 4) == 0)
-			return (export_prompt(args));
-		if (ft_memcmp(args[0], "unset", ft_strlen(args[0])) == 0
-			&& ft_memcmp(args[0], "unset", 4) == 0)
-			return (unset_prompt(args));
-	}
-	return (0);
-}
-
 static char	*try_path(char	**args)
 {
 	char	*path;
@@ -109,28 +80,20 @@ static char	*try_path(char	**args)
 	return (path);
 }
 
-void	check_input(void)
+void	execute_cmd(char **args)
 {
-	char	**args;
 	char	*path;
 
-	if (!g_obj.input || ft_strlen(g_obj.input) == 0)
-		return ;
-	args = clean_quotes(replace_env_var(tokenizer()));
-	if (g_obj.error == 0 && args[0] && !check_builtin(args))
+	path = try_path(args);
+	if (path)
 	{
-		path = try_path(args);
-		if (path)
-		{
-			free(path);
-			if (!check_envp(args))
-				printf("Error -> Command not found: %s\n", args[0]);
-		}
-		else
-		{
-			printf("Command not found: %s\n", args[0]);
-			g_obj.exit_code = 127;
-		}
+		free(path);
+		if (!check_envp(args))
+			printf("Error -> Command not found: %s\n", args[0]);
 	}
-	ft_free_matrix(args);
+	else
+	{
+		printf("Command not found: %s\n", args[0]);
+		g_obj.exit_code = 127;
+	}
 }
