@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 21:06:57 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 23:30:07 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	split_args(char **args, char *input);
 void	clean_redirect_input(char **args, char **input);
 void	execute_cmd(char **args);
 void	redirect(char **input);
+void	reestore_initial_fd(int *initial_fd);
+void	save_initial_fd(int *initial_fd);
 void	new_line(int signal);
 void	new_prompt(int signal);
 

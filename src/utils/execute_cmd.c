@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 01:49:26 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 23:19:55 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,21 @@ static char	*get_path(char *command)
 
 static int	check_envp(char **args)
 {
-	if (ft_chrpos(args[0], '/') != -1)
-		g_obj.exit_code = execve(args[0], args, g_obj.envp);
-	else
-		g_obj.exit_code = execve(get_path(args[0]), args, g_obj.envp);
+	int	pid;
+	int	status;
+
+	pid = fork();
+	signal(SIGINT, new_line);
+	if (pid == 0)
+	{
+		if (ft_chrpos(args[0], '/') != -1)
+			execve(args[0], args, g_obj.envp);
+		else
+			execve(get_path(args[0]), args, g_obj.envp);
+	}
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		g_obj.exit_code = WEXITSTATUS(status);
 	if (g_obj.exit_code == -1)
 		return (0);
 	return (1);

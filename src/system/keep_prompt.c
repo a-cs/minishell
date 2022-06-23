@@ -6,13 +6,13 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 21:07:14 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 23:28:20 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	execute_children(char **input)
+static void	execute(char **input)
 {
 	int		code;
 	char	**args;
@@ -28,24 +28,17 @@ static void	execute_children(char **input)
 			execute_cmd(args);
 	}
 	ft_free_matrix(args);
-	g_obj.close_code = 1;
 }
 
 static void	execute_args(void)
 {
 	int	fd[2];
-	int	pid;
 
 	if (!is_exit_cmd())
 	{
-		pipe(fd);
-		pid = fork();
-		signal(SIGINT, new_line);
-		if (pid == 0)
-			execute_children(&g_obj.input);
-		waitpid(pid, NULL, 0);
-		close(fd[0]);
-		close(fd[1]);
+		save_initial_fd(fd);
+		execute(&g_obj.input);
+		reestore_initial_fd(fd);
 	}
 	else
 		exit_prompt();

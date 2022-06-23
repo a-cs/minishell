@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/22 20:52:01 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/22 23:11:45 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/tokenizer/tokenizer.c \
 	$(SRC_DIR)/utils/clean_redirect_input.c \
 	$(SRC_DIR)/utils/execute_cmd.c \
+	$(SRC_DIR)/utils/fd_utils.c \
 	$(SRC_DIR)/utils/redirect.c \
 	$(SRC_DIR)/utils/signals.c
 
