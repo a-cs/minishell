@@ -6,19 +6,19 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 02:54:48 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 21:07:14 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	execute_children(int fd[])
+static void	execute_children(char **input)
 {
 	int		code;
 	char	**args;
 
-	redirect(g_obj.input, fd);
-	args = clean_quotes(replace_env_var(tokenizer()));
+	redirect(input);
+	args = clean_quotes(replace_env_var(tokenizer(*input)));
 	if (g_obj.error == 0 && args[0])
 	{
 		code = is_builtin(args);
@@ -42,7 +42,7 @@ static void	execute_args(void)
 		pid = fork();
 		signal(SIGINT, new_line);
 		if (pid == 0)
-			execute_children(fd);
+			execute_children(&g_obj.input);
 		waitpid(pid, NULL, 0);
 		close(fd[0]);
 		close(fd[1]);

@@ -6,54 +6,105 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 02:58:06 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:56:14 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*get_file_name(char *input)
+static void	change_input(char *file, int flags)
 {
-	int		pos;
-	char	*file_name;
-	char	*temp;
+	int	file_id;
 
-	pos = ft_chrpos(input, '>');
-	if (pos != -1)
+	file_id = open(file, flags);
+	if (file_id == -1)
 	{
-		file_name = ft_strtrim(ft_substr(input, pos + 1,
-					ft_strlen(input) - pos), " \t");
-		temp = ft_strtrim(ft_substr(g_obj.input, 0, pos), " \t");
-		free(g_obj.input);
-		g_obj.input = ft_strdup(temp);
-		free(temp);
+		g_obj.error = 1;
+		g_obj.exit_code = 9;
+		printf("Redirect: Bad file descriptor\n");
 	}
 	else
-		file_name = NULL;
-	return (file_name);
+	{
+		dup2(file_id, STDIN_FILENO);
+		close(file_id);
+	}
 }
 
-void	redirect(char *input, int fd[])
+static void	change_output(char *file, int flags)
 {
-	int		file;
-	char	*file_name;
+	int	file_id;
 
-	file_name = get_file_name(input);
-	if (g_obj.error == 0 && file_name)
+	file_id = open(file, flags, 0777);
+	if (file_id == -1)
 	{
-		file = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		if (file == -1)
-		{
-			printf("Unable to open file %s\n", file_name);
-			g_obj.exit_code = 9;
-			g_obj.error = 1;
-		}
-		else
-		{
-			dup2(fd[0], STDIN_FILENO);
-			dup2(file, STDOUT_FILENO);
-			close(fd[1]);
-		}
-		free(file_name);
+		g_obj.error = 1;
+		g_obj.exit_code = 9;
+		printf("Redirect: Bad file descriptor\n");
 	}
+	else
+	{
+		dup2(file_id, STDOUT_FILENO);
+		close(file_id);
+	}
+}
+
+static void	do_redirect(char *redirect, char *file)
+{
+	if (ft_memcmp(redirect, ">>", 2) == 0)
+		change_output(file, O_WRONLY | O_CREAT | O_APPEND);
+	else if (ft_memcmp(redirect, "<<", 2) == 0)
+		change_input(file, O_RDONLY | O_CREAT);
+	else if (ft_memcmp(redirect, ">", 1) == 0)
+		change_output(file, O_WRONLY | O_CREAT | O_TRUNC);
+	else if (ft_memcmp(redirect, "<", 1) == 0)
+		change_input(file, O_RDONLY | O_CREAT);
+}
+
+static int	is_valid_redirection(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		if (ft_chrqty(args[i], '>') > 0 || ft_chrqty(args[i], '<') > 0)
+		{
+			if (i == 0 && ft_chrqty(args[i], '<') > 0)
+			{
+				g_obj.exit_code = 1;
+				return (0);
+			}
+			if ((ft_chrqty(args[i], '>') > 2 || ft_chrqty(args[i], '<') > 2)
+				|| (ft_chrqty(args[i], '>') > 0 && ft_chrqty(args[i], '<') > 0)
+				|| (!args[i + 1] || ft_chrqty(args[i + 1], '>') > 0
+					|| ft_chrqty(args[i + 1], '<') > 0))
+			{
+				g_obj.exit_code = 258;
+				return (0);
+			}
+		}
+		i++;
+	}
+	return (1);
+}
+
+void	redirect(char **input)
+{
+	int		i;
+	char	**args;
+
+	args = redirect_args(clean_quotes(replace_env_var(tokenizer(*input))));
+	if (!is_valid_redirection(args))
+		printf("Redirect: sintax error\n");
+	else
+	{
+		i = 0;
+		while (args[i] && args[i + 1])
+		{
+			do_redirect(args[i], args[i + 1]);
+			i++;
+		}
+		clean_redirect_input(args, input);
+	}
+	ft_free_matrix(args);
 }

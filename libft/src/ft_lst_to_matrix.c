@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 00:44:27 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/18 00:51:04 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:00:18 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ char	**ft_lst_to_matrix(t_list *lst)
 		lst = lst->next;
 		i++;
 	}
+	matrix[i] = NULL;
 	return (matrix);
 }

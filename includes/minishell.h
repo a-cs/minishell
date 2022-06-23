@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 02:54:52 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 21:06:57 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,20 @@ void	start_msg(void);
 
 // TOKENIZER
 int		has_quotes_before_space(char *str);
-int		increment_count(int i, int c);
-int		increment_quotes(int i);
-int		skip_spaces(int i, int j);
+int		increment_count(int i, int c, char *input);
+int		increment_quotes(int i, char *input);
+int		skip_spaces(int i, int j, char *input);
 char	*join_list(t_list *char_list);
 char	**clean_quotes(char **temp);
+char	**redirect_args(char **temp);
 char	**replace_env_var(char **temp);
-char	**tokenizer(void);
-void	split_args(char **args);
+char	**tokenizer(char *input);
+void	split_args(char **args, char *input);
 
 // UTILS
+void	clean_redirect_input(char **args, char **input);
 void	execute_cmd(char **args);
-void	redirect(char *input, int fd[]);
+void	redirect(char **input);
 void	new_line(int signal);
 void	new_prompt(int signal);
 
