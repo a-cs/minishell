@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:25:01 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 00:09:51 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:25:27 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	clean_redirect_input(char **args, char **input)
 			i++;
 		i++;
 	}
-	if (j == 0 && (ft_chrqty(args[0], '>') != 0
+	if (j == 0 && args[j] && (ft_chrqty(args[0], '>') != 0
 			|| ft_chrqty(args[0], '<') != 0))
 	{
 		free(*input);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keep_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 23:28:20 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:39:43 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ static void	check_eof(char *input)
 	exit_prompt();
 }
 
+static int	is_valid_input(char *input)
+{
+	check_eof(input);
+	if (input[0] == '\0')
+		return (0);
+	return (1);
+}
+
 void	keep_prompt(char **envp)
 {
 	char	*temp;
@@ -65,10 +73,13 @@ void	keep_prompt(char **envp)
 		signal(SIGINT, new_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		temp = readline(g_obj.prompt);
-		check_eof(temp);
-		g_obj.input = ft_strtrim(temp, " \t");
-		execute_args();
+		if (is_valid_input(temp))
+		{
+			g_obj.input = ft_strtrim(temp, " \t");
+			execute_args();
+		}
 		if (g_obj.input)
 			free(g_obj.input);
+
 	}
 }
