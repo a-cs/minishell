@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_prompt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 19:15:19 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 00:55:51 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:23:01 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,35 +77,6 @@ static int	already_has_env_var(char *var)
 		i++;
 	}
 	return (0);
-}
-
-static int	is_valid_attribution(char *arg, char *next)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = ft_chrpos(arg, '=');
-	if (j == -1)
-		return (0);
-	while (i <= j)
-	{
-		if (j == 0 || !(ft_isalpha(arg[i]) || ft_isdigit(arg[i]))
-			|| ft_is_all_digit(arg, j))
-		{
-			printf("export '%s': not a valid identifier\n", arg);
-			g_obj.exit_code = 1;
-			return (0);
-		}
-		i++;
-	}
-	if (!arg[j + 1] && next)
-	{
-		printf("export '%s': not a valid identifier\n", next);
-		g_obj.exit_code = 1;
-		return (-1);
-	}
-	return (1);
 }
 
 void	export_prompt(char **args)

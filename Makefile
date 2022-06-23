@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/22 23:11:45 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/23 01:16:42 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/execute_builtin.c \
 	$(SRC_DIR)/builtins/exit_prompt.c \
 	$(SRC_DIR)/builtins/export_prompt.c \
+	$(SRC_DIR)/builtins/export_utils.c \
 	$(SRC_DIR)/builtins/is_builtin.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/builtins/unset_prompt.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 23:30:07 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:16:16 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_data	g_obj;
 // BUILTINS
 int		is_builtin(char **args);
 int		is_exit_cmd(void);
+int		is_valid_attribution(char *arg, char *next);
 void	echo_prompt(char **args);
 void	env_prompt(void);
 void	execute_builtin(char **args, int code);

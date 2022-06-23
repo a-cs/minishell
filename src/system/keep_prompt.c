@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 00:39:43 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:23:23 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,5 @@ void	keep_prompt(char **envp)
 		}
 		if (g_obj.input)
 			free(g_obj.input);
-
 	}
 }
