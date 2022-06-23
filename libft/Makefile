@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/18 18:29:39 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/23 18:12:41 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS = ft_atoi.c \
 		ft_memcmp.c \
 		ft_memcpy.c \
 		ft_putchar_fd.c \
+		ft_putendl_fd.c \
 		ft_putstr_fd.c \
 		ft_split.c \
 		ft_strchr.c \

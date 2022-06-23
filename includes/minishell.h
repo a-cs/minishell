@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 16:11:19 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:48:44 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ void	export_prompt(char **args);
 void	pwd_prompt(void);
 void	unset_prompt(char **args);
 
+// REDIRECT
+char	**redirect_args(char **temp);
+void	change_input(char *file, int flags);
+void	change_output(char *file, int flags);
+void	clean_redirect_input(char **args, char **input);
+void	here_doc(char *eof);
+void	redirect(char **input);
+void	reestore_initial_fd(int *initial_fd);
+void	save_initial_fd(int *initial_fd);
+
 // SYSTEM
 char	**dup_envp(char **envp);
 void	keep_prompt(char **envp);
@@ -72,19 +82,12 @@ int		increment_quotes(int i, char *input);
 int		skip_spaces(int i, int j, char *input);
 char	*join_list(t_list *char_list);
 char	**clean_quotes(char **temp);
-char	**redirect_args(char **temp);
 char	**replace_env_var(char **temp);
 char	**tokenizer(char *input);
-void	clean_redirect_input(char **args, char **input);
 void	split_args(char **args, char *input);
 
 // UTILS
-void	change_input(char *file, int flags);
-void	change_output(char *file, int flags);
 void	execute_cmd(char **args);
-void	redirect(char **input);
-void	reestore_initial_fd(int *initial_fd);
-void	save_initial_fd(int *initial_fd);
 void	new_line(int signal);
 void	new_prompt(int signal);
 

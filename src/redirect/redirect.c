@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 17:12:38 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:44:47 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	especial_case_fd(char *file, char *redirect)
 {
-	if (ft_memcmp(redirect, "><", 2) == 0)
+	if (ft_memcmp(redirect, "<<>", 3) == 0 || ft_memcmp(redirect, "><", 2) == 0)
 	{
 		g_obj.error = 1;
 		g_obj.exit_code = 258;
@@ -30,13 +30,14 @@ static void	especial_case_fd(char *file, char *redirect)
 
 static void	do_redirect(char *redirect, char *file)
 {
-	if (ft_memcmp(redirect, ">>", 2) == 0)
-		change_output(file, O_WRONLY | O_CREAT | O_APPEND);
-	else if (ft_memcmp(redirect, "<<", 2) == 0)
-		change_input(file, O_RDONLY);
-	else if (ft_memcmp(redirect, "<>", 2) == 0
+	if (ft_memcmp(redirect, "<<>", 3) == 0
+		|| ft_memcmp(redirect, "<>", 2) == 0
 		|| ft_memcmp(redirect, "><", 2) == 0)
 		especial_case_fd(file, redirect);
+	else if (ft_memcmp(redirect, ">>", 2) == 0)
+		change_output(file, O_WRONLY | O_CREAT | O_APPEND);
+	else if (ft_memcmp(redirect, "<<", 2) == 0)
+		here_doc(file);
 	else if (ft_memcmp(redirect, ">", 1) == 0)
 		change_output(file, O_WRONLY | O_CREAT | O_TRUNC);
 	else if (ft_memcmp(redirect, "<", 1) == 0)
