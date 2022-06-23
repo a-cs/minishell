@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:38:13 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 20:01:23 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:03:34 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ char	**redirect_args(char **temp)
 	}
 	args = ft_lst_to_matrix(redirect_args_lst);
 	ft_lstclear(&redirect_args_lst, free);
+	ft_free_matrix(temp);
 	return (args);
 }

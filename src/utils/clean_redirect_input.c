@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_redirect_input.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:25:01 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 23:57:28 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:09:51 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 static int	update_input(char **input, char *arg, int j)
 {
 	char	*temp;
+	char	*aux;
 
-	temp = ft_calloc(ft_strlen(*input) + ft_strlen(arg) + 1, sizeof(char));
 	if (j == 0)
 		temp = ft_strdup(arg);
 	else
-		temp = ft_strjoin(*input, ft_strjoin(" ", arg));
+	{
+		aux = ft_strjoin(" ", arg);
+		temp = ft_strjoin(*input, aux);
+		free(aux);
+	}
 	free(*input);
 	*input = ft_strdup(temp);
 	free(temp);
