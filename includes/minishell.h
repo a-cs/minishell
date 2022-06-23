@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 01:16:16 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:11:19 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 	int		error;
 	int		exit_code;
 	int		close_code;
+	int		initial_fd[2];
 	char	*input;
 	char	*prompt;
 	char	**envp;
@@ -74,10 +75,12 @@ char	**clean_quotes(char **temp);
 char	**redirect_args(char **temp);
 char	**replace_env_var(char **temp);
 char	**tokenizer(char *input);
+void	clean_redirect_input(char **args, char **input);
 void	split_args(char **args, char *input);
 
 // UTILS
-void	clean_redirect_input(char **args, char **input);
+void	change_input(char *file, int flags);
+void	change_output(char *file, int flags);
 void	execute_cmd(char **args);
 void	redirect(char **input);
 void	reestore_initial_fd(int *initial_fd);

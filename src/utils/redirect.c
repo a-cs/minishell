@@ -3,48 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 02:30:21 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:06:10 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	change_input(char *file, int flags)
+static void	especial_case_fd(char *file, char *redirect)
 {
-	int	file_id;
-
-	file_id = open(file, flags);
-	if (file_id == -1)
+	if (ft_memcmp(redirect, "><", 2) == 0)
 	{
 		g_obj.error = 1;
-		g_obj.exit_code = 9;
-		printf("Redirect: Bad file descriptor\n");
+		g_obj.exit_code = 258;
+		reestore_initial_fd(g_obj.initial_fd);
+		printf("Redirect: syntax error near unexpected token `<'\n");
 	}
-	else
+	else if (ft_memcmp(redirect, "<>", 2) == 0)
 	{
-		dup2(file_id, STDIN_FILENO);
-		close(file_id);
-	}
-}
-
-static void	change_output(char *file, int flags)
-{
-	int	file_id;
-
-	file_id = open(file, flags, 0777);
-	if (file_id == -1)
-	{
-		g_obj.error = 1;
-		g_obj.exit_code = 9;
-		printf("Redirect: Bad file descriptor\n");
-	}
-	else
-	{
-		dup2(file_id, STDOUT_FILENO);
-		close(file_id);
+		open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		change_input(file, O_RDONLY);
 	}
 }
 
@@ -53,11 +33,14 @@ static void	do_redirect(char *redirect, char *file)
 	if (ft_memcmp(redirect, ">>", 2) == 0)
 		change_output(file, O_WRONLY | O_CREAT | O_APPEND);
 	else if (ft_memcmp(redirect, "<<", 2) == 0)
-		change_input(file, O_RDONLY | O_CREAT);
+		change_input(file, O_RDONLY);
+	else if (ft_memcmp(redirect, "<>", 2) == 0
+		|| ft_memcmp(redirect, "><", 2) == 0)
+		especial_case_fd(file, redirect);
 	else if (ft_memcmp(redirect, ">", 1) == 0)
 		change_output(file, O_WRONLY | O_CREAT | O_TRUNC);
 	else if (ft_memcmp(redirect, "<", 1) == 0)
-		change_input(file, O_RDONLY | O_CREAT);
+		change_input(file, O_RDONLY);
 }
 
 static int	is_valid_redirection(char **args)
@@ -75,7 +58,6 @@ static int	is_valid_redirection(char **args)
 				return (0);
 			}
 			if ((ft_chrqty(args[i], '>') > 2 || ft_chrqty(args[i], '<') > 2)
-				|| (ft_chrqty(args[i], '>') > 0 && ft_chrqty(args[i], '<') > 0)
 				|| (!args[i + 1] || ft_chrqty(args[i + 1], '>') > 0
 					|| ft_chrqty(args[i + 1], '<') > 0))
 			{

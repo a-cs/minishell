@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/23 01:16:42 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/23 15:23:09 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,11 +40,11 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/system/set_obj_data.c \
 	$(SRC_DIR)/system/start_msg.c \
 	$(SRC_DIR)/tokenizer/clean_quotes.c \
+	$(SRC_DIR)/tokenizer/clean_redirect_input.c \
 	$(SRC_DIR)/tokenizer/redirect_args.c \
 	$(SRC_DIR)/tokenizer/replace_env_var.c \
 	$(SRC_DIR)/tokenizer/split_args.c \
 	$(SRC_DIR)/tokenizer/tokenizer.c \
-	$(SRC_DIR)/utils/clean_redirect_input.c \
 	$(SRC_DIR)/utils/execute_cmd.c \
 	$(SRC_DIR)/utils/fd_utils.c \
 	$(SRC_DIR)/utils/redirect.c \
