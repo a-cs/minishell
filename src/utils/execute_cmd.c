@@ -3,32 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 23:19:55 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:56:56 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static char	*join_path(char *env_path, char *command)
+{
+	char	*temp_path;
+	char	*path;
+
+	temp_path = ft_strjoin(env_path, "/");
+	path = ft_strjoin(temp_path, command);
+	free(temp_path);
+	return (path);
+}
+
 static char	*get_path(char *command)
 {
 	char	**env_path;
-	char	*temp_path;
 	char	*path;
 	int		i;
 
 	i = 0;
-	while (ft_strnstr(g_obj.envp[i], "PATH", 4) == 0)
+	while (g_obj.envp[i] && ft_strnstr(g_obj.envp[i], "PATH", 4) == 0)
 		i++;
+	if (!g_obj.envp[i])
+		return (0);
 	env_path = ft_split(g_obj.envp[i] + 5, ':');
 	i = 0;
 	while (env_path[i])
 	{
-		temp_path = ft_strjoin(env_path[i], "/");
-		path = ft_strjoin(temp_path, command);
-		free(temp_path);
+		path = join_path(env_path[i], command);
 		if (access(path, F_OK) == 0)
 		{
 			ft_free_matrix(env_path);
