@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:53:06 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/20 16:02:47 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:35:44 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static char	*save_arg(char *str, int len)
 	return (arg);
 }
 
-int	skip_spaces(int i, int j)
+int	skip_spaces(int i, int j, char *input)
 {
-	if ((i + j) < ft_strlen(g_obj.input) && g_obj.input[i + j] == SPACE_VALUE)
+	if ((i + j) < ft_strlen(input) && input[i + j] == SPACE_VALUE)
 	{
 		j++;
-		while ((i + j) < ft_strlen(g_obj.input) && g_obj.input[i + j]
-			&& g_obj.input[i + j] == SPACE_VALUE)
+		while ((i + j) < ft_strlen(input) && input[i + j]
+			&& input[i + j] == SPACE_VALUE)
 			j++;
 	}
 	return (j);
@@ -58,7 +58,7 @@ int	has_quotes_before_space(char *str)
 	return (1);
 }
 
-void	split_args(char **args)
+void	split_args(char **args, char *input)
 {
 	int	i;
 	int	j;
@@ -66,19 +66,19 @@ void	split_args(char **args)
 
 	i = 0;
 	pos = 0;
-	while (i < ft_strlen(g_obj.input) && g_obj.input[i])
+	while (i < ft_strlen(input) && input[i])
 	{
-		j = increment_quotes(i);
-		if ((i + j) < ft_strlen(g_obj.input) && g_obj.input[i + j]
-			!= DOUBLE_QUOTES && g_obj.input[i + j] != SINGLE_QUOTES
-			&& g_obj.input[i + j] != SPACE_VALUE)
-			j = increment_count(i + j, SPACE_VALUE) - i;
+		j = increment_quotes(i, input);
+		if ((i + j) < ft_strlen(input) && input[i + j]
+			!= DOUBLE_QUOTES && input[i + j] != SINGLE_QUOTES
+			&& input[i + j] != SPACE_VALUE)
+			j = increment_count(i + j, SPACE_VALUE, input) - i;
 		if (pos <= 1)
-			args[pos] = save_arg(g_obj.input + i, j);
+			args[pos] = save_arg(input + i, j);
 		else
-			args[pos] = save_arg(g_obj.input + i - 1, j + 1);
+			args[pos] = save_arg(input + i - 1, j + 1);
 		pos++;
-		j = skip_spaces(i, j);
+		j = skip_spaces(i, j, input);
 		i += j;
 	}
 	args[g_obj.args_num] = NULL;

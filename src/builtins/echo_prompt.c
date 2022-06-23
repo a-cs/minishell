@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:02 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/20 16:07:29 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 00:57:44 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_flag(char **args)
 	return (has_flag);
 }
 
-int	echo_prompt(char **args)
+void	echo_prompt(char **args)
 {
 	int		i;
 	int		has_flag;
@@ -51,8 +51,7 @@ int	echo_prompt(char **args)
 			printf("%s", args[i]);
 		i++;
 	}
-	if (g_obj.args_num > 1 && has_flag != 0)
+	if (g_obj.args_num >= 1 && has_flag != 0)
 		printf("\n");
 	g_obj.exit_code = 0;
-	return (1);
 }
