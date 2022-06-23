@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 20:56:14 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 02:30:21 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ void	redirect(char **input)
 
 	args = redirect_args(clean_quotes(replace_env_var(tokenizer(*input))));
 	if (!is_valid_redirection(args))
+	{
+		g_obj.error = g_obj.exit_code;
 		printf("Redirect: sintax error\n");
+	}
 	else
 	{
 		i = 0;

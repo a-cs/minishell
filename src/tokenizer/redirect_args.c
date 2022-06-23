@@ -6,11 +6,35 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:38:13 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 00:03:34 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 02:20:20 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	populate_redirect_list(char *str, t_list **lst, int i)
+{
+	char	*temp;
+	char	*aux;
+
+	if (i == 0)
+	{
+		while (str[i] && (str[i] == '>' || str[i] == '<'))
+			i++;
+		temp = ft_substr(str, 0, i);
+		ft_lstadd_back(lst, ft_lstnew(ft_strdup(temp)));
+		free(temp);
+	}
+	else
+	{
+		temp = ft_substr(str, 0, i);
+		aux = ft_strtrim(temp, " \t");
+		ft_lstadd_back(lst, ft_lstnew(ft_strdup(aux)));
+		free(temp);
+		free(aux);
+	}
+	return (i);
+}
 
 static int	split_redirect_args(char *str, t_list **lst)
 {
@@ -27,15 +51,8 @@ static int	split_redirect_args(char *str, t_list **lst)
 			ft_lstadd_back(lst, ft_lstnew(ft_strtrim(str, " \t")));
 			return (ft_strlen(str));
 		}
-		else if (i == 0)
-		{
-			while (str[i] && (str[i] == '>' || str[i] == '<'))
-				i++;
-			ft_lstadd_back(lst, ft_lstnew(ft_substr(str, 0, i)));
-		}
 		else
-			ft_lstadd_back(lst, ft_lstnew(ft_strtrim(
-						ft_substr(str, 0, i), " \t")));
+			i = populate_redirect_list(str, lst, i);
 		i += split_redirect_args(str + i, lst);
 	}
 	return (i);
