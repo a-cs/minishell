@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_redirect_input.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:25:01 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 00:25:27 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:01:51 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

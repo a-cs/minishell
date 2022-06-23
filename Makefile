@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/23 01:16:42 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/23 17:50:58 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,18 +36,19 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/is_builtin.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/builtins/unset_prompt.c \
+	$(SRC_DIR)/redirect/clean_redirect_input.c \
+	$(SRC_DIR)/redirect/fd_utils.c \
+	$(SRC_DIR)/redirect/here_doc.c \
+	$(SRC_DIR)/redirect/redirect_args.c \
+	$(SRC_DIR)/redirect/redirect.c \
 	$(SRC_DIR)/system/keep_prompt.c \
 	$(SRC_DIR)/system/set_obj_data.c \
 	$(SRC_DIR)/system/start_msg.c \
 	$(SRC_DIR)/tokenizer/clean_quotes.c \
-	$(SRC_DIR)/tokenizer/redirect_args.c \
 	$(SRC_DIR)/tokenizer/replace_env_var.c \
 	$(SRC_DIR)/tokenizer/split_args.c \
 	$(SRC_DIR)/tokenizer/tokenizer.c \
-	$(SRC_DIR)/utils/clean_redirect_input.c \
 	$(SRC_DIR)/utils/execute_cmd.c \
-	$(SRC_DIR)/utils/fd_utils.c \
-	$(SRC_DIR)/utils/redirect.c \
 	$(SRC_DIR)/utils/signals.c
 
 all: $(NAME)
@@ -59,6 +60,7 @@ $(NAME): $(LIBFT) $(OBJ)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE)
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/builtins
+	@mkdir -p $(OBJ_DIR)/redirect
 	@mkdir -p $(OBJ_DIR)/system
 	@mkdir -p $(OBJ_DIR)/tokenizer
 	@mkdir -p $(OBJ_DIR)/utils

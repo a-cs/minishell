@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keep_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 01:23:23 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:11:27 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ static void	execute(char **input)
 
 static void	execute_args(void)
 {
-	int	fd[2];
-
 	if (!is_exit_cmd())
 	{
-		save_initial_fd(fd);
+		save_initial_fd(g_obj.initial_fd);
 		execute(&g_obj.input);
-		reestore_initial_fd(fd);
+		reestore_initial_fd(g_obj.initial_fd);
 	}
 	else
 		exit_prompt();

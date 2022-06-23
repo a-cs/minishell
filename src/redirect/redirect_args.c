@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:38:13 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 02:20:20 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:08:35 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static int	populate_redirect_list(char *str, t_list **lst, int i)
 	{
 		temp = ft_substr(str, 0, i);
 		aux = ft_strtrim(temp, " \t");
-		ft_lstadd_back(lst, ft_lstnew(ft_strdup(aux)));
+		if (aux[0])
+			ft_lstadd_back(lst, ft_lstnew(ft_strdup(aux)));
 		free(temp);
 		free(aux);
 	}
@@ -44,7 +45,7 @@ static int	split_redirect_args(char *str, t_list **lst)
 	while (i < ft_strlen(str) && str[i])
 	{
 		i = ft_chrpos(str, '>');
-		if (i == -1)
+		if (i == -1 || i > ft_chrpos(str, '<'))
 			i = ft_chrpos(str, '<');
 		if (i == -1)
 		{
