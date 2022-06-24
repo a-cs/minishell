@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keep_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 16:11:27 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/24 00:09:07 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	execute(char **input)
 		if (code != 0)
 			execute_builtin(args, code);
 		else
-			execute_cmd(args);
+			execute_cmd(redirect_args(clean_quotes(
+						replace_env_var(tokenizer(*input)))));
 	}
 	ft_free_matrix(args);
 }
@@ -65,6 +66,7 @@ void	keep_prompt(char **envp)
 	g_obj.envp = dup_envp(envp);
 	g_obj.exit_code = 0;
 	g_obj.close_code = 0;
+	start_msg();
 	while (g_obj.close_code == 0)
 	{
 		reset_obj_data();

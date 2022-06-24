@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 18:44:47 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 22:18:33 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	especial_case_fd(char *file, char *redirect)
 {
+	int	fd;
+
 	if (ft_memcmp(redirect, "<<>", 3) == 0 || ft_memcmp(redirect, "><", 2) == 0)
 	{
 		g_obj.error = 1;
@@ -21,9 +23,16 @@ static void	especial_case_fd(char *file, char *redirect)
 		reestore_initial_fd(g_obj.initial_fd);
 		printf("Redirect: syntax error near unexpected token `<'\n");
 	}
+	else if (ft_memcmp(redirect, "<>>", 3) == 0)
+	{
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		close(fd);
+		change_input(file, O_RDONLY);
+	}
 	else if (ft_memcmp(redirect, "<>", 2) == 0)
 	{
-		open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		close(fd);
 		change_input(file, O_RDONLY);
 	}
 }
@@ -31,6 +40,7 @@ static void	especial_case_fd(char *file, char *redirect)
 static void	do_redirect(char *redirect, char *file)
 {
 	if (ft_memcmp(redirect, "<<>", 3) == 0
+		|| ft_memcmp(redirect, "<>>", 3) == 0
 		|| ft_memcmp(redirect, "<>", 2) == 0
 		|| ft_memcmp(redirect, "><", 2) == 0)
 		especial_case_fd(file, redirect);

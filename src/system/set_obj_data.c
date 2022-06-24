@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_obj_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:47:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 01:44:35 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 23:50:19 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*prompt_str(void)
 {
 	char	*str;
 
-	str = "\001\033[1;96m\002Minishell\001\033[1;92m\002$\001\033[0m\002 ";
+	str = "\001\033[1;96m\002Mi-Shell\001\033[1;92m\002$\001\033[0m\002 ";
 	return (str);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 17:07:14 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/23 23:44:35 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,5 @@ void	execute_cmd(char **args)
 		printf("Command not found: %s\n", args[0]);
 		g_obj.exit_code = 127;
 	}
+	ft_free_matrix(args);
 }
