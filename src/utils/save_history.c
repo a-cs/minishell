@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_prompt.c                                      :+:      :+:    :+:   */
+/*   save_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 22:39:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 00:30:34 by acarneir         ###   ########.fr       */
+/*   Created: 2022/06/24 00:35:04 by acarneir          #+#    #+#             */
+/*   Updated: 2022/06/24 00:43:31 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exit_prompt(void)
+static int	is_valid_history(char *str)
 {
-	if (g_obj.input)
-		free(g_obj.input);
-	if (g_obj.envp)
-		ft_free_matrix(g_obj.envp);
-	rl_clear_history();
-	exit(0);
+	if (str && *str)
+	{
+		if (str[0] == '\t' || str[0] == '\v' || str[0] == '\r' || str[0] == ' ')
+			return (0);
+		return (1);
+	}
+	return (0);
+}
+
+void	save_history(char *str)
+{
+	if (is_valid_history(str))
+		add_history(str);
 }
