@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_obj_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:47:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 23:50:19 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:53:47 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	reset_obj_data(void)
 {
 	g_obj.error = 0;
 	g_obj.args_num = 0;
+	g_obj.close_code = 0;
 	g_obj.prompt = prompt_str();
 	g_obj.input = NULL;
 }
