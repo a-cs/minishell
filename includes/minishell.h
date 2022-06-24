@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 15:32:57 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/24 20:02:10 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 	int		error;
 	int		exit_code;
 	int		close_code;
+	int		stop;
 	int		old_pipe_in;
 	int		initial_fd[2];
 	int		actual_fd[2];
@@ -91,6 +92,7 @@ void	split_args(char **args, char *input);
 
 // UTILS
 void	execute_cmd(char **args);
+void	here_doc_stop(int signal);
 void	new_line(int signal);
 void	new_prompt(int signal);
 void	save_history(char *str);
