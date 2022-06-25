@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/25 16:20:36 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/25 17:03:35 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/unset_prompt.c \
 	$(SRC_DIR)/pipe/pipe_args.c \
 	$(SRC_DIR)/pipe/pipe_checker.c \
+	$(SRC_DIR)/pipe/pipe_utils.c \
 	$(SRC_DIR)/redirect/clean_redirect_input.c \
 	$(SRC_DIR)/redirect/fd_utils.c \
 	$(SRC_DIR)/redirect/here_doc.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:49:46 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 16:10:17 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 16:54:41 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ static void	save_actual_fd(void)
 	g_obj.actual_fd[1] = dup(STDOUT_FILENO);
 }
 
+static void	save_history(char **args)
+{
+	char	*input;
+
+	if (is_valid_history(g_obj.input))
+	{
+		input = ft_matrix_to_str(args);
+		add_history(input);
+		free(input);
+	}
+}
+
 void	pipe_checker(void)
 {
 	int		i;
@@ -41,8 +53,7 @@ void	pipe_checker(void)
 
 	i = 0;
 	args = pipe_args();
-	if (is_valid_history(g_obj.input))
-		add_history(ft_matrix_to_str(args));
+	save_history(args);
 	while (args[i])
 	{
 		if (args[i + 1] && args[i + 1][0] == '|')

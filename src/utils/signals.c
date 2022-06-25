@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/25 16:22:16 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 16:24:29 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	pipe_stop(int signal)
 		g_obj.error = 1;
 		g_obj.invalid_input = 1;
 		rl_replace_line("", 0);
-		rl_done = true;
+		rl_done = 1;
 	}
 	return ;
 }
@@ -32,7 +32,7 @@ void	here_doc_stop(int signal)
 		g_obj.exit_code = 130;
 		ft_putendl_fd("", 1);
 		rl_replace_line("", 0);
-		rl_done = true;
+		rl_done = 1;
 		close(rl_instream->_fileno);
 	}
 	return ;

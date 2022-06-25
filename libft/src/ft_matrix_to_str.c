@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_matrix_to_str.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 16:11:09 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 16:16:21 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 16:44:45 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+
+static void	conc_str(char **result, char *str)
+{
+	char	*temp;
+	char	*aux;
+
+	temp = ft_strjoin(" ", str);
+	aux = ft_strjoin(*result, temp);
+	free(*result);
+	*result = ft_strdup(temp);
+	free(temp);
+	free(aux);
+}
 
 char	*ft_matrix_to_str(char **matrix)
 {
@@ -26,12 +39,7 @@ char	*ft_matrix_to_str(char **matrix)
 		if (i == 0)
 			result = ft_strdup(matrix[i]);
 		else
-		{
-			temp = ft_strjoin(result, ft_strjoin(" ", matrix[i]));
-			free(result);
-			result = ft_strdup(temp);
-			free(temp);
-		}
+			conc_str(&result, matrix[i]);
 		i++;
 	}
 	temp = ft_strjoin(result, "");

@@ -3,44 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 00:51:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 15:53:32 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 17:10:41 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static void	cotinue_add_pipe_arg(t_list **lst)
-{
-	char	*input;
-	char	*aux;
-
-	input = readline("> ");
-	if (!input)
-	{
-		g_obj.error = 1;
-		g_obj.exit_code = 258;
-		g_obj.invalid_input = 1;
-		printf("syntax error: unexpected end of file\n");
-	}
-	else
-	{
-		aux = ft_strtrim(input, " \t");
-		if (aux[ft_strlen(aux) - 1] == '|')
-		{
-			ft_lstadd_back(lst, ft_lstnew(ft_substr(aux, 0,
-						ft_chrpos(aux, '|') - 1)));
-			ft_lstadd_back(lst, ft_lstnew(ft_strdup("|")));
-			cotinue_add_pipe_arg(lst);
-		}
-        else
-            ft_lstadd_back(lst, ft_lstnew(ft_strdup(aux)));
-		free(aux);
-		free(input);
-	}
-}
 
 static int	increment_pipe_str(char *str, int i)
 {
@@ -61,10 +31,32 @@ static int	increment_pipe_str(char *str, int i)
 	return (i);
 }
 
+static void	add_last_pipe_arg(t_list **lst, char *str, int i, int j)
+{
+	char	*temp;
+	char	*aux;
+
+	if (str[j])
+	{
+		temp = ft_substr(str, j, i - j);
+		aux = ft_strtrim(temp, " \t");
+		ft_lstadd_back(lst, ft_lstnew(ft_strdup(aux)));
+		free(temp);
+		free(aux);
+	}
+	else
+	{
+		signal(SIGINT, pipe_stop);
+		cotinue_add_pipe_arg(lst);
+	}
+}
+
 static void	iterate_pipe_args(char *str, t_list **lst)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*temp;
+	char	*aux;
 
 	i = 0;
 	j = 0;
@@ -72,21 +64,18 @@ static void	iterate_pipe_args(char *str, t_list **lst)
 	{
 		i = increment_pipe_str(str, i);
 		if (str[i] == '|')
-		{
-			ft_lstadd_back(lst, ft_lstnew(ft_strtrim(
-						ft_substr(str, j, i - j), " \t")));
+		{	
+			temp = ft_substr(str, j, i - j);
+			aux = ft_strtrim(temp, " \t");
+			ft_lstadd_back(lst, ft_lstnew(ft_strdup(aux)));
+			free(temp);
+			free(aux);
 			ft_lstadd_back(lst, ft_lstnew(ft_strdup("|")));
 			j = i + 1;
 		}
 		i++;
 	}
-	if (str[j])
-		ft_lstadd_back(lst, ft_lstnew(ft_strtrim(ft_substr(str, j, i - j), " \t")));
-	else
-	{
-		signal(SIGINT, pipe_stop);
-		cotinue_add_pipe_arg(lst);
-	}
+	add_last_pipe_arg(lst, str, i, j);
 }
 
 char	**pipe_args(void)
@@ -103,5 +92,7 @@ char	**pipe_args(void)
 	}
 	else
 		args = ft_lst_to_matrix(lst);
+	if (lst)
+		ft_lstclear(&lst, free);
 	return (args);
 }
