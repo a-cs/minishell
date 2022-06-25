@@ -65,10 +65,10 @@ void	change_output(char *file, int flags)
 void	change_fd(int *fd)
 {
 	dup2(fd[0], STDIN_FILENO);
-	if (fd[0] != 0)
+	if (fd[0] != g_obj.initial_fd[0])
 		close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
-	if (fd[1] != 1)
+	if (fd[1] != g_obj.initial_fd[1])
 		close(fd[1]);
 }
 

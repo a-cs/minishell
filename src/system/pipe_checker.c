@@ -50,7 +50,6 @@ static void	save_actual_fd(void)
 	g_obj.actual_fd[1] = dup(STDOUT_FILENO);
 }
 
-
 char	*pipe_checker(void)
 {
 	if (ft_chrqty(g_obj.input, '|') > 0)
