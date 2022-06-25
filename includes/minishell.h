@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 20:02:10 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/24 21:29:48 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_data
 }	t_data;
 
 // GLOBAL VARIABLE
-t_data	g_obj;
+extern t_data	g_obj;
 
 /* FUNCTIONS */
 // BUILTINS
