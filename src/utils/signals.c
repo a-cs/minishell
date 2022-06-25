@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/25 16:24:29 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/25 17:20:39 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	here_doc_stop(int signal)
 	if (signal == SIGINT)
 	{
 		g_obj.exit_code = 130;
+		g_obj.error = 1;
+		g_obj.invalid_input = 1;
 		ft_putendl_fd("", 1);
 		rl_replace_line("", 0);
 		rl_done = 1;
