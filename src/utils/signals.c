@@ -6,11 +6,24 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/24 23:37:58 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 16:22:16 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	pipe_stop(int signal)
+{
+	if (signal == SIGINT)
+	{
+		g_obj.exit_code = 1;
+		g_obj.error = 1;
+		g_obj.invalid_input = 1;
+		rl_replace_line("", 0);
+		rl_done = true;
+	}
+	return ;
+}
 
 void	here_doc_stop(int signal)
 {

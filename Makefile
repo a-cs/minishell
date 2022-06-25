@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/25 01:34:36 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/25 16:20:36 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/tokenizer/split_args.c \
 	$(SRC_DIR)/tokenizer/tokenizer.c \
 	$(SRC_DIR)/utils/execute_cmd.c \
-	$(SRC_DIR)/utils/save_history.c \
+	$(SRC_DIR)/utils/is_valid_history.c \
 	$(SRC_DIR)/utils/signals.c
 
 all: $(NAME)

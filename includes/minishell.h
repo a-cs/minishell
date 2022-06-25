@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 01:37:48 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 16:20:01 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ char	**tokenizer(char *input);
 void	split_args(char **args, char *input);
 
 // UTILS
+int		is_valid_history(char *str);
 void	execute_cmd(char **args);
 void	here_doc_stop(int signal);
 void	new_line(int signal);
 void	new_prompt(int signal);
-void	save_history(char *str);
+void	pipe_stop(int signal);
 
 #endif

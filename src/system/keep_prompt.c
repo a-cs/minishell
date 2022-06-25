@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 01:39:13 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 16:06:23 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	keep_prompt(char **envp)
 		temp = readline(g_obj.prompt);
 		if (is_valid_input(temp))
 		{
-			save_history(temp);
 			g_obj.input = ft_strtrim(temp, " \t");
 			execute_args();
 		}
