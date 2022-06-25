@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:44:44 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 18:51:47 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/24 23:18:11 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@ static void	get_input(int temp_file, char *eof)
 {
 	char	*input;
 
-	signal(SIGINT, new_line);
-	while (1)
+	input = readline("> ");
+	if (!input)
+		printf("warning: here-document delimited by end-of-file"
+			"(wanted `%s')\n", eof);
+	else
 	{
-		input = readline("> ");
-		if (input[0] == '\0')
+		while (ft_memcmp(input, eof, ft_strlen(input)) != 0)
 		{
+			if (input[0] == '\0')
+				ft_putendl_fd("", temp_file);
+			else
+				ft_putendl_fd(input, temp_file);
+			g_obj.exit_code = 0;
 			free(input);
-			ft_putendl_fd("", temp_file);
-			continue ;
+			input = readline("> ");
+			if (!input)
+				printf("warning: here-document delimited by end-of-file"
+					"(wanted `%s')\n", eof);
 		}
-		if (ft_memcmp(input, eof, ft_strlen(input)))
-			ft_putendl_fd(input, temp_file);
-		else
-		{
-			close(temp_file);
-			free(input);
-			break ;
-		}
-		free(input);
 	}
-	g_obj.exit_code = 0;
 }
 
 void	here_doc(char *eof)
 {
 	int	temp_file;
+	int	actual_fd_out;
 
 	temp_file = open("temp_file", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (temp_file == -1)
@@ -50,7 +50,14 @@ void	here_doc(char *eof)
 		g_obj.exit_code = 9;
 		return ;
 	}
+	actual_fd_out = dup(STDOUT_FILENO);
+	dup2(g_obj.initial_fd[1], STDOUT_FILENO);
+	signal(SIGINT, here_doc_stop);
+	signal(SIGQUIT, SIG_IGN);
 	get_input(temp_file, eof);
+	close(temp_file);
 	change_input("temp_file", O_RDONLY);
 	unlink("temp_file");
+	dup2(actual_fd_out, STDOUT_FILENO);
+	close(actual_fd_out);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   keep_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 01:16:26 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/25 16:06:23 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	execute(char **input)
+void	execute(char **input)
 {
 	int		code;
 	char	**args;
@@ -35,9 +35,10 @@ static void	execute_args(void)
 {
 	if (!is_exit_cmd())
 	{
-		save_initial_fd(g_obj.initial_fd);
-		execute(&g_obj.input);
-		reestore_initial_fd(g_obj.initial_fd);
+		save_fd(g_obj.initial_fd);
+		g_obj.old_pipe_in = 0;
+		pipe_checker();
+		change_fd(g_obj.initial_fd);
 	}
 	else
 		exit_prompt();
@@ -65,9 +66,8 @@ void	keep_prompt(char **envp)
 
 	g_obj.envp = dup_envp(envp);
 	g_obj.exit_code = 0;
-	g_obj.close_code = 0;
 	start_msg();
-	while (g_obj.close_code == 0)
+	while (1)
 	{
 		reset_obj_data();
 		signal(SIGINT, new_prompt);
@@ -75,7 +75,6 @@ void	keep_prompt(char **envp)
 		temp = readline(g_obj.prompt);
 		if (is_valid_input(temp))
 		{
-			save_history(temp);
 			g_obj.input = ft_strtrim(temp, " \t");
 			execute_args();
 		}

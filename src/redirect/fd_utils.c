@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 23:07:15 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 16:14:09 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:35:30 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_a_valid_file(char *file, int flags)
 	{
 		g_obj.error = 1;
 		g_obj.exit_code = 1;
-		reestore_initial_fd(g_obj.initial_fd);
+		change_fd(g_obj.initial_fd);
 		printf("%s: No such file or directory\n", file);
 		return (0);
 	}
@@ -26,7 +26,7 @@ static int	is_a_valid_file(char *file, int flags)
 	{
 		g_obj.error = 1;
 		g_obj.exit_code = 1;
-		reestore_initial_fd(g_obj.initial_fd);
+		change_fd(g_obj.initial_fd);
 		printf("%s: Permission denied\n", file);
 		return (0);
 	}
@@ -62,14 +62,18 @@ void	change_output(char *file, int flags)
 	}
 }
 
-void	reestore_initial_fd(int *initial_fd)
+void	change_fd(int *fd)
 {
-	dup2(initial_fd[0], STDIN_FILENO);
-	dup2(initial_fd[1], STDOUT_FILENO);
+	dup2(fd[0], STDIN_FILENO);
+	if (fd[0] != g_obj.initial_fd[0])
+		close(fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	if (fd[1] != g_obj.initial_fd[1])
+		close(fd[1]);
 }
 
-void	save_initial_fd(int *initial_fd)
+void	save_fd(int *fd)
 {
-	initial_fd[0] = dup(STDIN_FILENO);
-	initial_fd[1] = dup(STDOUT_FILENO);
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
 }

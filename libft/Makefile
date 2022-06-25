@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/23 18:12:41 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/25 16:17:39 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,15 +32,16 @@ SRCS = ft_atoi.c \
 		ft_isdigit.c \
 		ft_itoa.c \
 		ft_lst_to_matrix.c \
-		ft_lstadd_back.o \
-		ft_lstadd_front.o \
-		ft_lstclear.o \
-		ft_lstdelone.o \
-		ft_lstiter.o \
-		ft_lstlast.o \
-		ft_lstmap.o \
-		ft_lstnew.o \
-		ft_lstsize.o \
+		ft_lstadd_back.c \
+		ft_lstadd_front.c \
+		ft_lstclear.c \
+		ft_lstdelone.c \
+		ft_lstiter.c \
+		ft_lstlast.c \
+		ft_lstmap.c \
+		ft_lstnew.c \
+		ft_lstsize.c \
+		ft_matrix_to_str.c \
 		ft_memcmp.c \
 		ft_memcpy.c \
 		ft_putchar_fd.c \

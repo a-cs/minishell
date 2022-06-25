@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_obj_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:47:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 23:50:19 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/25 01:03:04 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*prompt_str(void)
 {
 	char	*str;
 
-	str = "\001\033[1;96m\002Mi-Shell\001\033[1;92m\002$\001\033[0m\002 ";
+	str = "\e[0;34mMi-Shell\e[0m \e[0;32m$\e[0m ";
 	return (str);
 }
 
@@ -24,6 +24,8 @@ void	reset_obj_data(void)
 {
 	g_obj.error = 0;
 	g_obj.args_num = 0;
+	g_obj.close_code = 0;
+	g_obj.invalid_input = 0;
 	g_obj.prompt = prompt_str();
 	g_obj.input = NULL;
 }

@@ -45,7 +45,7 @@ static int	split_redirect_args(char *str, t_list **lst)
 	while (i < ft_strlen(str) && str[i])
 	{
 		i = ft_chrpos(str, '>');
-		if (i == -1 || i > ft_chrpos(str, '<'))
+		if (i == -1 || (ft_chrpos(str, '<') != -1 && i > ft_chrpos(str, '<')))
 			i = ft_chrpos(str, '<');
 		if (i == -1)
 		{

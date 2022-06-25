@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 00:44:40 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/25 17:03:08 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@ typedef struct s_data
 	int		error;
 	int		exit_code;
 	int		close_code;
+	int		old_pipe_in;
+	int		invalid_input;
 	int		initial_fd[2];
+	int		actual_fd[2];
 	char	*input;
 	char	*prompt;
 	char	**envp;
 }	t_data;
 
 // GLOBAL VARIABLE
-t_data	g_obj;
+extern t_data	g_obj;
 
 /* FUNCTIONS */
 // BUILTINS
@@ -59,18 +62,24 @@ void	export_prompt(char **args);
 void	pwd_prompt(void);
 void	unset_prompt(char **args);
 
+// PIPE
+char	**pipe_args(void);
+void	cotinue_add_pipe_arg(t_list **lst);
+void	pipe_checker(void);
+
 // REDIRECT
 char	**redirect_args(char **temp);
+void	change_fd(int *fd);
 void	change_input(char *file, int flags);
 void	change_output(char *file, int flags);
 void	clean_redirect_input(char **args, char **input);
 void	here_doc(char *eof);
 void	redirect(char **input);
-void	reestore_initial_fd(int *initial_fd);
-void	save_initial_fd(int *initial_fd);
+void	save_fd(int *fd);
 
 // SYSTEM
 char	**dup_envp(char **envp);
+void	execute(char **input);
 void	keep_prompt(char **envp);
 void	reset_obj_data(void);
 void	start_msg(void);
@@ -87,9 +96,11 @@ char	**tokenizer(char *input);
 void	split_args(char **args, char *input);
 
 // UTILS
+int		is_valid_history(char *str);
 void	execute_cmd(char **args);
+void	here_doc_stop(int signal);
 void	new_line(int signal);
 void	new_prompt(int signal);
-void	save_history(char *str);
+void	pipe_stop(int signal);
 
 #endif
