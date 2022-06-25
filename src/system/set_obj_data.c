@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:47:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 12:53:47 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/24 23:35:48 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*prompt_str(void)
 {
 	char	*str;
 
-	str = "\001\033[1;96m\002Mi-Shell\001\033[1;92m\002$\001\033[0m\002 ";
+	str = "\e[0;34mMi-Shell\e[0m \e[0;32m$\e[0m ";
 	return (str);
 }
 

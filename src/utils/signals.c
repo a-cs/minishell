@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/24 20:33:39 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/24 23:37:58 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 void	here_doc_stop(int signal)
 {
-	(void)signal;
-	g_obj.exit_code = 130;
-	g_obj.stop = 1;
+	if (signal == SIGINT)
+	{
+		g_obj.exit_code = 130;
+		ft_putendl_fd("", 1);
+		rl_replace_line("", 0);
+		rl_done = true;
+		close(rl_instream->_fileno);
+	}
+	return ;
 }
 
 void	new_prompt(int signal)
