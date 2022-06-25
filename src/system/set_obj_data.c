@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:47:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 23:35:48 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 01:03:04 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	reset_obj_data(void)
 	g_obj.error = 0;
 	g_obj.args_num = 0;
 	g_obj.close_code = 0;
+	g_obj.invalid_input = 0;
 	g_obj.prompt = prompt_str();
 	g_obj.input = NULL;
 }

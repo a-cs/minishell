@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 23:12:08 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/25 01:37:48 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 	int		exit_code;
 	int		close_code;
 	int		old_pipe_in;
+	int		invalid_input;
 	int		initial_fd[2];
 	int		actual_fd[2];
 	char	*input;
@@ -61,6 +62,10 @@ void	export_prompt(char **args);
 void	pwd_prompt(void);
 void	unset_prompt(char **args);
 
+// PIPE
+char	**pipe_args(void);
+void	pipe_checker(void);
+
 // REDIRECT
 char	**redirect_args(char **temp);
 void	change_fd(int *fd);
@@ -72,8 +77,8 @@ void	redirect(char **input);
 void	save_fd(int *fd);
 
 // SYSTEM
-char	*pipe_checker(void);
 char	**dup_envp(char **envp);
+void	execute(char **input);
 void	keep_prompt(char **envp);
 void	reset_obj_data(void);
 void	start_msg(void);

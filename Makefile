@@ -6,7 +6,7 @@
 #    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/24 12:56:30 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/25 01:34:36 by rfelipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,14 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/builtins/is_builtin.c \
 	$(SRC_DIR)/builtins/pwd_prompt.c \
 	$(SRC_DIR)/builtins/unset_prompt.c \
+	$(SRC_DIR)/pipe/pipe_args.c \
+	$(SRC_DIR)/pipe/pipe_checker.c \
 	$(SRC_DIR)/redirect/clean_redirect_input.c \
 	$(SRC_DIR)/redirect/fd_utils.c \
 	$(SRC_DIR)/redirect/here_doc.c \
 	$(SRC_DIR)/redirect/redirect_args.c \
 	$(SRC_DIR)/redirect/redirect.c \
 	$(SRC_DIR)/system/keep_prompt.c \
-	$(SRC_DIR)/system/pipe_checker.c \
 	$(SRC_DIR)/system/set_obj_data.c \
 	$(SRC_DIR)/system/start_msg.c \
 	$(SRC_DIR)/tokenizer/clean_quotes.c \
@@ -62,6 +63,7 @@ $(NAME): $(LIBFT) $(OBJ)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE)
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/builtins
+	@mkdir -p $(OBJ_DIR)/pipe
 	@mkdir -p $(OBJ_DIR)/redirect
 	@mkdir -p $(OBJ_DIR)/system
 	@mkdir -p $(OBJ_DIR)/tokenizer
