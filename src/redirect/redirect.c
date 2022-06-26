@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 03:05:16 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:06:35 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	redirect(char **input)
 	int		i;
 	char	**args;
 
-	args = redirect_args(clean_quotes(replace_env_var(tokenizer(*input))));
+	args = redirect_args(replace_env_var(tokenizer(*input)));
 	if (!is_valid_redirection(args))
 	{
 		g_obj.error = g_obj.exit_code;
