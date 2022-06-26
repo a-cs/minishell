@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 17:03:08 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:40:21 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	pwd_prompt(void);
 void	unset_prompt(char **args);
 
 // PIPE
+int		increment_all_str_quotes(char *str, int i);
 char	**pipe_args(void);
 void	cotinue_add_pipe_arg(t_list **lst);
 void	pipe_checker(void);

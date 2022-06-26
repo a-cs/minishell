@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/26 02:06:35 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:27:41 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ static int	is_valid_redirection(char **args)
 	{
 		if (ft_chrqty(args[i], '>') > 0 || ft_chrqty(args[i], '<') > 0)
 		{
-			if ((ft_chrqty(args[i], '>') > 2 || ft_chrqty(args[i], '<') > 2)
+			if ((args[i][0] == '>' || args[i][0] == '<') &&
+				((ft_chrqty(args[i], '>') > 2 || ft_chrqty(args[i], '<') > 2)
 				|| (!args[i + 1] || ft_chrqty(args[i + 1], '>') > 0
-					|| ft_chrqty(args[i + 1], '<') > 0))
+					|| ft_chrqty(args[i + 1], '<') > 0)))
 			{
 				g_obj.exit_code = 258;
 				return (0);
