@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/26 02:40:21 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/28 02:02:07 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ extern t_data	g_obj;
 int		is_builtin(char **args);
 int		is_exit_cmd(void);
 int		is_valid_attribution(char *arg, char *next);
+void	cd_prompt(char **args);
 void	echo_prompt(char **args);
 void	env_prompt(void);
 void	execute_builtin(char **args, int code);

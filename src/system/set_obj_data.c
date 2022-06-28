@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_obj_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:47:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 01:03:04 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/28 01:52:38 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,19 @@
 static char	*prompt_str(void)
 {
 	char	*str;
+	char	*buffer;
+	char	*pwd;
+	char	*aux;
+	char	*temp;
 
-	str = "\e[0;34mMi-Shell\e[0m \e[0;32m$\e[0m ";
+	buffer = NULL;
+	pwd = getcwd(buffer, 0);
+	temp = ft_strjoin("\e[1;36mMi-Shell\e[0m>\e[1;34m", pwd);
+	aux = ft_strjoin(temp, "\e[0m");
+	str = ft_strjoin(aux, "\e[1;32m$\e[0m ");
+	free(pwd);
+	free(temp);
+	free(aux);
 	return (str);
 }
 

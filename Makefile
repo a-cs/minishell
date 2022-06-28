@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/25 17:03:35 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/27 22:58:03 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 SRC_DIR = ./src
 SRC = $(SRC_DIR)/minishell.c \
+	$(SRC_DIR)/builtins/cd_prompt.c \
 	$(SRC_DIR)/builtins/echo_prompt.c \
 	$(SRC_DIR)/builtins/env_prompt.c \
 	$(SRC_DIR)/builtins/execute_builtin.c \

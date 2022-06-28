@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:19:21 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 23:42:49 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/27 22:44:19 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ void	execute_builtin(char **args, int code)
 		export_prompt(args);
 	if (code == 6)
 		unset_prompt(args);
+	if (code == 7)
+		cd_prompt(args);
 }
