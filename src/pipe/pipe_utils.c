@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:02:17 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/25 17:02:53 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/27 22:15:12 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	throw_add_pipe_error(void)
 {
 	g_obj.error = 1;
-	g_obj.exit_code = 258;
+	g_obj.exit_code = 2;
 	g_obj.invalid_input = 1;
 	printf("syntax error: unexpected end of file\n");
 }
