@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 00:51:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 17:10:41 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:40:02 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	increment_pipe_str(char *str, int i)
+int	increment_all_str_quotes(char *str, int i)
 {
 	if (str[i] && str[i] == DOUBLE_QUOTES)
 	{
@@ -62,7 +62,7 @@ static void	iterate_pipe_args(char *str, t_list **lst)
 	j = 0;
 	while (i < ft_strlen(str) && str[i] && g_obj.invalid_input == 0)
 	{
-		i = increment_pipe_str(str, i);
+		i = increment_all_str_quotes(str, i);
 		if (str[i] == '|')
 		{	
 			temp = ft_substr(str, j, i - j);

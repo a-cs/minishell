@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 23:07:15 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 15:35:30 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/27 22:06:12 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ void	change_input(char *file, int flags)
 {
 	int	file_id;
 
+	if (!file[0])
+	{
+		g_obj.error = 1;
+		g_obj.exit_code = 2;
+		printf("Redirect: sintax error\n");
+		return ;
+	}
 	file_id = open(file, flags);
 	if (!is_a_valid_file(file, R_OK))
 		return ;
@@ -48,6 +55,13 @@ void	change_output(char *file, int flags)
 {
 	int	file_id;
 
+	if (!file[0])
+	{
+		g_obj.error = 1;
+		g_obj.exit_code = 2;
+		printf("Redirect: sintax error\n");
+		return ;
+	}
 	file_id = open(file, flags, 0777);
 	if (file_id == -1)
 	{

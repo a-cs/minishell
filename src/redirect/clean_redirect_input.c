@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 20:25:01 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 17:01:51 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/26 02:53:50 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	clean_redirect_input(char **args, char **input)
 	j = 0;
 	while (args[i])
 	{
-		if (ft_chrqty(args[i], '>') == 0 && ft_chrqty(args[i], '<') == 0)
+		if ((ft_chrqty(args[i], '>') == 0 && ft_chrqty(args[i], '<') == 0)
+			|| (args[i][0] != '>' && args[i][0] != '<'))
 			j = update_input(input, args[i], j);
 		else
 			i++;

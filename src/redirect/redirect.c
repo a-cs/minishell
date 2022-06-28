@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 03:05:16 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/27 22:15:12 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	especial_case_fd(char *file, char *redirect)
 	if (ft_memcmp(redirect, "<<>", 3) == 0 || ft_memcmp(redirect, "><", 2) == 0)
 	{
 		g_obj.error = 1;
-		g_obj.exit_code = 258;
+		g_obj.exit_code = 2;
 		change_fd(g_obj.initial_fd);
 		printf("Redirect: syntax error near unexpected token `<'\n");
 	}
@@ -63,11 +63,12 @@ static int	is_valid_redirection(char **args)
 	{
 		if (ft_chrqty(args[i], '>') > 0 || ft_chrqty(args[i], '<') > 0)
 		{
-			if ((ft_chrqty(args[i], '>') > 2 || ft_chrqty(args[i], '<') > 2)
+			if ((args[i][0] == '>' || args[i][0] == '<') &&
+				((ft_chrqty(args[i], '>') > 2 || ft_chrqty(args[i], '<') > 2)
 				|| (!args[i + 1] || ft_chrqty(args[i + 1], '>') > 0
-					|| ft_chrqty(args[i + 1], '<') > 0))
+					|| ft_chrqty(args[i + 1], '<') > 0)))
 			{
-				g_obj.exit_code = 258;
+				g_obj.exit_code = 2;
 				return (0);
 			}
 		}
@@ -81,7 +82,7 @@ void	redirect(char **input)
 	int		i;
 	char	**args;
 
-	args = redirect_args(clean_quotes(replace_env_var(tokenizer(*input))));
+	args = redirect_args(replace_env_var(tokenizer(*input)));
 	if (!is_valid_redirection(args))
 	{
 		g_obj.error = g_obj.exit_code;
