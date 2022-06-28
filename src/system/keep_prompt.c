@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keep_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 16:06:23 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/28 01:55:13 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void	keep_prompt(char **envp)
 		if (g_obj.input)
 			free(g_obj.input);
 		free(temp);
+		free(g_obj.prompt);
 	}
 }
