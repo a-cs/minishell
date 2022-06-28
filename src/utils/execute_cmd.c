@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 15:36:07 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/27 22:57:03 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*get_path(char *command)
 	return (0);
 }
 
-static int	check_envp(char **args)
+static int	try_execute(char **args)
 {
 	int	pid;
 	int	status;
@@ -97,7 +97,7 @@ void	execute_cmd(char **args)
 	if (path)
 	{
 		free(path);
-		if (!check_envp(args))
+		if (!try_execute(args))
 			printf("Error -> Command not found: %s\n", args[0]);
 	}
 	else
