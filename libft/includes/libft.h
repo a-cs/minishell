@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 20:36:32 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 16:16:53 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 00:36:20 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 int		ft_atoi(char *str);
 int		ft_chrpos(char *s, int c);
 int		ft_chrqty(char *s, int c);
+int		ft_is_all_blank(char *str);
 int		ft_is_all_digit(char *c, int len);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);

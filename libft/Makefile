@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 20:36:30 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/25 16:17:39 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/29 00:36:53 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = ft_atoi.c \
 		ft_chrqty.c \
 		ft_free_matrix.c \
 		ft_free_ptr.c \
+		ft_is_all_blank.c \
 		ft_is_all_digit.c \
 		ft_isalpha.c \
 		ft_isascii.c \

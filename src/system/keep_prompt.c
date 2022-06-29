@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 00:24:11 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 00:38:53 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,11 @@ static void	check_eof(char *input)
 
 static int	is_valid_input(char *input)
 {
-	int	i;
-
 	check_eof(input);
 	if (input[0] == '\0')
 		return (0);
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] == '\t' || input[i] == '\v' || input[i] == '\r'
-			|| input[i] == ' ')
-			return (0);
-		i++;
-	}
+	if (ft_is_all_blank(input))
+		return (0);
 	return (1);
 }
 
