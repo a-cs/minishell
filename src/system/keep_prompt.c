@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keep_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 00:38:53 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:34:53 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,19 @@ static void	check_eof(char *input)
 
 static int	is_valid_input(char *input)
 {
+	char	*aux;
+	char	**temp;
+
 	check_eof(input);
 	if (input[0] == '\0')
 		return (0);
 	if (ft_is_all_blank(input))
+		return (0);
+	aux = ft_strtrim(input, " \t");
+	temp = clean_quotes(tokenizer(aux));
+	free(aux);
+	ft_free_matrix(temp);
+	if (g_obj.invalid_input != 0)
 		return (0);
 	return (1);
 }
