@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/27 22:57:03 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/28 21:48:44 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	try_execute(char **args)
 
 	pid = fork();
 	signal(SIGINT, new_line);
+	signal(SIGQUIT, quit_exec);
 	if (pid == 0)
 	{
 		if (ft_chrpos(args[0], '/') != -1)
