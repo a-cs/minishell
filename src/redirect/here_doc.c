@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:44:44 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/24 23:18:11 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:42:46 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ static void	get_input(int temp_file, char *eof)
 	char	*input;
 
 	input = readline("> ");
-	if (!input)
+	if (!input && g_obj.invalid_input == 0)
 		printf("warning: here-document delimited by end-of-file"
 			"(wanted `%s')\n", eof);
 	else
 	{
-		while (ft_memcmp(input, eof, ft_strlen(input)) != 0)
+		while (input && ft_memcmp(input, eof, ft_strlen(input)) != 0
+			&& g_obj.invalid_input == 0)
 		{
 			if (input[0] == '\0')
 				ft_putendl_fd("", temp_file);
@@ -31,10 +32,12 @@ static void	get_input(int temp_file, char *eof)
 			g_obj.exit_code = 0;
 			free(input);
 			input = readline("> ");
-			if (!input)
+			if (!input && g_obj.invalid_input == 0)
 				printf("warning: here-document delimited by end-of-file"
 					"(wanted `%s')\n", eof);
 		}
+		if (input)
+			free(input);
 	}
 }
 
