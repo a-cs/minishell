@@ -6,18 +6,24 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:02:17 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/27 22:15:12 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:29:32 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	throw_add_pipe_error(void)
+static void	throw_add_pipe_error(t_list **lst)
 {
-	g_obj.error = 1;
-	g_obj.exit_code = 2;
-	g_obj.invalid_input = 1;
-	printf("syntax error: unexpected end of file\n");
+	if (g_obj.invalid_input == 0)
+	{
+		g_obj.error = 1;
+		g_obj.exit_code = 2;
+		g_obj.invalid_input = 1;
+		printf("syntax error: unexpected end of file\n");
+		if (lst)
+			ft_lstclear(lst, free);
+		exit_prompt();
+	}
 }
 
 void	cotinue_add_pipe_arg(t_list **lst)
@@ -27,7 +33,7 @@ void	cotinue_add_pipe_arg(t_list **lst)
 
 	input = readline("> ");
 	if (!input)
-		throw_add_pipe_error();
+		throw_add_pipe_error(lst);
 	else
 	{
 		aux = ft_strtrim(input, " \t");

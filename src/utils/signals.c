@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 00:20:55 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/28 23:06:47 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:20:05 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	pipe_stop(int signal)
 		ft_putendl_fd("", g_obj.initial_fd[1]);
 		rl_replace_line("", 0);
 		rl_done = 1;
+		close(rl_instream->_fileno);
 	}
 	return ;
 }
