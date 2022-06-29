@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:44:44 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/28 23:42:46 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:52:26 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	get_input(int temp_file, char *eof)
 			"(wanted `%s')\n", eof);
 	else
 	{
-		while (input && ft_memcmp(input, eof, ft_strlen(input)) != 0
-			&& g_obj.invalid_input == 0)
+		while (input && (ft_memcmp(input, eof, ft_strlen(input)) != 0
+				|| ft_memcmp(input, eof, ft_strlen(eof)) != 0))
 		{
 			if (input[0] == '\0')
 				ft_putendl_fd("", temp_file);
