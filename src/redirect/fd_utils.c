@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 23:07:15 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 17:11:47 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 18:33:15 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	change_output(char *file, int flags)
 {
 	int	file_id;
 
-	if (!file[OUT])
+	if (!file[IN])
 	{
 		g_obj.error = TRUE;
 		g_obj.exit_code = 2;

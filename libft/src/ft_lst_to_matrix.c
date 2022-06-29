@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_to_matrix.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 00:44:27 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/22 20:00:18 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 18:30:41 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	**ft_lst_to_matrix(t_list *lst)
 	int		i;
 	char	**matrix;
 
+	if (lst == NULL)
+		return (NULL);
 	i = ft_lstsize(lst);
 	matrix = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
