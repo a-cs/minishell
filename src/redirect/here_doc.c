@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:44:44 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 15:36:46 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:12:37 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	get_input(int temp_file, char *eof)
 	char	*input;
 
 	input = readline("> ");
-	if (!input && g_obj.invalid_input == 0)
+	if (!input && !g_obj.invalid_input)
 		throw_here_doc_error(eof);
 	else
 	{
@@ -39,7 +39,7 @@ static void	get_input(int temp_file, char *eof)
 			g_obj.exit_code = 0;
 			free(input);
 			input = readline("> ");
-			if (!input && g_obj.invalid_input == 0)
+			if (!input && !g_obj.invalid_input)
 				throw_here_doc_error(eof);
 		}
 		if (input)
@@ -55,12 +55,12 @@ void	here_doc(char *eof)
 	temp_file = open("temp_file", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (temp_file == -1)
 	{
-		g_obj.error = 1;
+		g_obj.error = TRUE;
 		g_obj.exit_code = 9;
 		return ;
 	}
 	actual_fd_out = dup(STDOUT_FILENO);
-	dup2(g_obj.initial_fd[1], STDOUT_FILENO);
+	dup2(g_obj.initial_fd[OUT], STDOUT_FILENO);
 	signal(SIGINT, here_doc_stop);
 	signal(SIGQUIT, SIG_IGN);
 	get_input(temp_file, eof);

@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 15:44:24 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:21:24 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_path(char *command)
 	while (g_obj.envp[i] && ft_strnstr(g_obj.envp[i], "PATH", 4) == 0)
 		i++;
 	if (!g_obj.envp[i])
-		return (0);
+		return (NULL);
 	env_path = ft_split(g_obj.envp[i] + 5, ':');
 	i = 0;
 	while (env_path[i])
@@ -48,7 +48,7 @@ static char	*get_path(char *command)
 		free(path);
 	}
 	ft_free_matrix(env_path);
-	return (0);
+	return (NULL);
 }
 
 static int	try_execute(char **args)
@@ -70,8 +70,8 @@ static int	try_execute(char **args)
 	if (WIFEXITED(status))
 		g_obj.exit_code = WEXITSTATUS(status);
 	if (g_obj.exit_code == -1)
-		return (0);
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }
 
 static char	*try_path(char	**args)

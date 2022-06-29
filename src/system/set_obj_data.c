@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_obj_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:47:43 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/28 01:52:38 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:17:30 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static char	*prompt_str(void)
 
 void	reset_obj_data(void)
 {
-	g_obj.error = 0;
+	g_obj.error = FALSE;
 	g_obj.args_num = 0;
-	g_obj.close_code = 0;
-	g_obj.invalid_input = 0;
+	g_obj.close_code = FALSE;
+	g_obj.invalid_input = FALSE;
 	g_obj.prompt = prompt_str();
 	g_obj.input = NULL;
 }

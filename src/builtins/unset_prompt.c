@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:05:24 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 15:29:46 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:02:26 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ static int	is_valid_unset(char *var)
 	int	error;
 
 	i = 0;
-	error = 1;
+	error = TRUE;
 	if (ft_chrpos(var, '=') != -1)
-		error = 0;
-	while (var[i] && error == 1)
+		error = FALSE;
+	while (var[i] && error)
 	{
 		if (!(ft_isalpha(var[i]) || ft_isdigit(var[i]))
 			|| ft_is_all_digit(var, ft_strlen(var)))
-			error = 0;
+			error = FALSE;
 		i++;
 	}
-	if (error == 0)
+	if (!error)
 	{
 		ft_putstr_fd("unset '", STDERR_FILENO);
 		ft_putstr_fd(var, STDERR_FILENO);

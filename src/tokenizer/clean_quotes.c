@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:10:11 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/29 16:35:59 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:18:02 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static int	iterate_and_clean(char *temp, t_list **char_list)
 	int	j;
 
 	i = 0;
-	if (g_obj.error != 0)
+	if (g_obj.error)
 		return (ft_strlen(temp));
-	while (g_obj.error == 0 && temp[i] != '\0')
+	while (!g_obj.error && temp[i] != '\0')
 	{
 		if (temp[0] == DOUBLE_QUOTES)
 		{

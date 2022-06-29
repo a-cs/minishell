@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 16:34:53 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:17:05 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	execute(char **input)
 
 	redirect(input);
 	args = clean_quotes(replace_env_var(tokenizer(*input)));
-	if (g_obj.error == 0 && args[0])
+	if (!g_obj.error && args[0])
 	{
 		code = is_builtin(args);
-		if (code != 0)
+		if (code)
 			execute_builtin(args, code);
 		else
 			execute_cmd(redirect_args(clean_quotes(
@@ -59,16 +59,16 @@ static int	is_valid_input(char *input)
 
 	check_eof(input);
 	if (input[0] == '\0')
-		return (0);
+		return (FALSE);
 	if (ft_is_all_blank(input))
-		return (0);
+		return (FALSE);
 	aux = ft_strtrim(input, " \t");
 	temp = clean_quotes(tokenizer(aux));
 	free(aux);
 	ft_free_matrix(temp);
-	if (g_obj.invalid_input != 0)
-		return (0);
-	return (1);
+	if (g_obj.invalid_input)
+		return (FALSE);
+	return (TRUE);
 }
 
 void	keep_prompt(char **envp)
@@ -78,7 +78,7 @@ void	keep_prompt(char **envp)
 	g_obj.envp = dup_envp(envp);
 	g_obj.exit_code = 0;
 	start_msg();
-	while (1)
+	while (TRUE)
 	{
 		reset_obj_data();
 		signal(SIGINT, new_prompt);

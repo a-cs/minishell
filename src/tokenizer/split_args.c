@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 00:53:06 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/22 19:35:44 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:19:20 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ int	has_quotes_before_space(char *str)
 	int	aux_space;
 
 	if (str[0] == DOUBLE_QUOTES || str[0] == SINGLE_QUOTES)
-		return (1);
+		return (TRUE);
 	else
 	{
 		aux_space = ft_chrpos(str, SPACE_VALUE);
 		aux_double = ft_chrpos(str, DOUBLE_QUOTES);
 		aux_single = ft_chrpos(str, SINGLE_QUOTES);
 		if (aux_double == -1 && aux_single == -1)
-			return (0);
+			return (FALSE);
 		if (aux_double != -1 && aux_space < aux_double)
 			if (aux_single == -1 || aux_space < aux_single)
-				return (0);
+				return (FALSE);
 		if (aux_single != -1 && aux_space < aux_single)
 			if (aux_double == -1 || aux_space < aux_double)
-				return (0);
+				return (FALSE);
 	}
-	return (1);
+	return (TRUE);
 }
 
 void	split_args(char **args, char *input)

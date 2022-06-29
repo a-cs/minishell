@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 16:17:14 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 16:20:56 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:19:53 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	throw_unclosed_quotes_error(void)
 {
-	g_obj.error = 1;
+	g_obj.error = TRUE;
 	g_obj.exit_code = 22;
-	g_obj.invalid_input = 1;
+	g_obj.invalid_input = TRUE;
 	ft_putendl_fd("Unclosed quotes", STDERR_FILENO);
 }
 

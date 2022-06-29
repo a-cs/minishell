@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:08:45 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/27 22:44:07 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:01:47 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	is_exit_cmd(void)
 	int		result;
 	char	**cmds;
 
-	result = 0;
+	result = FALSE;
 	cmds = ft_split(g_obj.input, ' ');
 	if (cmds)
 	{
 		if (ft_memcmp(cmds[0], "exit", ft_strlen(cmds[0])) == 0
 			&& ft_memcmp(cmds[0], "exit", 4) == 0)
-			result = 1;
+			result = TRUE;
 	}
 	ft_free_matrix(cmds);
 	return (result);
@@ -31,7 +31,7 @@ int	is_exit_cmd(void)
 
 int	is_builtin(char **args)
 {
-	if (g_obj.error == 0 && args[0])
+	if (!g_obj.error && args[0])
 	{
 		if (ft_memcmp(args[0], "exit", ft_strlen(args[0])) == 0
 			&& ft_memcmp(args[0], "exit", 4) == 0)
@@ -55,5 +55,5 @@ int	is_builtin(char **args)
 			&& ft_memcmp(args[0], "cd", 2) == 0)
 			return (7);
 	}
-	return (0);
+	return (FALSE);
 }
