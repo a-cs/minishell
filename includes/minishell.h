@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/28 02:02:07 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/28 21:31:39 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	here_doc_stop(int signal);
 void	new_line(int signal);
 void	new_prompt(int signal);
 void	pipe_stop(int signal);
+void	quit_exec(int signal);
 
 #endif
