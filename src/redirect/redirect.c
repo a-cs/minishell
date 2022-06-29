@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/27 22:15:12 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:38:12 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	especial_case_fd(char *file, char *redirect)
 		g_obj.error = 1;
 		g_obj.exit_code = 2;
 		change_fd(g_obj.initial_fd);
-		printf("Redirect: syntax error near unexpected token `<'\n");
+		ft_putendl_fd("Redirect: syntax error near unexpected token `<'",
+			STDERR_FILENO);
 	}
 	else if (ft_memcmp(redirect, "<>>", 3) == 0)
 	{
@@ -86,7 +87,7 @@ void	redirect(char **input)
 	if (!is_valid_redirection(args))
 	{
 		g_obj.error = g_obj.exit_code;
-		printf("Redirect: sintax error\n");
+		ft_putendl_fd("Redirect: syntax error", STDERR_FILENO);
 	}
 	else
 	{

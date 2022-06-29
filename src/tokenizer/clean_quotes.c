@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:10:11 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/20 23:50:32 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:39:15 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	populate_list(char *temp, t_list **char_list, int i)
 		{
 			g_obj.error++;
 			g_obj.exit_code = 22;
-			printf("Unclosed quotes\n");
+			ft_putendl_fd("Unclosed quotes", STDERR_FILENO);
 		}
 		else
 			ft_lstadd_back(char_list, ft_lstnew(ft_substr(temp, 1, j)));
@@ -92,7 +92,7 @@ static int	iterate_and_clean(char *temp, t_list **char_list)
 			if (j == -1)
 			{
 				g_obj.exit_code = 22;
-				printf("Unclosed quotes\n");
+				ft_putendl_fd("Unclosed quotes", STDERR_FILENO);
 			}
 			else
 				ft_lstadd_back(char_list, ft_lstnew(ft_substr(temp, 1, j)));

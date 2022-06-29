@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 23:07:15 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/27 22:06:12 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:33:15 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	is_a_valid_file(char *file, int flags)
 		g_obj.error = 1;
 		g_obj.exit_code = 1;
 		change_fd(g_obj.initial_fd);
-		printf("%s: No such file or directory\n", file);
+		ft_putstr_fd(file, STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		return (0);
 	}
 	if (access(file, flags) == -1)
@@ -27,7 +28,8 @@ static int	is_a_valid_file(char *file, int flags)
 		g_obj.error = 1;
 		g_obj.exit_code = 1;
 		change_fd(g_obj.initial_fd);
-		printf("%s: Permission denied\n", file);
+		ft_putstr_fd(file, STDERR_FILENO);
+		ft_putendl_fd(": Permission denied", STDERR_FILENO);
 		return (0);
 	}
 	return (1);
@@ -41,7 +43,7 @@ void	change_input(char *file, int flags)
 	{
 		g_obj.error = 1;
 		g_obj.exit_code = 2;
-		printf("Redirect: sintax error\n");
+		ft_putendl_fd("Redirect: sintax error", STDERR_FILENO);
 		return ;
 	}
 	file_id = open(file, flags);
@@ -59,7 +61,7 @@ void	change_output(char *file, int flags)
 	{
 		g_obj.error = 1;
 		g_obj.exit_code = 2;
-		printf("Redirect: sintax error\n");
+		ft_putendl_fd("Redirect: sintax error", STDERR_FILENO);
 		return ;
 	}
 	file_id = open(file, flags, 0777);
@@ -67,7 +69,8 @@ void	change_output(char *file, int flags)
 	{
 		g_obj.error = 1;
 		g_obj.exit_code = 9;
-		printf("%s: Bad file descriptor\n", file);
+		ft_putstr_fd(file, STDERR_FILENO);
+		ft_putendl_fd(": Bad file descriptor", STDERR_FILENO);
 	}
 	else
 	{

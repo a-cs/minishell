@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:05:24 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/21 22:26:00 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:29:46 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ static int	is_valid_unset(char *var)
 	}
 	if (error == 0)
 	{
-		printf("unset: '%s': not a valid identifier\n", var);
+		ft_putstr_fd("unset '", STDERR_FILENO);
+		ft_putstr_fd(var, STDERR_FILENO);
+		ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		g_obj.exit_code = 1;
 	}
 	return (error);

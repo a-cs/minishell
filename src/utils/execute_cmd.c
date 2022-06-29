@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:41:20 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/28 21:48:44 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:44:24 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,16 @@ void	execute_cmd(char **args)
 	{
 		free(path);
 		if (!try_execute(args))
-			printf("Error -> Command not found: %s\n", args[0]);
+		{
+			ft_putstr_fd("Error -> Command not found: ", STDERR_FILENO);
+			ft_putendl_fd(args[0], STDERR_FILENO);
+		}
 	}
 	else
 	{
 		change_fd(g_obj.initial_fd);
-		printf("Command not found: %s\n", args[0]);
+		ft_putstr_fd("Command not found: ", STDERR_FILENO);
+		ft_putendl_fd(args[0], STDERR_FILENO);
 		g_obj.exit_code = 127;
 	}
 	ft_free_matrix(args);
