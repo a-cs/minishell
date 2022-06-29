@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 16:11:09 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 16:44:45 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/28 21:18:38 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	conc_str(char **result, char *str)
 	temp = ft_strjoin(" ", str);
 	aux = ft_strjoin(*result, temp);
 	free(*result);
-	*result = ft_strdup(temp);
+	*result = ft_strdup(aux);
 	free(temp);
 	free(aux);
 }

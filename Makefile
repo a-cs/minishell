@@ -6,7 +6,7 @@
 #    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/27 22:58:03 by acarneir         ###   ########.fr        #
+#    Updated: 2022/06/28 21:20:39 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,6 @@ fclean: clean
 	@echo "Deleting EVERYTHING...\n"
 	@make fclean -C $(LIBFT_DIR)
 	@rm -rf $(NAME)
-	@rm -rf $(CHECKER)
 	@echo "Project cleaned up!"
 
 re: fclean all
