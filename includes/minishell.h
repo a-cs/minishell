@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 17:05:17 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:05:20 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	split_args(char **args, char *input);
 void	throw_unclosed_quotes_error(void);
 
 // UTILS
+int		is_all_dollar(char *str);
 int		is_valid_history(char *str);
 void	execute_cmd(char **args);
 void	here_doc_stop(int signal);

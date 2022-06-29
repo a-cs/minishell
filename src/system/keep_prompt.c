@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keep_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 17:17:05 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:14:30 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ static int	is_valid_input(char *input)
 {
 	char	*aux;
 	char	**temp;
+	int		flag;
 
+	flag = FALSE;
 	check_eof(input);
 	if (input[0] == '\0')
 		return (FALSE);
@@ -64,9 +66,11 @@ static int	is_valid_input(char *input)
 		return (FALSE);
 	aux = ft_strtrim(input, " \t");
 	temp = clean_quotes(tokenizer(aux));
+	if (!temp[1] && is_all_dollar(temp[0]))
+		flag = TRUE;
 	free(aux);
 	ft_free_matrix(temp);
-	if (g_obj.invalid_input)
+	if (g_obj.invalid_input || flag)
 		return (FALSE);
 	return (TRUE);
 }

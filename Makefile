@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 23:44:29 by rfelipe-          #+#    #+#              #
-#    Updated: 2022/06/29 16:19:33 by rfelipe-         ###   ########.fr        #
+#    Updated: 2022/06/29 19:05:57 by acarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC = $(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/tokenizer/tokenizer_utils.c \
 	$(SRC_DIR)/tokenizer/tokenizer.c \
 	$(SRC_DIR)/utils/execute_cmd.c \
+	$(SRC_DIR)/utils/is_all_dollar.c \
 	$(SRC_DIR)/utils/is_valid_history.c \
 	$(SRC_DIR)/utils/signals.c
 
