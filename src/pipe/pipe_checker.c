@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:49:46 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/25 16:54:41 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/28 21:42:55 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	pipe_checker(void)
 	i = 0;
 	args = pipe_args();
 	save_history(args);
-	while (args[i])
+	while (args[i] && g_obj.invalid_input == 0)
 	{
 		if (args[i + 1] && args[i + 1][0] == '|')
 		{
