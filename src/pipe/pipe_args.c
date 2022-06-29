@@ -6,7 +6,7 @@
 /*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 00:51:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/26 02:40:02 by rfelipe-         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:03:51 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	increment_all_str_quotes(char *str, int i)
 		if (ft_chrpos(str + i + 1, DOUBLE_QUOTES) != -1)
 			i += ft_chrpos(str + i + 1, DOUBLE_QUOTES) + 1;
 		else
-			g_obj.invalid_input = 1;
+			g_obj.invalid_input = TRUE;
 	}
 	if (str[i] && str[i] == SINGLE_QUOTES)
 	{
 		if (ft_chrpos(str + i + 1, SINGLE_QUOTES) != -1)
 			i += ft_chrpos(str + i + 1, SINGLE_QUOTES) + 1;
 		else
-			g_obj.invalid_input = 1;
+			g_obj.invalid_input = TRUE;
 	}
 	return (i);
 }
@@ -60,7 +60,7 @@ static void	iterate_pipe_args(char *str, t_list **lst)
 
 	i = 0;
 	j = 0;
-	while (i < ft_strlen(str) && str[i] && g_obj.invalid_input == 0)
+	while (i < ft_strlen(str) && str[i] && !g_obj.invalid_input)
 	{
 		i = increment_all_str_quotes(str, i);
 		if (str[i] == '|')
@@ -85,7 +85,7 @@ char	**pipe_args(void)
 
 	lst = NULL;
 	iterate_pipe_args(g_obj.input, &lst);
-	if (lst == NULL || g_obj.invalid_input != 0)
+	if (lst == NULL || g_obj.invalid_input)
 	{
 		args = ft_calloc(2, sizeof(char *));
 		args[0] = ft_strdup(g_obj.input);

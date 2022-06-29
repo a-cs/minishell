@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:40:31 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/28 21:31:39 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:05:20 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # include <stdio.h>
 
 // DEFINES
+# define IN				0
+# define OUT			1
+# define FALSE			0
+# define TRUE			1
 # define SPACE_VALUE	32
 # define DOUBLE_QUOTES	34
 # define DOLLAR_SIGN	36
@@ -96,8 +100,10 @@ char	**clean_quotes(char **temp);
 char	**replace_env_var(char **temp);
 char	**tokenizer(char *input);
 void	split_args(char **args, char *input);
+void	throw_unclosed_quotes_error(void);
 
 // UTILS
+int		is_all_dollar(char *str);
 int		is_valid_history(char *str);
 void	execute_cmd(char **args);
 void	here_doc_stop(int signal);

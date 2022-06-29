@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_history.c                                 :+:      :+:    :+:   */
+/*   is_all_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/24 00:35:04 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/29 17:22:08 by rfelipe-         ###   ########.fr       */
+/*   Created: 2022/06/29 19:03:31 by acarneir          #+#    #+#             */
+/*   Updated: 2022/06/29 19:17:19 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	is_valid_history(char *str)
+int	is_all_dollar(char *str)
 {
-	if (str && *str)
+	int	i;
+
+	if (!str)
+		return (FALSE);
+	i = 0;
+	while (str[i])
 	{
-		if (str[0] == '\t' || str[0] == '\v' || str[0] == '\r' || str[0] == ' ')
+		if (!(str[i] == DOLLAR_SIGN))
 			return (FALSE);
-		return (TRUE);
+		i++;
 	}
-	return (FALSE);
+	return (TRUE);
 }

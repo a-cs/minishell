@@ -6,7 +6,7 @@
 /*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:10:42 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/29 00:38:53 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:14:30 by acarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	execute(char **input)
 
 	redirect(input);
 	args = clean_quotes(replace_env_var(tokenizer(*input)));
-	if (g_obj.error == 0 && args[0])
+	if (!g_obj.error && args[0])
 	{
 		code = is_builtin(args);
-		if (code != 0)
+		if (code)
 			execute_builtin(args, code);
 		else
 			execute_cmd(redirect_args(clean_quotes(
@@ -54,12 +54,25 @@ static void	check_eof(char *input)
 
 static int	is_valid_input(char *input)
 {
+	char	*aux;
+	char	**temp;
+	int		flag;
+
+	flag = FALSE;
 	check_eof(input);
 	if (input[0] == '\0')
-		return (0);
+		return (FALSE);
 	if (ft_is_all_blank(input))
-		return (0);
-	return (1);
+		return (FALSE);
+	aux = ft_strtrim(input, " \t");
+	temp = clean_quotes(tokenizer(aux));
+	if (!temp[1] && is_all_dollar(temp[0]))
+		flag = TRUE;
+	free(aux);
+	ft_free_matrix(temp);
+	if (g_obj.invalid_input || flag)
+		return (FALSE);
+	return (TRUE);
 }
 
 void	keep_prompt(char **envp)
@@ -69,7 +82,7 @@ void	keep_prompt(char **envp)
 	g_obj.envp = dup_envp(envp);
 	g_obj.exit_code = 0;
 	start_msg();
-	while (1)
+	while (TRUE)
 	{
 		reset_obj_data();
 		signal(SIGINT, new_prompt);

@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:44:44 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/28 23:52:26 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:12:37 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	throw_here_doc_error(char *eof)
+{
+	ft_putstr_fd("warning: here-document delimited by end-of-file (wanted `",
+		STDERR_FILENO);
+	ft_putstr_fd(eof, STDERR_FILENO);
+	ft_putendl_fd("')", STDERR_FILENO);
+}
 
 static void	get_input(int temp_file, char *eof)
 {
 	char	*input;
 
 	input = readline("> ");
-	if (!input && g_obj.invalid_input == 0)
-		printf("warning: here-document delimited by end-of-file"
-			"(wanted `%s')\n", eof);
+	if (!input && !g_obj.invalid_input)
+		throw_here_doc_error(eof);
 	else
 	{
 		while (input && (ft_memcmp(input, eof, ft_strlen(input)) != 0
@@ -32,9 +39,8 @@ static void	get_input(int temp_file, char *eof)
 			g_obj.exit_code = 0;
 			free(input);
 			input = readline("> ");
-			if (!input && g_obj.invalid_input == 0)
-				printf("warning: here-document delimited by end-of-file"
-					"(wanted `%s')\n", eof);
+			if (!input && !g_obj.invalid_input)
+				throw_here_doc_error(eof);
 		}
 		if (input)
 			free(input);
@@ -49,12 +55,12 @@ void	here_doc(char *eof)
 	temp_file = open("temp_file", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (temp_file == -1)
 	{
-		g_obj.error = 1;
+		g_obj.error = TRUE;
 		g_obj.exit_code = 9;
 		return ;
 	}
 	actual_fd_out = dup(STDOUT_FILENO);
-	dup2(g_obj.initial_fd[1], STDOUT_FILENO);
+	dup2(g_obj.initial_fd[OUT], STDOUT_FILENO);
 	signal(SIGINT, here_doc_stop);
 	signal(SIGQUIT, SIG_IGN);
 	get_input(temp_file, eof);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_prompt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 19:15:19 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/23 01:23:01 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:58:56 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static int	already_has_env_var(char *var)
 	{
 		if (ft_memcmp(var, g_obj.envp[i], len) == 0
 			&& g_obj.envp[i][len] == '=')
-			return (1);
+			return (TRUE);
 		i++;
 	}
-	return (0);
+	return (FALSE);
 }
 
 void	export_prompt(char **args)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:38:13 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/27 21:56:15 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:12:56 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	split_redirect_args(char *str, t_list **lst)
 
 	i = 0;
 	j = 0;
-	while (i < ft_strlen(str) && str[i] && g_obj.invalid_input == 0)
+	while (i < ft_strlen(str) && str[i] && !g_obj.invalid_input)
 	{
 		i = increment_all_str_quotes(str, i);
 		if (str[i] == '>' || str[i] == '<')

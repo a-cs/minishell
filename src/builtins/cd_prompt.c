@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 22:44:49 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/28 01:34:18 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:55:20 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	to_old_chdir(char *oldpwd, char *pwd)
 	else
 	{
 		ft_putendl_fd("cd: OLDPWD not set", STDERR_FILENO);
-		g_obj.exit_code = 1;
+		g_obj.exit_code = TRUE;
 	}
 }
 
@@ -111,7 +111,7 @@ void	cd_prompt(char **args)
 	{
 		printf("cd: too many arguments\n");
 		g_obj.error++;
-		g_obj.exit_code = 1;
+		g_obj.exit_code = TRUE;
 	}
 	pwd = replace_env_var(tokenizer("$PWD"));
 	oldpwd = replace_env_var(tokenizer("$OLDPWD"));

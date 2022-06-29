@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 21:20:18 by rfelipe-          #+#    #+#             */
-/*   Updated: 2022/06/27 22:15:12 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:15:04 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ static void	especial_case_fd(char *file, char *redirect)
 
 	if (ft_memcmp(redirect, "<<>", 3) == 0 || ft_memcmp(redirect, "><", 2) == 0)
 	{
-		g_obj.error = 1;
+		g_obj.error = TRUE;
 		g_obj.exit_code = 2;
 		change_fd(g_obj.initial_fd);
-		printf("Redirect: syntax error near unexpected token `<'\n");
+		ft_putendl_fd("Redirect: syntax error near unexpected token `<'",
+			STDERR_FILENO);
 	}
 	else if (ft_memcmp(redirect, "<>>", 3) == 0)
 	{
@@ -69,12 +70,12 @@ static int	is_valid_redirection(char **args)
 					|| ft_chrqty(args[i + 1], '<') > 0)))
 			{
 				g_obj.exit_code = 2;
-				return (0);
+				return (FALSE);
 			}
 		}
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 void	redirect(char **input)
@@ -85,8 +86,8 @@ void	redirect(char **input)
 	args = redirect_args(replace_env_var(tokenizer(*input)));
 	if (!is_valid_redirection(args))
 	{
-		g_obj.error = g_obj.exit_code;
-		printf("Redirect: sintax error\n");
+		g_obj.error = TRUE;
+		ft_putendl_fd("Redirect: syntax error", STDERR_FILENO);
 	}
 	else
 	{

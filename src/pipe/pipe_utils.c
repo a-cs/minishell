@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarneir <acarneir@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rfelipe- <rfelipe-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:02:17 by acarneir          #+#    #+#             */
-/*   Updated: 2022/06/28 23:29:32 by acarneir         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:06:53 by rfelipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	throw_add_pipe_error(t_list **lst)
 {
-	if (g_obj.invalid_input == 0)
+	if (!g_obj.invalid_input)
 	{
-		g_obj.error = 1;
+		g_obj.error = TRUE;
 		g_obj.exit_code = 2;
-		g_obj.invalid_input = 1;
-		printf("syntax error: unexpected end of file\n");
+		g_obj.invalid_input = TRUE;
+		ft_putendl_fd("syntax error: unexpected end of file", STDERR_FILENO);
 		if (lst)
 			ft_lstclear(lst, free);
 		exit_prompt();
